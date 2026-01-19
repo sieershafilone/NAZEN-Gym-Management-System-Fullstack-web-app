@@ -16,8 +16,8 @@ import type { MembershipPlan } from '@/types';
 // --- Schema ---
 const planSchema = z.object({
     name: z.string().min(2, 'Name is required'),
-    durationDays: z.coerce.number().min(1, 'Duration must be at least 1 day'),
-    basePrice: z.coerce.number().min(0, 'Price must be positive'),
+    durationDays: z.number().min(1, 'Duration must be at least 1 day'),
+    basePrice: z.number().min(0, 'Price must be positive'),
     description: z.string().optional(),
     features: z.array(z.object({ value: z.string() })).optional(),
 });
@@ -289,13 +289,13 @@ function PlanModal({ isOpen, onClose, initialData, onSuccess }: {
                             <Input
                                 type="number"
                                 label="Duration (Days)"
-                                {...register('durationDays')}
+                                {...register('durationDays', { valueAsNumber: true })}
                                 error={errors.durationDays?.message}
                             />
                             <Input
                                 type="number"
                                 label="Price (₹)"
-                                {...register('basePrice')}
+                                {...register('basePrice', { valueAsNumber: true })}
                                 error={errors.basePrice?.message}
                             />
                         </div>

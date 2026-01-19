@@ -38,7 +38,7 @@ export default function QRPage() {
                 <div className="bg-white p-4 rounded-xl">
                     {loading ? (
                         <div className="w-48 h-48 flex items-center justify-center">
-                            <Spinner variant="dark" />
+                            <Spinner className="border-zinc-400 border-t-zinc-800" />
                         </div>
                     ) : qrCode ? (
                         // eslint-disable-next-line @next/next/no-img-element

@@ -170,7 +170,7 @@ Card.displayName = 'Card';
 
 // Badge Component
 interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-    variant?: 'default' | 'success' | 'warning' | 'danger' | 'info';
+    variant?: 'default' | 'success' | 'warning' | 'danger' | 'info' | 'outline';
 }
 
 export const Badge: React.FC<BadgeProps> = ({
@@ -185,6 +185,7 @@ export const Badge: React.FC<BadgeProps> = ({
         warning: 'bg-orange-500/10 text-orange-500 border border-orange-500/20 shadow-sm shadow-orange-500/10',
         danger: 'bg-red-500/10 text-red-500 border border-red-500/20 shadow-sm shadow-red-500/10',
         info: 'bg-blue-500/10 text-blue-500 border border-blue-500/20 shadow-sm shadow-blue-500/10',
+        outline: 'bg-transparent text-zinc-300 border border-white/20',
     };
 
     return (

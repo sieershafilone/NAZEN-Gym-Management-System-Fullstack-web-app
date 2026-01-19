@@ -58,7 +58,7 @@ export default function MembershipPage() {
                                 <h3 className="text-zinc-400 font-medium uppercase tracking-wider text-xs mb-1">Current Plan</h3>
                                 <h2 className="text-3xl font-black text-white">{membership.plan?.name}</h2>
                             </div>
-                            <Badge variant={membership.status === 'ACTIVE' ? 'success' : 'error'}>{membership.status}</Badge>
+                            <Badge variant={membership.status === 'ACTIVE' ? 'success' : 'danger'}>{membership.status}</Badge>
                         </div>
 
                         <div className="space-y-4 mb-8">
@@ -85,7 +85,7 @@ export default function MembershipPage() {
                         </div>
 
                         <div className="space-y-2">
-                            {membership.plan?.features.map((feature, i) => (
+                            {membership.plan?.features?.map((feature, i) => (
                                 <div key={i} className="flex items-center gap-2 text-sm text-zinc-300">
                                     <CheckCircle size={16} className="text-green-500" />
                                     {feature}
