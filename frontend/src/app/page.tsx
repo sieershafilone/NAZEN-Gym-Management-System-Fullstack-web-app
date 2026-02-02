@@ -138,7 +138,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-lg text-zinc-500 max-w-2xl mx-auto mb-12 font-bold uppercase tracking-widest leading-relaxed">
-              Join <span className="text-white">ULIFTS</span> – THE PREMIER GYM IN DRUGMULLA,
+              Join <span className="text-white">ULIFTS-ONE MORE REP</span> – THE PREMIER GYM IN DRUGMULLA,
               DESIGNED FOR THE <span className="text-white">DEDICATED</span>.
             </p>
 
