@@ -105,71 +105,8 @@ async function main() {
     }
     console.log(`   ✅ ${galleryImages.length} gallery images created`);
 
-    // Create Membership Plans
-    console.log('📋 Creating membership plans...');
-    const plans = await Promise.all([
-        prisma.membershipPlan.create({
-            data: {
-                name: 'Monthly Membership',
-                durationDays: 30,
-                basePrice: 1500,
-                gstPercent: 18,
-                finalPrice: 1770,
-                description: 'Access to all gym facilities for 1 month',
-                features: ['Full gym access', 'Locker room', 'Free WiFi', 'Water dispenser'],
-                isActive: true,
-            },
-        }),
-        prisma.membershipPlan.create({
-            data: {
-                name: 'Quarterly Membership',
-                durationDays: 90,
-                basePrice: 4000,
-                gstPercent: 18,
-                finalPrice: 4720,
-                description: 'Access to all gym facilities for 3 months',
-                features: ['Full gym access', 'Locker room', 'Free WiFi', 'Water dispenser', '1 Free PT session'],
-                isActive: true,
-            },
-        }),
-        prisma.membershipPlan.create({
-            data: {
-                name: 'Half-Yearly Membership',
-                durationDays: 180,
-                basePrice: 7000,
-                gstPercent: 18,
-                finalPrice: 8260,
-                description: 'Access to all gym facilities for 6 months',
-                features: ['Full gym access', 'Locker room', 'Free WiFi', 'Water dispenser', '3 Free PT sessions', 'Diet consultation'],
-                isActive: true,
-            },
-        }),
-        prisma.membershipPlan.create({
-            data: {
-                name: 'Annual Membership',
-                durationDays: 365,
-                basePrice: 12000,
-                gstPercent: 18,
-                finalPrice: 14160,
-                description: 'Best value! Full year access to all facilities',
-                features: ['Full gym access', 'Locker room', 'Free WiFi', 'Water dispenser', '6 Free PT sessions', 'Diet consultation', 'Body composition analysis', 'Gym merchandise'],
-                isActive: true,
-            },
-        }),
-        prisma.membershipPlan.create({
-            data: {
-                name: 'Personal Training (Monthly)',
-                durationDays: 30,
-                basePrice: 5000,
-                gstPercent: 18,
-                finalPrice: 5900,
-                description: 'One-on-one personal training sessions',
-                features: ['Full gym access', 'Personal trainer', 'Custom workout plan', 'Diet plan', 'Weekly progress tracking'],
-                isActive: true,
-            },
-        }),
-    ]);
-    console.log(`   ✅ ${plans.length} membership plans created`);
+    // Membership Plans creation removed as per user request to add manually via dashboard
+    console.log('📋 Existing membership plans cleared. Skipping sample plan creation...');
 
     // Create Workout Plans
     console.log('🏋️ Creating workout plans...');
@@ -357,6 +294,7 @@ async function main() {
             },
         });
 
+        /*
         // Create membership
         const planIndex = i % plans.length;
         const startDate = new Date();
@@ -387,6 +325,7 @@ async function main() {
                 paidAt: startDate,
             },
         });
+        */
 
         // Create some attendance records
         for (let j = 0; j < 10; j++) {
