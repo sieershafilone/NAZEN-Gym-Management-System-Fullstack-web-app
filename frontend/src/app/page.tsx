@@ -347,7 +347,7 @@ export default function HomePage() {
                 {[
                   { icon: MapPin, label: 'ADDRESS', value: 'BED COLLEGE DRUGMULLA KUPWARA' },
                   { icon: Phone, label: 'PHONE', value: '+91 6006403075' },
-                  { icon: Clock, label: 'OPENING HOURS', value: 'MON-SAT: Morning 6:00 AM TO 8:30 AM - Males | 9:00 AM TO 12:00 PM - Females| 2:00 PM TO 10:00 PM - Males' },
+                  { icon: Clock, label: 'OPENING HOURS', value: 'MON-SAT: Morning 6:00 AM TO 8:30 AM - Males | 9:00 AM TO 12:00 PM - Females | 2:00 PM TO 10:00 PM - Males' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-8 group">
                     <div className="w-16 h-16 bg-[#0D0D0D] border border-white/5 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:border-cyan-400/30 transition-all">
@@ -355,7 +355,14 @@ export default function HomePage() {
                     </div>
                     <div>
                       <h4 className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.4em] mb-2">{item.label}</h4>
-                      <p className="text-sm font-black text-white uppercase tracking-tight">{item.value}</p>
+                      <p className="text-sm font-black text-white uppercase tracking-tight leading-relaxed">
+                        {item.value.split('|').map((line, index) => (
+                          <React.Fragment key={index}>
+                            {line.trim()}
+                            {index < item.value.split('|').length - 1 && <br />}
+                          </React.Fragment>
+                        ))}
+                      </p>
                     </div>
                   </div>
                 ))}
