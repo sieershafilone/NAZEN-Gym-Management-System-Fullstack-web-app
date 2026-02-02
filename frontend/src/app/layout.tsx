@@ -9,12 +9,12 @@ const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono" });
 
 export const metadata: Metadata = {
-  title: "Nazen – Powered by Being Strong | Gym Management System",
-  description: "Premium gym management system for Nazen Gym, Handwara, Jammu and Kashmir. Member management, payments, attendance tracking, and workout plans.",
-  keywords: ["gym", "fitness", "Handwara", "Jammu Kashmir", "Nazen", "workout", "membership"],
-  authors: [{ name: "Nazen Gym" }],
+  title: "ULIFTS – Powered by Being Strong | Gym Management System",
+  description: "Premium gym management system for ULIFTS Gym, Drugmulla, Kupwara, Jammu and Kashmir. Member management, payments, attendance tracking, and workout plans.",
+  keywords: ["gym", "fitness", "Drugmulla, Kupwara", "Jammu Kashmir", "ULIFTS", "workout", "membership"],
+  authors: [{ name: "ULIFTS Gym" }],
   openGraph: {
-    title: "Nazen – Powered by Being Strong",
+    title: "ULIFTS – Powered by Being Strong",
     description: "Transform Your Body, Transform Your Life",
     type: "website",
   },
@@ -59,3 +59,4 @@ export default function RootLayout({
     </html>
   );
 }
+

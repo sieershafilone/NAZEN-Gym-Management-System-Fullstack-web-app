@@ -164,7 +164,7 @@ export default function AdminLayout({
 
                 {/* Copyright */}
                 <div className="absolute bottom-1 w-full text-center pb-2">
-                    <p className="text-[10px] text-zinc-600">© 2026 Nazen Gym</p>
+                    <p className="text-[10px] text-zinc-600">© 2026 ULIFTS Gym</p>
                 </div>
             </aside>
 
@@ -236,3 +236,4 @@ export default function AdminLayout({
         </div>
     );
 }
+

@@ -1,7 +1,7 @@
 {
-  "name": "nazen-gym-backend",
+  "name": "ulifts-gym-backend",
   "version": "1.0.0",
-  "description": "Nazen Gym Management System - Backend API",
+  "description": "ULIFTS Gym Management System - Backend API",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",

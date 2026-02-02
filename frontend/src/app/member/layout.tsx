@@ -100,14 +100,14 @@ export default function MemberLayout({
                         <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center overflow-hidden">
                             <Image
                                 src="/logo.png"
-                                alt="Nazen Logo"
+                                alt="ULIFTS Logo"
                                 width={32}
                                 height={32}
                                 className="object-contain"
                             />
                         </div>
                         <div>
-                            <span className="font-bold text-white">Nazen</span>
+                            <span className="font-bold text-white">ULIFTS</span>
                             <span className="text-zinc-500 text-xs block -mt-0.5">Member Portal</span>
                         </div>
                     </Link>
@@ -171,7 +171,7 @@ export default function MemberLayout({
 
                 {/* Copyright */}
                 <div className="absolute bottom-1 w-full text-center pb-2">
-                    <p className="text-[10px] text-zinc-600">© 2026 Nazen Gym</p>
+                    <p className="text-[10px] text-zinc-600">© 2026 ULIFTS Gym</p>
                 </div>
             </aside>
 
@@ -256,3 +256,4 @@ export default function MemberLayout({
         </div>
     );
 }
+

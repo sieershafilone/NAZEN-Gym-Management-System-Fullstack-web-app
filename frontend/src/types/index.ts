@@ -1,4 +1,4 @@
-// API Types for Nazen Gym Management System
+// API Types for ULIFTS Gym Management System
 
 // User & Auth Types
 export interface User {
@@ -244,3 +244,4 @@ export interface PlanForm {
     description?: string;
     features?: string[];
 }
+

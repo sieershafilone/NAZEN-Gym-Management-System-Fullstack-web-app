@@ -119,7 +119,7 @@ export default function HomePage() {
           >
             <div className="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/20 rounded-full px-4 py-1.5 mb-6">
               <Zap className="w-4 h-4 text-orange-500" />
-              <span className="text-sm text-orange-400">Handwara&apos;s Premium Fitness Centre</span>
+              <span className="text-sm text-orange-400">Drugmulla, Kupwara&apos;s Premium Fitness Centre</span>
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
@@ -131,7 +131,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-xl text-zinc-400 max-w-2xl mx-auto mb-8">
-              Join Nazen – the most advanced gym in Handwara with state-of-the-art equipment,
+              Join ULIFTS – the most advanced gym in Drugmulla, Kupwara with state-of-the-art equipment,
               and a supportive community to help you achieve your fitness goals.
             </p>
 
@@ -178,7 +178,7 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Inside
-              <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent"> Nazen</span>
+              <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent"> ULIFTS</span>
             </h2>
             <p className="text-zinc-400 max-w-2xl mx-auto">
               Experience our world-class facilities designed to help you crush your limits.
@@ -186,18 +186,30 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[1, 2, 3, 4].map((num) => (
+            {[
+              'Screenshot_1.png',
+              'Screenshot_2.png',
+              'Screenshot_27.png',
+              'Screenshot_3.png',
+              'Screenshot_4.png',
+              'Screenshot_5.png',
+              'WhatsApp Image 2026-02-02 at 12.47.49 PM.jpeg',
+              'WhatsApp Image 2026-02-02 at 12.47.59 PM.jpeg',
+              'WhatsApp Image 2026-02-02 at 12.48.18 PM.jpeg',
+              'WhatsApp Image 2026-02-02 at 12.48.31 PM.jpeg',
+              'WhatsApp Image 2026-02-02 at 12.52.41 PM.jpeg'
+            ].map((imgName, index) => (
               <motion.div
-                key={num}
+                key={imgName}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: num * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 className="relative group aspect-[3/4] overflow-hidden rounded-2xl"
               >
                 <Image
-                  src={`/images/gym-${num}.webp`}
-                  alt={`Gym Photo ${num}`}
+                  src={`/images/${imgName}`}
+                  alt={`Gym Photo ${index + 1}`}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -340,7 +352,7 @@ export default function HomePage() {
                 <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent"> Gym</span>
               </h2>
               <p className="text-zinc-400 mb-8">
-                Located in the heart of Handwara, our gym is equipped with the latest
+                Located in the heart of Drugmulla, Kupwara, our gym is equipped with the latest
                 fitness equipment to help you
                 achieve your goals.
               </p>
@@ -352,7 +364,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h4 className="font-medium text-white">Address</h4>
-                    <p className="text-zinc-500">97XQ+CW3, Handwara, Jammu and Kashmir – 193221, India</p>
+                    <p className="text-zinc-500">97XQ+CW3, Drugmulla, Kupwara, Jammu and Kashmir – 193221, India</p>
                   </div>
                 </div>
 
@@ -382,7 +394,7 @@ export default function HomePage() {
 
             <div className="relative h-[400px] w-full rounded-2xl overflow-hidden border border-zinc-800">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10500!2d74.2898507!3d34.3985659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e11d001124d89d%3A0xe0ed0b9e05a75016!2s97XQ%2BCW3%2C%20Handwara%2C%20Jammu%20and%20Kashmir%20193221!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10500!2d74.2898507!3d34.3985659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e11d001124d89d%3A0xe0ed0b9e05a75016!2s97XQ%2BCW3%2C%20Drugmulla, Kupwara%2C%20Jammu%20and%20Kashmir%20193221!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -410,7 +422,7 @@ export default function HomePage() {
               </Link>
             </div>
             <p className="text-zinc-500 text-sm">
-              © 2026 Nazen Gym. All rights reserved.
+              © 2026 ULIFTS Gym. All rights reserved.
             </p>
             <p className="text-zinc-500 text-sm">
               Developed and Maintained by Sieer <br />
@@ -423,3 +435,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+

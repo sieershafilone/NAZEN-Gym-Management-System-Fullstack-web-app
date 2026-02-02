@@ -41,9 +41,11 @@ module.exports = {
     },
 
     gym: {
-        name: process.env.GYM_NAME || 'Nazen – Powered by Being Strong',
-        address: process.env.GYM_ADDRESS || '97XQ+CW3, Handwara, Jammu and Kashmir – 193221, India',
+        name: process.env.GYM_NAME || 'ULIFTS – Powered by Being Strong',
+        address: process.env.GYM_ADDRESS || '97XQ+CW3, Drugmulla, Kupwara, Jammu and Kashmir – 193221, India',
         phone: process.env.GYM_PHONE || '+91 1234567890',
         gstin: process.env.GYM_GSTIN || '',
     },
 };
+
+

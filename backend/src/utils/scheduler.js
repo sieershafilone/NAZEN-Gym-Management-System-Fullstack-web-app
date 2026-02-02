@@ -60,7 +60,7 @@ const checkExpiringMemberships = async () => {
             const endDate = new Date(membership.endDate).toLocaleDateString('en-IN');
             const mobile = membership.member.user.mobile;
 
-            const message = `Hi ${memberName}, your ${planName} at Nazen Gym expires on ${endDate}. Please renew to continue your fitness journey!`;
+            const message = `Hi ${memberName}, your ${planName} at ULIFTS Gym expires on ${endDate}. Please renew to continue your fitness journey!`;
 
             await NotificationService.sendSMS(mobile, message);
 
@@ -77,3 +77,4 @@ const checkExpiringMemberships = async () => {
 };
 
 module.exports = initScheduler;
+

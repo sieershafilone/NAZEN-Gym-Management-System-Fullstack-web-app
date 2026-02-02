@@ -28,8 +28,8 @@ export const BrandLogo = ({ className, variant = 'default', withGlow = true }: B
             className={cn(
                 "relative flex items-center justify-center",
                 // Optical alignment container - Height based sizing for natural aspect ratio
-                variant === 'default' && "h-14 w-auto aspect-[3/1]",
-                variant === 'large' && "h-32 w-auto aspect-[3/1]",
+                variant === 'default' && "h-14 w-40",
+                variant === 'large' && "h-32 w-64",
                 variant === 'icon' && "h-12 w-12",
                 className
             )}
@@ -46,7 +46,7 @@ export const BrandLogo = ({ className, variant = 'default', withGlow = true }: B
             <div className="relative w-full h-full filter drop-shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_15px_rgba(255,100,50,0.3)] transition-all duration-300">
                 <Image
                     src="/logo-white.png"
-                    alt="Nazen Gym"
+                    alt="ULIFTS Gym"
                     fill
                     className={cn(
                         // Clean projection

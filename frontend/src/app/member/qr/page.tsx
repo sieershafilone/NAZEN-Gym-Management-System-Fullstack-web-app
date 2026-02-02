@@ -32,7 +32,7 @@ export default function QRPage() {
             <Card className="max-w-sm w-full p-8 text-center flex flex-col items-center gap-6">
                 <div>
                     <h1 className="text-2xl font-black text-white uppercase tracking-wider">Access Pass</h1>
-                    <p className="text-zinc-500 text-sm mt-1">Nazen Gym Access Control</p>
+                    <p className="text-zinc-500 text-sm mt-1">ULIFTS Gym Access Control</p>
                 </div>
 
                 <div className="bg-white p-4 rounded-xl">
@@ -58,3 +58,4 @@ export default function QRPage() {
         </div>
     );
 }
+

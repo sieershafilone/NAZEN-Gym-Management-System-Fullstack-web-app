@@ -160,10 +160,11 @@ export default function LoginPage() {
                 {/* Copyright */}
                 <div className="mt-8 text-center">
                     <p className="text-zinc-600 text-xs">
-                        © 2026 Nazen Gym. All rights reserved.
+                        © 2026 ULIFTS Gym. All rights reserved.
                     </p>
                 </div>
             </motion.div>
         </div>
     );
 }
+

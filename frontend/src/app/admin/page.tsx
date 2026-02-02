@@ -63,7 +63,7 @@ export default function AdminDashboardPage() {
                         Command <span className="text-orange-500 glow-text-orange">Center</span>
                     </h1>
                     <p className="text-zinc-500 mt-2 font-medium tracking-wide">
-                        Real-time analytics and management for <span className="text-white">Nazen Gym</span>.
+                        Real-time analytics and management for <span className="text-white">ULIFTS Gym</span>.
                     </p>
                 </div>
                 <div className="flex items-center gap-3">
@@ -271,3 +271,4 @@ export default function AdminDashboardPage() {
         </div>
     );
 }
+

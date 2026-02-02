@@ -35,8 +35,8 @@ async function main() {
     console.log('👤 Creating admin user...');
     const admin = await prisma.user.create({
         data: {
-            fullName: 'Nazen Admin',
-            email: 'admin@nazen.gym',
+            fullName: 'ULIFTS Admin',
+            email: 'admin@ulifts.gym',
             mobile: '+919876543210',
             password: hashedPassword,
             role: 'ADMIN',
@@ -49,12 +49,13 @@ async function main() {
     console.log('⚙️  Creating gym settings...');
     await prisma.gymSettings.create({
         data: {
-            gymName: 'Nazen – Powered by Being Strong',
+            gymName: 'ULIFTS – Powered by Being Strong',
             tagline: 'Transform Your Body, Transform Your Life',
-            address: '97XQ+CW3, Handwara, Jammu and Kashmir – 193221, India',
+            address: '97XQ+CW3, Drugmulla, Kupwara, Jammu and Kashmir – 193221, India',
             phone: '+91 1234567890',
-            email: 'info@nazen.gym',
-            website: 'https://nazen.gym',
+            email: 'info@ulifts.gym',
+            website: 'https://ulifts.gym',
+            logo: '/logo.png',
             currency: 'INR',
             timezone: 'Asia/Kolkata',
             workingHours: {
@@ -67,13 +68,42 @@ async function main() {
                 sunday: { open: '08:00', close: '14:00' },
             },
             socialLinks: {
-                instagram: 'https://instagram.com/nazengym',
-                facebook: 'https://facebook.com/nazengym',
-                youtube: 'https://youtube.com/nazengym',
+                instagram: 'https://instagram.com/uliftsgym',
+                facebook: 'https://facebook.com/uliftsgym',
+                youtube: 'https://youtube.com/uliftsgym',
             },
         },
     });
     console.log('   ✅ Gym settings created');
+
+    // Create Gym Images (Gallery)
+    console.log('🖼️  Creating gallery images...');
+    const galleryImages = [
+        'Screenshot_1.png',
+        'Screenshot_2.png',
+        'Screenshot_27.png',
+        'Screenshot_3.png',
+        'Screenshot_4.png',
+        'Screenshot_5.png',
+        'WhatsApp Image 2026-02-02 at 12.47.49 PM.jpeg',
+        'WhatsApp Image 2026-02-02 at 12.47.59 PM.jpeg',
+        'WhatsApp Image 2026-02-02 at 12.48.18 PM.jpeg',
+        'WhatsApp Image 2026-02-02 at 12.48.31 PM.jpeg',
+        'WhatsApp Image 2026-02-02 at 12.52.41 PM.jpeg'
+    ];
+
+    for (const [index, imgName] of galleryImages.entries()) {
+        await prisma.gymImage.create({
+            data: {
+                title: `Gym Gallery ${index + 1}`,
+                imageUrl: `/images/${imgName}`,
+                category: 'GALLERY',
+                visibility: 'PUBLIC',
+                sortOrder: index,
+            },
+        });
+    }
+    console.log(`   ✅ ${galleryImages.length} gallery images created`);
 
     // Create Membership Plans
     console.log('📋 Creating membership plans...');
@@ -316,7 +346,7 @@ async function main() {
 
         const member = await prisma.member.create({
             data: {
-                memberId: `NAZ-${String(i + 1).padStart(3, '0')}`,
+                memberId: `ULF-${String(i + 1).padStart(3, '0')}`,
                 userId: user.id,
                 gender: m.gender,
                 dateOfBirth: new Date(m.dob),

@@ -3,7 +3,7 @@ const QRCode = require('qrcode');
 // Generate QR code for member check-in
 const generateMemberQR = async (memberId, memberUUID) => {
     const qrData = JSON.stringify({
-        type: 'NAZEN_CHECKIN',
+        type: 'ULIFTS_CHECKIN',
         memberId,
         uuid: memberUUID,
         timestamp: Date.now(),
@@ -24,7 +24,7 @@ const generateMemberQR = async (memberId, memberUUID) => {
 // Generate QR code as buffer
 const generateMemberQRBuffer = async (memberId, memberUUID) => {
     const qrData = JSON.stringify({
-        type: 'NAZEN_CHECKIN',
+        type: 'ULIFTS_CHECKIN',
         memberId,
         uuid: memberUUID,
     });
@@ -41,7 +41,7 @@ const generateMemberQRBuffer = async (memberId, memberUUID) => {
 const parseQRData = (qrString) => {
     try {
         const data = JSON.parse(qrString);
-        if (data.type !== 'NAZEN_CHECKIN') {
+        if (data.type !== 'ULIFTS_CHECKIN') {
             throw new Error('Invalid QR code type');
         }
         return data;
@@ -55,3 +55,4 @@ module.exports = {
     generateMemberQRBuffer,
     parseQRData,
 };
+

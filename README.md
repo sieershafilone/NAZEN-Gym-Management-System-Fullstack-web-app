@@ -1,11 +1,11 @@
-# Nazen Gym Management System
+# ULIFTS Gym Management System
 
 > **Production-Ready Indian Gym Management Solution**
 > 
-> Gym: **Nazen – Powered by Being Strong**  
-> Location: 97XQ+CW3, Handwara, Jammu and Kashmir – 193221, India
+> Gym: **ULIFTS – Powered by Being Strong**  
+> Location: 97XQ+CW3, Drugmulla, Kupwara, Jammu and Kashmir – 193221, India
 
-![Nazen Gym](https://img.shields.io/badge/Nazen-Gym%20Management-orange)
+![ULIFTS Gym](https://img.shields.io/badge/ULIFTS-Gym%20Management-orange)
 ![Next.js](https://img.shields.io/badge/Next.js-14-black)
 ![Express](https://img.shields.io/badge/Express-5.x-green)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
@@ -14,8 +14,8 @@
 
 | Service | URL |
 |---------|-----|
-| **Frontend** | [https://nazen-gym.netlify.app](https://nazen-gym.netlify.app) |
-| **Backend API** | [https://nazen-back-end.onrender.com](https://nazen-back-end.onrender.com) |
+| **Frontend** | [https://ulifts-gym.netlify.app](https://ulifts-gym.netlify.app) |
+| **Backend API** | [https://ulifts-back-end.onrender.com](https://ulifts-back-end.onrender.com) |
 | **Database** | Supabase (PostgreSQL) |
 
 ### Demo Credentials
@@ -223,7 +223,7 @@ MIT License - feel free to use for your gym!
 
 ---
 
-**Built with ❤️ for Nazen – Powered by Being Strong, Handwara**
+**Built with ❤️ for ULIFTS – Powered by Being Strong, Drugmulla, Kupwara**
 
 👨‍💻 Author
 Created & Developed by: SIEER SHAFI LONE

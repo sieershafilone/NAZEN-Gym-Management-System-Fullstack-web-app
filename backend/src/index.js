@@ -32,10 +32,10 @@ app.use('/api', routes);
 app.get('/', (req, res) => {
     res.json({
         success: true,
-        message: '🏋️ Nazen Gym Management API',
+        message: '🏋️ ULIFTS Gym Management API',
         version: '1.0.0',
-        gym: 'Nazen – Powered by Being Strong',
-        location: 'Handwara, Jammu and Kashmir',
+        gym: 'ULIFTS – Powered by Being Strong',
+        location: 'Drugmulla, Kupwara, Jammu and Kashmir',
         endpoints: {
             health: '/api/health',
             docs: '/api-docs',
@@ -54,7 +54,7 @@ app.listen(PORT, () => {
     console.log(`
 ╔══════════════════════════════════════════════════════════════╗
 ║                                                              ║
-║   🏋️  NAZEN GYM MANAGEMENT SYSTEM                           ║
+║   🏋️  ULIFTS GYM MANAGEMENT SYSTEM                           ║
 ║   Powered by Being Strong                                    ║
 ║                                                              ║
 ║   Server running on http://localhost:${PORT}                    ║
@@ -65,3 +65,5 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
+
+

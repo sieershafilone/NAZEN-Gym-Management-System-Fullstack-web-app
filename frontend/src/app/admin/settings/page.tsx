@@ -255,14 +255,14 @@ export default function SettingsPage() {
                                             name="gymName"
                                             value={formData.gymName}
                                             onChange={handleChange}
-                                            placeholder="Nazen High Performance"
+                                            placeholder="ULIFTS High Performance"
                                         />
                                         <Input
                                             label="Operational Email"
                                             name="operationalEmail"
                                             value={formData.operationalEmail}
                                             onChange={handleChange}
-                                            placeholder="hq@nazengym.com"
+                                            placeholder="hq@ULIFTSgym.com"
                                         />
                                         <Input
                                             label="Primary Contact"
@@ -477,3 +477,4 @@ export default function SettingsPage() {
         </div>
     );
 }
+

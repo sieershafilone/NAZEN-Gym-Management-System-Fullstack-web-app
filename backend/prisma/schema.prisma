@@ -1,4 +1,4 @@
-// Prisma Schema for Nazen Gym Management System
+// Prisma Schema for ULIFTS Gym Management System
 
 generator client {
   provider = "prisma-client-js"
@@ -97,7 +97,7 @@ model User {
 
 model Member {
   id               String   @id @default(uuid())
-  memberId         String   @unique // Display ID like NAZ-001
+  memberId         String   @unique // Display ID like ULF-001
   userId           String   @unique
   gender           Gender
   dateOfBirth      DateTime
@@ -272,9 +272,9 @@ model GymImage {
 
 model GymSettings {
   id           String   @id @default(uuid())
-  gymName      String   @default("Nazen – Powered by Being Strong")
+  gymName      String   @default("ULIFTS – Powered by Being Strong")
   tagline      String?  @default("Transform Your Body, Transform Your Life")
-  address      String   @default("97XQ+CW3, Handwara, Jammu and Kashmir – 193221, India")
+  address      String   @default("97XQ+CW3, Drugmulla, Kupwara, Jammu and Kashmir – 193221, India")
   phone        String?  @default("+91 1234567890")
   email        String?
   website      String?
@@ -302,3 +302,4 @@ model Notification {
   @@index([userId])
   @@index([isRead])
 }
+
