@@ -135,17 +135,17 @@ export default function PlansPage() {
                             <Card variant="default" className="h-full flex flex-col p-10 bg-white/[0.03] backdrop-blur-3xl border-white/10 group overflow-hidden relative shadow-xl">
                                 <div className="absolute -right-12 -top-12 w-48 h-48 bg-cyan-400/5 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-                                <div className="mb-10 relative z-10">
-                                    <h3 className="text-2xl font-black text-white mb-4 tracking-tight group-hover:text-cyan-400 transition-colors">{plan.name}</h3>
+                                <div className="mb-6 md:mb-10 relative z-10">
+                                    <h3 className="text-xl md:text-2xl font-black text-white mb-3 md:mb-4 tracking-tight group-hover:text-cyan-400 transition-colors uppercase">{plan.name}</h3>
                                     <div className="flex items-baseline gap-2">
-                                        <span className="text-4xl font-extrabold text-white tracking-tighter tabular-nums">
+                                        <span className="text-3xl md:text-4xl font-extrabold text-white tracking-tighter tabular-nums">
                                             {formatCurrency(plan.finalPrice || plan.basePrice)}
                                         </span>
-                                        <span className="text-zinc-600 text-[10px] font-black uppercase tracking-[0.2em]">
+                                        <span className="text-zinc-600 text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em]">
                                             / {plan.durationDays} Days
                                         </span>
                                     </div>
-                                    <p className="text-zinc-500 text-xs mt-4 font-medium leading-relaxed line-clamp-2">
+                                    <p className="text-zinc-500 text-[11px] md:text-xs mt-3 md:mt-4 font-medium leading-relaxed line-clamp-2 uppercase">
                                         {plan.description || "Core membership plan with standard facility privileges."}
                                     </p>
                                 </div>
@@ -161,16 +161,16 @@ export default function PlansPage() {
                                     ))}
                                 </div>
 
-                                <div className="pt-8 border-t border-white/5 flex items-center justify-between gap-4 relative z-10">
-                                    <div className="flex flex-col">
-                                        <span className="text-white font-black text-xs tracking-tighter">ACTIVE</span>
-                                        <span className="text-[10px] text-zinc-600 uppercase tracking-widest font-black">Ready for sale</span>
+                                <div className="pt-6 md:pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
+                                    <div className="flex flex-col items-center sm:items-start">
+                                        <span className="text-white font-black text-[10px] md:text-xs tracking-tighter">ACTIVE</span>
+                                        <span className="text-[8px] md:text-[10px] text-zinc-600 uppercase tracking-widest font-black">Ready for sale</span>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <Button variant="ghost" size="sm" onClick={() => handleDelete(plan.id)} className="h-10 w-10 p-0 rounded-xl text-rose-500 hover:bg-rose-500/10">
                                             <Trash2 size={18} />
                                         </Button>
-                                        <Button variant="secondary" size="sm" onClick={() => handleEdit(plan)} className="rounded-xl px-5 h-10 border-white/5">
+                                        <Button variant="secondary" size="sm" onClick={() => handleEdit(plan)} className="rounded-xl px-4 md:px-5 h-10 border-white/5 text-[10px] md:text-xs">
                                             <Edit2 size={16} className="mr-2" /> EDIT
                                         </Button>
                                     </div>
@@ -270,19 +270,19 @@ function PlanModal({ isOpen, onClose, initialData, onSuccess }: {
             <motion.div
                 initial={{ scale: 0.9, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
-                className="bg-[#050505] w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-[3rem] border border-white/5 shadow-[0_0_80px_rgba(0,0,0,0.5)] flex flex-col"
+                className="bg-[#050505] w-full max-w-xl max-h-[95vh] md:max-h-[90vh] overflow-y-auto rounded-[2.5rem] md:rounded-[3rem] border border-white/5 shadow-[0_0_80px_rgba(0,0,0,0.5)] flex flex-col mb-4"
             >
-                <div className="p-10 border-b border-white/5 flex justify-between items-center bg-white/[0.01] sticky top-0 z-10 backdrop-blur-3xl">
+                <div className="p-6 md:p-10 border-b border-white/5 flex justify-between items-center bg-white/[0.01] sticky top-0 z-10 backdrop-blur-3xl">
                     <div>
-                        <h2 className="text-2xl font-black text-white tracking-tight">{initialData ? 'EDIT PLAN' : 'NEW PLAN'}</h2>
-                        <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mt-1">PLAN DETAILS</p>
+                        <h2 className="text-xl md:text-2xl font-black text-white tracking-tight uppercase">{initialData ? 'Edit Plan' : 'New Plan'}</h2>
+                        <p className="text-zinc-600 text-[8px] md:text-[10px] font-bold uppercase tracking-widest mt-1">Plan Details</p>
                     </div>
-                    <button onClick={onClose} className="p-4 bg-white/5 rounded-2xl text-zinc-500 hover:text-white transition-colors">
+                    <button onClick={onClose} className="p-3 md:p-4 bg-white/5 rounded-xl md:rounded-2xl text-zinc-500 hover:text-white transition-colors">
                         <X size={20} />
                     </button>
                 </div>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="p-10 space-y-10">
+                <form onSubmit={handleSubmit(onSubmit)} className="p-6 md:p-10 space-y-8 md:space-y-10">
                     <div className="space-y-8">
                         <Input
                             label="Plan Name"

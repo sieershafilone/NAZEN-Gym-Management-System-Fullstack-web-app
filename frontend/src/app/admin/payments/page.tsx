@@ -123,23 +123,23 @@ export default function PaymentsPage() {
 
             {/* Content Area */}
             <Card variant="default" className="overflow-hidden min-h-[600px] flex flex-col p-0 bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[2.5rem] shadow-xl">
-                <div className="p-10 border-b border-white/5 flex flex-col sm:flex-row items-center justify-between gap-6 bg-white/[0.01]">
-                    <div className="flex items-center gap-6 w-full sm:w-auto">
-                        <h2 className="text-2xl font-black text-white tracking-tight">Transaction History</h2>
+                <div className="p-6 md:p-10 border-b border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 bg-white/[0.01]">
+                    <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6 w-full md:w-auto">
+                        <h2 className="text-xl md:text-2xl font-black text-white tracking-tight uppercase">Transactions</h2>
                         {selectedIds.size > 0 && (
                             <motion.button
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 onClick={handleDeleteSelected}
-                                className="flex items-center gap-3 px-5 py-2.5 rounded-xl bg-rose-500/10 text-rose-500 border border-rose-500/20 hover:bg-rose-500/20 transition-all text-[10px] font-black uppercase tracking-widest"
+                                className="flex items-center gap-3 px-5 py-2.5 rounded-xl bg-rose-500/10 text-rose-500 border border-rose-500/20 hover:bg-rose-500/20 transition-all text-[9px] font-black uppercase tracking-widest"
                             >
-                                <Trash2 size={14} /> Delete ({selectedIds.size})
+                                <Trash2 size={12} /> Wipe ({selectedIds.size})
                             </motion.button>
                         )}
                     </div>
-                    <div className="flex items-center gap-4 bg-[#0D0D0D] rounded-2xl px-6 py-4 border border-white/5 w-full sm:w-80 focus-within:border-cyan-400/50 focus-within:ring-4 focus-within:ring-cyan-400/5 transition-all duration-300">
-                        <SearchIcon size={18} className="text-zinc-600" />
-                        <input type="text" placeholder="Search transactions..." className="bg-transparent border-none outline-none text-sm text-white placeholder:text-zinc-700 w-full font-medium" />
+                    <div className="flex items-center gap-4 bg-[#0D0D0D] rounded-2xl px-5 py-3 md:py-4 border border-white/5 w-full md:w-80 focus-within:border-cyan-400/50 focus-within:ring-4 focus-within:ring-cyan-400/5 transition-all duration-300">
+                        <SearchIcon size={16} className="text-zinc-600" />
+                        <input type="text" placeholder="Search..." className="bg-transparent border-none outline-none text-xs md:text-sm text-white placeholder:text-zinc-700 w-full font-medium" />
                     </div>
                 </div>
 
@@ -277,17 +277,17 @@ function RecordTransactionModal({ isOpen, onClose, onSuccess }: { isOpen: boolea
             <motion.div
                 initial={{ scale: 0.9, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
-                className="bg-[#050505] w-full max-w-xl rounded-[3rem] border border-white/5 shadow-2xl overflow-hidden flex flex-col"
+                className="bg-[#050505] w-full max-w-xl rounded-[2.5rem] md:rounded-[3rem] border border-white/5 shadow-2xl overflow-hidden flex flex-col mb-4 max-h-[95vh] md:max-h-none"
             >
-                <div className="p-10 border-b border-white/5 flex justify-between items-center bg-white/[0.01]">
+                <div className="p-6 md:p-10 border-b border-white/5 flex justify-between items-center bg-white/[0.01]">
                     <div>
-                        <h2 className="text-2xl font-black text-white tracking-tight">RECORD PAYMENT</h2>
-                        <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mt-1">MANUAL PAYMENT ENTRY</p>
+                        <h2 className="text-xl md:text-2xl font-black text-white tracking-tight uppercase">Record Payment</h2>
+                        <p className="text-zinc-600 text-[8px] md:text-[10px] font-bold uppercase tracking-widest mt-1">Manual Entry</p>
                     </div>
-                    <button onClick={onClose} className="p-4 bg-white/5 rounded-2xl text-zinc-500 hover:text-white transition-all"><X size={24} /></button>
+                    <button onClick={onClose} className="p-3 md:p-4 bg-white/5 rounded-xl md:rounded-2xl text-zinc-500 hover:text-white transition-all"><X size={20} /></button>
                 </div>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="p-10 space-y-10">
+                <form onSubmit={handleSubmit(onSubmit)} className="p-6 md:p-10 space-y-8 md:space-y-10 overflow-y-auto">
                     <div className="space-y-8">
                         <div className="space-y-3">
                             <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Member</label>

@@ -255,8 +255,8 @@ function MemberCard({ member, onView, onDelete, index }: { member: Member, onVie
                     <Avatar
                         src={member.user?.profilePhoto}
                         fallback={getInitials(member.user?.fullName || '?')}
-                        size="lg"
-                        className="rounded-2xl shadow-xl shadow-black group-hover:scale-105 transition-transform duration-500"
+                        size="md"
+                        className="rounded-2xl shadow-xl shadow-black group-hover:scale-105 transition-transform duration-500 sm:size-lg"
                     />
                     <div>
                         <h3 className="text-white font-black text-xl leading-tight group-hover:text-cyan-400 transition-colors truncate max-w-[150px]">
@@ -345,18 +345,18 @@ function AddMemberModal({ isOpen, onClose, plans, onSuccess }: { isOpen: boolean
             <motion.div
                 initial={{ scale: 0.9, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
-                className="bg-[#050505] w-full max-w-3xl rounded-[3rem] border border-white/5 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
+                className="bg-[#050505] w-full max-w-3xl rounded-[2.5rem] md:rounded-[3rem] border border-white/5 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
             >
-                <div className="p-10 border-b border-white/5 flex justify-between items-center bg-white/[0.01]">
+                <div className="p-6 md:p-10 border-b border-white/5 flex justify-between items-center bg-white/[0.01]">
                     <div>
-                        <h2 className="text-2xl font-black text-white tracking-tight">ADD MEMBER</h2>
-                        <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mt-1">BASIC INFORMATION</p>
+                        <h2 className="text-xl md:text-2xl font-black text-white tracking-tight uppercase">Add Member</h2>
+                        <p className="text-zinc-600 text-[8px] md:text-[10px] font-bold uppercase tracking-widest mt-1">Basic Information</p>
                     </div>
-                    <button onClick={onClose} className="p-4 bg-white/5 rounded-2xl text-zinc-500 hover:text-white transition-colors"><X size={24} /></button>
+                    <button onClick={onClose} className="p-3 md:p-4 bg-white/5 rounded-xl md:rounded-2xl text-zinc-500 hover:text-white transition-colors"><X size={20} className="md:w-6 md:h-6" /></button>
                 </div>
 
-                <div className="overflow-y-auto p-10 custom-scrollbar scroll-hide">
-                    <form id="add-member-form" onSubmit={handleSubmit(onSubmit)} className="space-y-12">
+                <div className="overflow-y-auto p-6 md:p-10 custom-scrollbar scroll-hide">
+                    <form id="add-member-form" onSubmit={handleSubmit(onSubmit)} className="space-y-8 md:space-y-12">
                         <section>
                             <h3 className="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-8 flex items-center gap-3">
                                 <div className="w-8 h-[1px] bg-cyan-400/30" />
@@ -433,49 +433,54 @@ function ViewMemberModal({ isOpen, onClose, member }: { isOpen: boolean, onClose
             <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="bg-[#050505] w-full max-w-4xl rounded-[3rem] border border-white/5 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col relative"
+                className="bg-[#050505] w-full max-w-4xl rounded-[2.5rem] md:rounded-[3rem] border border-white/5 shadow-2xl overflow-hidden max-h-[95vh] md:max-h-[90vh] flex flex-col relative"
             >
                 <div className="absolute top-0 left-0 w-full h-[300px] bg-gradient-to-b from-cyan-400/5 to-transparent pointer-events-none" />
 
-                <div className="p-12 relative z-10 flex justify-between items-start">
-                    <div className="flex gap-10">
-                        <Avatar src={member.user?.profilePhoto} fallback={getInitials(member.user?.fullName || '?')} size="xl" className="rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.5)] scale-125 border border-white/10" />
-                        <div className="ml-4">
-                            <h1 className="text-5xl font-black text-white tracking-tighter">{member.user?.fullName}</h1>
-                            <div className="flex items-center gap-4 mt-4">
-                                <Badge variant="default" className="bg-white/5 border-none font-black tracking-widest">{member.memberId}</Badge>
-                                <Badge variant="success" className="px-4 py-1">ACTIVE</Badge>
+                <div className="p-6 md:p-12 relative z-10 flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
+                    <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10 text-center md:text-left">
+                        <Avatar
+                            src={member.user?.profilePhoto}
+                            fallback={getInitials(member.user?.fullName || '?')}
+                            size="xl"
+                            className="rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.5)] scale-110 md:scale-125 border border-white/10"
+                        />
+                        <div className="md:ml-4">
+                            <h1 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase">{member.user?.fullName}</h1>
+                            <div className="flex items-center justify-center md:justify-start gap-4 mt-4">
+                                <Badge variant="default" className="bg-white/5 border-none font-black tracking-widest text-[9px]">{member.memberId}</Badge>
+                                <Badge variant="success" className="px-3 md:px-4 py-1 text-[9px]">ACTIVE</Badge>
                             </div>
                         </div>
                     </div>
-                    <button onClick={onClose} className="p-5 bg-white/5 hover:bg-white/10 rounded-2xl text-zinc-500 hover:text-white transition-all"><X size={28} /></button>
+                    <button onClick={onClose} className="absolute top-6 right-6 p-4 md:p-5 bg-white/5 hover:bg-white/10 rounded-xl md:rounded-2xl text-zinc-500 hover:text-white transition-all"><X size={24} className="md:w-7 md:h-7" /></button>
                 </div>
 
-                <div className="px-12 pb-12 overflow-y-auto custom-scrollbar scroll-hide space-y-12">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div className="px-6 md:px-12 pb-10 md:pb-12 overflow-y-auto custom-scrollbar scroll-hide space-y-8 md:space-y-12">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                         {[
                             { label: 'Weight', value: member.weight ? `${member.weight} KG` : '--', icon: Dumbbell, color: 'indigo' },
                             { label: 'Height', value: member.height ? `${member.height} CM` : '--', icon: Activity, color: 'mint' },
                             { label: 'Goal', value: member.fitnessGoal || 'GENERAL', icon: TrendingUp, color: 'amber' },
                             { label: 'Joined', value: formatDate(member.joinDate).toUpperCase(), icon: Calendar, color: 'indigo' },
                         ].map((stat, i) => (
-                            <div key={i} className="bg-white/[0.02] rounded-3xl p-6 border border-white/5 group hover:bg-white/[0.04] transition-all">
+                            <div key={i} className="bg-white/[0.02] rounded-2xl md:rounded-3xl p-4 md:p-6 border border-white/5 group hover:bg-white/[0.04] transition-all">
                                 <div className={cn(
-                                    "flex items-center gap-3 mb-3 text-[10px] font-black uppercase tracking-widest",
+                                    "flex items-center gap-3 mb-2 md:mb-3 text-[9px] md:text-[10px] font-black uppercase tracking-widest",
                                     stat.color === 'indigo' && "text-indigo-400",
                                     stat.color === 'mint' && "text-cyan-400",
                                     stat.color === 'amber' && "text-amber-400"
                                 )}>
-                                    <stat.icon size={16} /> {stat.label}
+                                    <stat.icon size={14} className="md:w-4 md:h-4" /> {stat.label}
                                 </div>
-                                <div className="text-2xl font-black text-white tracking-tight">{stat.value}</div>
+                                <div className="text-xl md:text-2xl font-black text-white tracking-tight">{stat.value}</div>
                             </div>
                         ))}
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-12">
-                        <div className="bg-white/[0.03] backdrop-blur-3xl border border-white/10 p-10 rounded-[2.5rem] shadow-xl">
-                            <h3 className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-8">Contact Details</h3>
+                        <div className="bg-white/[0.03] backdrop-blur-3xl border border-white/10 p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-xl">
+                            <h3 className="text-[9px] md:text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-6 md:mb-8">Contact Details</h3>
                             <div className="space-y-6">
                                 <InfoRow label="Mobile" value={member.user?.mobile} />
                                 <InfoRow label="Email" value={member.user?.email} />
@@ -483,8 +488,8 @@ function ViewMemberModal({ isOpen, onClose, member }: { isOpen: boolean, onClose
                                 <InfoRow label="Emergency Contact" value={member.emergencyContact} />
                             </div>
                         </div>
-                        <div className="bg-white/[0.03] backdrop-blur-3xl border border-white/10 p-10 rounded-[2.5rem] shadow-xl">
-                            <h3 className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-8">Membership</h3>
+                        <div className="bg-white/[0.03] backdrop-blur-3xl border border-white/10 p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-xl">
+                            <h3 className="text-[9px] md:text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-6 md:mb-8">Membership</h3>
                             {member.memberships?.[0] ? (
                                 <div className="space-y-8">
                                     <div className="flex justify-between items-end">
