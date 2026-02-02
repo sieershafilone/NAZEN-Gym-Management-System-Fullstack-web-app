@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 import { useAuthStore, useUIStore } from '@/store';
 import { settingsAPI } from '@/lib/api';
-import { Avatar, Button, Badge } from '@/components/ui';
+import { Avatar, Button, Badge, BrandLogo } from '@/components/ui';
 import { getInitials, getDaysRemaining } from '@/lib/utils';
 
 const memberNavItems = [
@@ -95,21 +95,9 @@ export default function MemberLayout({
                     }`}
             >
                 {/* Logo Section */}
-                <div className="h-24 flex items-center justify-between px-8 border-b border-white/5">
+                <div className="h-32 flex items-center justify-between px-8 border-b border-white/5">
                     <Link href="/member" className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center overflow-hidden shadow-[0_0_20px_rgba(255,255,255,0.05)]">
-                            <Image
-                                src="/logo.png"
-                                alt="ULIFTS Logo"
-                                width={36}
-                                height={36}
-                                className="object-contain"
-                            />
-                        </div>
-                        <div>
-                            <span className="font-black text-white tracking-tighter text-xl">ULIFTS</span>
-                            <span className="text-zinc-600 text-[8px] font-black uppercase tracking-[0.3em] block mt-1">Member Area</span>
-                        </div>
+                        <BrandLogo variant="default" />
                     </Link>
                     <button
                         onClick={() => setSidebarOpen(false)}
@@ -176,7 +164,7 @@ export default function MemberLayout({
             {/* Main Content Area */}
             <div className="lg:pl-72">
                 {/* Unified Top Header */}
-                <header className="sticky top-0 z-30 h-24 bg-[#050505]/80 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-8 lg:px-12">
+                <header className="sticky top-0 z-30 h-32 bg-[#050505]/80 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-6 lg:px-10">
                     <div className="flex items-center gap-6">
                         <button
                             onClick={toggleSidebar}
