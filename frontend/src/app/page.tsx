@@ -194,9 +194,6 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              'Screenshot_1.png',
-              'Screenshot_2.png',
-              'Screenshot_27.png',
               'Screenshot_3.png',
               'Screenshot_4.png',
               'Screenshot_5.png',
