@@ -159,12 +159,12 @@ export default function HomePage() {
             {/* Metrics */}
             <div className="flex items-center justify-center gap-12 mt-24">
               <div className="text-center group">
-                <p className="text-5xl font-black text-white tracking-tighter group-hover:text-cyan-400 transition-colors">500+</p>
+                <p className="text-5xl font-black text-white tracking-tighter group-hover:text-cyan-400 transition-colors">50+</p>
                 <p className="text-zinc-600 text-[10px] uppercase tracking-widest font-black mt-2">Active Members</p>
               </div>
               <div className="w-px h-16 bg-white/5" />
               <div className="text-center group">
-                <p className="text-5xl font-black text-white tracking-tighter group-hover:text-cyan-400 transition-colors">75+</p>
+                <p className="text-5xl font-black text-white tracking-tighter group-hover:text-cyan-400 transition-colors">30+</p>
                 <p className="text-zinc-600 text-[10px] uppercase tracking-widest font-black mt-2">Gym Equipment</p>
               </div>
             </div>
