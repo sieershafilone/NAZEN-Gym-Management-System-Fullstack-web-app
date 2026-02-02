@@ -200,9 +200,6 @@ export default function HomePage() {
               'Screenshot_3.png',
               'Screenshot_4.png',
               'Screenshot_5.png',
-              'WhatsApp Image 2026-02-02 at 12.47.49 PM.jpeg',
-              'WhatsApp Image 2026-02-02 at 12.47.59 PM.jpeg',
-              'WhatsApp Image 2026-02-02 at 12.48.18 PM.jpeg',
               'WhatsApp Image 2026-02-02 at 12.48.31 PM.jpeg',
               'WhatsApp Image 2026-02-02 at 12.52.41 PM.jpeg'
             ].map((imgName, index) => (
