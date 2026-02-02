@@ -355,14 +355,13 @@ export default function HomePage() {
                     </div>
                     <div>
                       <h4 className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.4em] mb-2">{item.label}</h4>
-                      <p className="text-sm font-black text-white uppercase tracking-tight leading-relaxed">
+                      <div className="space-y-2 mt-1">
                         {item.value.split('|').map((line, index) => (
-                          <React.Fragment key={index}>
+                          <p key={index} className="text-[11px] font-bold text-white/90 uppercase tracking-widest leading-none">
                             {line.trim()}
-                            {index < item.value.split('|').length - 1 && <br />}
-                          </React.Fragment>
+                          </p>
                         ))}
-                      </p>
+                      </div>
                     </div>
                   </div>
                 ))}
