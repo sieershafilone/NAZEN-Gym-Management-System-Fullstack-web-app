@@ -7,45 +7,45 @@ import { Card, Button, Badge, StatCard, EmptyState } from '@/components/ui';
 
 export default function AttendancePage() {
     return (
-        <div className="space-y-10 animate-fade-in">
+        <div className="space-y-12 animate-fade-in pb-12">
             {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                <div>
-                    <h1 className="text-4xl font-extrabold text-white tracking-tight sm:text-5xl">
-                        Attendance <span className="text-orange-500 glow-text-orange">Logs</span>
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div className="space-y-4">
+                    <h1 className="text-5xl font-black text-white tracking-tighter sm:text-6xl">
+                        Activity <span className="text-cyan-400 glow-text">Logs</span>
                     </h1>
-                    <p className="text-zinc-500 mt-2 font-medium tracking-wide">
-                        Monitor athlete check-ins and real-time gym traffic.
+                    <p className="text-zinc-500 mt-3 font-medium tracking-widest uppercase text-[10px]">
+                        Monitor <span className="text-white">Athlete Presence</span> & Real-time gym flux.
                     </p>
                 </div>
-                <div className="flex items-center gap-3">
-                    <Button variant="secondary" className="group">
-                        <Filter size={18} className="mr-2 group-hover:text-orange-500 transition-colors" />
-                        Sort & Filter
+                <div className="flex items-center gap-4">
+                    <Button variant="secondary" className="group h-14 rounded-2xl px-6 border-white/5">
+                        <Filter size={20} className="mr-3 group-hover:text-cyan-400 transition-colors" />
+                        Sort Matrix
                     </Button>
-                    <Button className="btn-premium">
-                        Manual Entry
+                    <Button className="h-14 px-8 rounded-2xl group">
+                        Manual Induction
                     </Button>
                 </div>
             </div>
 
             {/* Metrics */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <StatCard title="Morning Session" value="42" icon={<Users size={18} />} color="blue" />
-                <StatCard title="Afternoon Session" value="28" icon={<Users size={18} />} color="purple" />
-                <StatCard title="Evening Session" value="65" icon={<Users size={18} />} color="orange" />
-                <StatCard title="Peak Traffic" value="6PM" icon={<Calendar size={18} />} color="green" />
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <StatCard title="Morning Flux" value="42" icon={<Users size={20} />} color="indigo" />
+                <StatCard title="Midday Flux" value="28" icon={<Users size={20} />} color="mint" />
+                <StatCard title="Peak Flux" value="65" icon={<Users size={20} />} color="amber" />
+                <StatCard title="Max Intensity" value="6PM" icon={<Calendar size={20} />} color="indigo" />
             </div>
 
             {/* Content Area */}
-            <Card variant="glass" className="min-h-[500px] flex flex-col justify-center items-center border-dashed border-2">
+            <Card variant="default" className="min-h-[600px] flex flex-col justify-center items-center border-white/5 rounded-[2.5rem] bg-white/[0.01]">
                 <EmptyState
-                    icon={<Calendar size={64} className="text-zinc-700 mb-2" />}
-                    title="No Activity Detected"
+                    icon={<Calendar size={64} className="text-zinc-800" />}
+                    title="Logs Dormant"
                     description="Our biometric scanners are ready. Once athletes start checking in, logs will appear here in real-time."
                     action={
-                        <Button variant="outline" className="mt-4">
-                            Check Hardware Status
+                        <Button variant="secondary" className="mt-6 rounded-xl">
+                            Verify Hardware Sync
                         </Button>
                     }
                 />

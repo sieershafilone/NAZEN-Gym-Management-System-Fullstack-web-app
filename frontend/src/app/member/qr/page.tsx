@@ -28,31 +28,42 @@ export default function QRPage() {
     }, [user]);
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-[60vh] animate-fade-in">
-            <Card className="max-w-sm w-full p-8 text-center flex flex-col items-center gap-6">
-                <div>
-                    <h1 className="text-2xl font-black text-white uppercase tracking-wider">Access Pass</h1>
-                    <p className="text-zinc-500 text-sm mt-1">ULIFTS Gym Access Control</p>
+        <div className="flex flex-col items-center justify-center min-h-[70vh] animate-fade-in relative overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-500/5 via-transparent to-transparent" />
+
+            <Card variant="default" className="max-w-md w-full p-12 text-center flex flex-col items-center gap-10 rounded-[3rem] bg-white/[0.01] border-white/5 relative z-10 backdrop-blur-xl group hover:border-cyan-400/20 transition-all duration-700">
+                <div className="space-y-3">
+                    <p className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.5em]">Identity Token</p>
+                    <h1 className="text-4xl font-black text-white uppercase tracking-tighter">ACCESS <span className="text-cyan-400">MATRIX</span></h1>
+                    <p className="text-zinc-600 text-[9px] font-black uppercase tracking-[0.2em]">NAIZEN Gateway Protocol</p>
                 </div>
 
-                <div className="bg-white p-4 rounded-xl">
-                    {loading ? (
-                        <div className="w-48 h-48 flex items-center justify-center">
-                            <Spinner className="border-zinc-400 border-t-zinc-800" />
-                        </div>
-                    ) : qrCode ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={qrCode} alt="Your QR Code" className="w-48 h-48" />
-                    ) : (
-                        <div className="w-48 h-48 flex items-center justify-center bg-zinc-100 rounded-lg">
-                            <QrCode size={48} className="text-zinc-300" />
-                        </div>
-                    )}
+                <div className="relative group/qr">
+                    <div className="absolute -inset-4 bg-cyan-400/10 rounded-[2.5rem] blur-2xl opacity-0 group-hover/qr:opacity-100 transition-opacity duration-700" />
+                    <div className="bg-white p-6 rounded-[2.5rem] relative z-10 shadow-[0_0_40px_rgba(34,211,238,0.1)] group-hover/qr:shadow-[0_0_60px_rgba(34,211,238,0.2)] transition-all">
+                        {loading ? (
+                            <div className="w-56 h-56 flex items-center justify-center">
+                                <Spinner size="lg" />
+                            </div>
+                        ) : qrCode ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img src={qrCode} alt="Your QR Code" className="w-56 h-56 mix-blend-multiply" />
+                        ) : (
+                            <div className="w-56 h-56 flex items-center justify-center bg-zinc-50 rounded-3xl">
+                                <QrCode size={56} className="text-zinc-200" />
+                            </div>
+                        )}
+                    </div>
                 </div>
 
-                <div className="text-xs text-zinc-500">
-                    <p className="font-mono">{user?.member?.memberId}</p>
-                    <p className="mt-2">Scan this at the entrance/exit.</p>
+                <div className="space-y-4">
+                    <div className="bg-[#0D0D0D] border border-white/5 rounded-2xl px-6 py-3">
+                        <p className="font-mono text-[11px] font-black text-white tracking-[0.3em]">{user?.member?.memberId}</p>
+                    </div>
+                    <p className="text-[9px] font-black text-zinc-600 uppercase tracking-widest leading-relaxed">
+                        Present this sequence to the <span className="text-white">Validation Gateway</span> <br />
+                        Initial entry/exit synchronization required.
+                    </p>
                 </div>
             </Card>
         </div>

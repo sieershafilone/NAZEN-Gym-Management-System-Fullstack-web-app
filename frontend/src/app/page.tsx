@@ -78,114 +78,121 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-[#050505] text-white selection:bg-cyan-400/30">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-lg border-b border-zinc-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-3">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/80 backdrop-blur-2xl border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
+          <div className="flex items-center justify-between h-20">
+            <div className="flex items-center gap-4">
               <Link href="/">
-                <BrandLogo variant="default" />
+                <BrandLogo variant="default" className="scale-110" />
               </Link>
             </div>
-            <div className="hidden md:flex items-center gap-6">
-              <a href="#features" className="text-zinc-400 hover:text-white transition-colors">Features</a>
-              <a href="#gallery" className="text-zinc-400 hover:text-white transition-colors">Gallery</a>
-              <a href="#plans" className="text-zinc-400 hover:text-white transition-colors">Plans</a>
-              <a href="#contact" className="text-zinc-400 hover:text-white transition-colors">Contact</a>
+            <div className="hidden md:flex items-center gap-10">
+              {['features', 'gallery', 'plans', 'contact'].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item}`}
+                  className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 hover:text-white transition-all duration-300"
+                >
+                  {item}
+                </a>
+              ))}
             </div>
             <Link href="/login">
-              <Button size="sm">Login</Button>
+              <Button size="sm" className="h-10 px-8 rounded-xl font-black text-[10px] uppercase tracking-widest">
+                Access System
+              </Button>
             </Link>
           </div>
         </div>
       </nav >
 
       {/* Hero Section */}
-      < section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden" >
-        {/* Background */}
-        < div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-orange-900/30 via-black to-black" />
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-red-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      < section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden" >
+        {/* Background Visuals */}
+        < div className="absolute inset-0 bg-[#050505]" />
+        <div className="absolute top-1/4 -right-20 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute -bottom-20 -left-20 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
 
-        {/* Grid pattern */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAgTSAwIDIwIEwgNDAgMjAgTSAyMCAwIEwgMjAgNDAgTSAwIDMwIEwgNDAgMzAgTSAzMCAwIEwgMzAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-50" />
+        {/* Technical Grid Overlay */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAgTSAwIDIwIEwgNDAgMjAgTSAyMCAwIEwgMjAgNDAgTSAwIDMwIEwgNDAgMzAgTSAzMCAwIEwgMzAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgzNCwyMTIsMTg4LDAuMDIpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, scale: 0.95, y: 40 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/20 rounded-full px-4 py-1.5 mb-6">
-              <Zap className="w-4 h-4 text-orange-500" />
-              <span className="text-sm text-orange-400">Drugmulla, Kupwara&apos;s Premium Fitness Centre</span>
+            <div className="inline-flex items-center gap-3 bg-white/[0.03] border border-white/5 rounded-2xl px-6 py-2 mb-10 transition-all hover:bg-white/[0.05] group">
+              <Zap className="w-4 h-4 text-cyan-400 animate-pulse group-hover:scale-125 transition-transform" />
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400">
+                Kupwara&apos;s <span className="text-white">Elite Performance</span> Matrix
+              </span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Transform Your
-              <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent"> Body</span>,
-              <br />
-              Transform Your
-              <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent"> Life</span>
+            <h1 className="text-6xl md:text-[6.5rem] font-black mb-10 leading-[0.9] tracking-tighter">
+              EVOLVE YOUR <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-500">PHYSICAL</span>
+              <span className="text-cyan-400 glow-text"> LOGIC</span>
             </h1>
 
-            <p className="text-xl text-zinc-400 max-w-2xl mx-auto mb-8">
-              Join ULIFTS – the most advanced gym in Drugmulla, Kupwara with state-of-the-art equipment,
-              and a supportive community to help you achieve your fitness goals.
+            <p className="text-lg text-zinc-500 max-w-2xl mx-auto mb-12 font-bold uppercase tracking-widest leading-relaxed">
+              Join <span className="text-white">NAIZEN</span> – The high-intensity training protocol in Drugmulla,
+              designed for the <span className="text-white">Elite 1%</span>.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <Link href="/login">
-                <Button size="lg" className="min-w-[180px]">
-                  Get Started
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                <Button size="lg" className="h-16 px-12 rounded-2xl font-black text-[12px] uppercase tracking-[0.2em] group shadow-[0_20px_40px_rgba(255,255,255,0.05)]">
+                  Enter The Matrix
+                  <ArrowRight className="ml-4 w-5 h-5 group-hover:translate-x-2 transition-transform" />
                 </Button>
               </Link>
               <a href="#plans">
-                <Button size="lg" variant="outline" className="min-w-[180px]">
-                  View Plans
+                <Button size="lg" variant="secondary" className="h-16 px-12 rounded-2xl font-black text-[12px] uppercase tracking-[0.2em] border-white/5 hover:bg-white/5 transition-all">
+                  View Protocols
                 </Button>
               </a>
             </div>
 
-            {/* Stats */}
-            <div className="flex items-center justify-center gap-8 mt-16">
-              <div className="text-center">
-                <p className="text-3xl font-bold text-white">50+</p>
-                <p className="text-zinc-500 text-sm">Active Members</p>
+            {/* Metrics */}
+            <div className="flex items-center justify-center gap-12 mt-24">
+              <div className="text-center group">
+                <p className="text-5xl font-black text-white tracking-tighter group-hover:text-cyan-400 transition-colors">500+</p>
+                <p className="text-zinc-600 text-[10px] uppercase tracking-widest font-black mt-2">Active Subjects</p>
               </div>
-              <div className="w-px h-12 bg-zinc-800" />
-              <div className="text-center">
-                <p className="text-3xl font-bold text-white">50+</p>
-                <p className="text-zinc-500 text-sm">Equipment</p>
+              <div className="w-px h-16 bg-white/5" />
+              <div className="text-center group">
+                <p className="text-5xl font-black text-white tracking-tighter group-hover:text-cyan-400 transition-colors">75+</p>
+                <p className="text-zinc-600 text-[10px] uppercase tracking-widest font-black mt-2">Force Units</p>
               </div>
             </div>
           </motion.div>
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-zinc-700 rounded-full flex items-start justify-center p-2">
-            <div className="w-1 h-2 bg-orange-500 rounded-full animate-pulse" />
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 group cursor-pointer">
+          <div className="w-8 h-12 border-2 border-white/5 rounded-full flex items-start justify-center p-2 group-hover:border-cyan-400/30 transition-all duration-500">
+            <div className="w-1.5 h-3 bg-cyan-400 rounded-full animate-bounce" />
           </div>
         </div>
       </section >
 
       {/* Gallery Section */}
-      < section id="gallery" className="py-24 bg-zinc-900/30 overflow-hidden" >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Inside
-              <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent"> ULIFTS</span>
+      < section id="gallery" className="py-32 bg-white/[0.01] border-y border-white/5 relative overflow-hidden" >
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
+          <div className="text-center mb-24">
+            <h2 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter uppercase">
+              VISUAL <span className="text-cyan-400 glow-text">ARCHIVE</span>
             </h2>
-            <p className="text-zinc-400 max-w-2xl mx-auto">
-              Experience our world-class facilities designed to help you crush your limits.
+            <div className="w-24 h-1 bg-cyan-400 mx-auto mb-10" />
+            <p className="text-zinc-500 max-w-2xl mx-auto font-black uppercase text-[10px] tracking-[0.3em]">
+              state-of-the-art intensity captured in real-time.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               'Screenshot_1.png',
               'Screenshot_2.png',
@@ -201,20 +208,21 @@ export default function HomePage() {
             ].map((imgName, index) => (
               <motion.div
                 key={imgName}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.05 }}
                 viewport={{ once: true }}
-                className="relative group aspect-[3/4] overflow-hidden rounded-2xl"
+                className="relative group aspect-[3/4] overflow-hidden rounded-[2.5rem] border border-white/5 hover:border-cyan-400/30 transition-all duration-700 shadow-2xl"
               >
                 <Image
                   src={`/images/${imgName}`}
                   alt={`Gym Photo ${index + 1}`}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="object-cover transition-transform duration-[1.5s] group-hover:scale-110 group-hover:rotate-1 grayscale group-hover:grayscale-0"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                  <span className="text-white font-medium">View Area</span>
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
+                  <div className="w-10 h-1 bg-cyan-400 mb-4 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500 delay-100" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500 delay-200">SECTOR {index + 1}</span>
                 </div>
               </motion.div>
             ))}
@@ -223,34 +231,32 @@ export default function HomePage() {
       </section >
 
       {/* Features Section */}
-      < section id="features" className="py-24 relative" >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Everything You Need to
-              <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent"> Succeed</span>
+      < section id="features" className="py-32 relative" >
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
+          <div className="text-center mb-24">
+            <h2 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter uppercase leading-tight">
+              CORE <span className="text-cyan-400 glow-text">LOGISTICS</span>
             </h2>
-            <p className="text-zinc-400 max-w-2xl mx-auto">
-              Our comprehensive gym management system provides all the tools you need
-              for a seamless fitness journey.
+            <p className="text-zinc-600 max-w-2xl mx-auto font-black uppercase text-[10px] tracking-[0.3em]">
+              Enterprise-grade tools for peak athletic performance.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card hover glow className="h-full">
-                  <div className="w-12 h-12 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-xl flex items-center justify-center mb-4">
-                    <feature.icon className="w-6 h-6 text-orange-500" />
+                <Card variant="default" className="h-full group p-10 rounded-[3rem] border-white/5 bg-white/[0.01] hover:bg-white/[0.03] transition-all duration-500 border hover:border-cyan-400/20">
+                  <div className="w-20 h-20 bg-[#0D0D0D] border border-white/5 rounded-3xl flex items-center justify-center mb-8 group-hover:border-cyan-400/30 transition-all group-hover:scale-110 group-hover:rotate-3">
+                    <feature.icon className="w-10 h-10 text-white group-hover:text-cyan-400 transition-colors" />
                   </div>
-                  <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
-                  <p className="text-zinc-500">{feature.description}</p>
+                  <h3 className="text-2xl font-black text-white mb-4 tracking-tight uppercase group-hover:text-cyan-400 transition-colors">{feature.title}</h3>
+                  <p className="text-zinc-600 font-bold uppercase text-[10px] tracking-widest leading-relaxed">{feature.description}</p>
                 </Card>
               </motion.div>
             ))}
@@ -259,15 +265,14 @@ export default function HomePage() {
       </section >
 
       {/* Plans Section */}
-      < section id="plans" className="py-24 bg-zinc-900/50" >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Simple, Transparent
-              <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent"> Pricing</span>
+      < section id="plans" className="py-32 bg-white/[0.01] border-y border-white/5" >
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
+          <div className="text-center mb-24">
+            <h2 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter uppercase leading-tight">
+              MEMBERSHIP <span className="text-cyan-400 glow-text">PROTOCOLS</span>
             </h2>
-            <p className="text-zinc-400 max-w-2xl mx-auto">
-              Choose the plan that fits your goals. All prices include GST.
+            <p className="text-zinc-600 max-w-2xl mx-auto font-black uppercase text-[10px] tracking-[0.3em]">
+              select your tier of engagement. all prices gst-synced.
             </p>
           </div>
 
@@ -276,64 +281,50 @@ export default function HomePage() {
               <Spinner size="lg" />
             </div>
           ) : plans.length === 0 ? (
-            <div className="text-center py-10">
-              <p className="text-zinc-500 text-lg">No active plans available at the moment.</p>
+            <div className="text-center py-20 bg-[#0D0D0D] rounded-[3rem] border border-white/5 border-dashed">
+              <p className="text-zinc-600 font-black uppercase tracking-widest">No active protocols detected.</p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
               {plans.map((plan, index) => (
                 <motion.div
                   key={plan.id}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="h-full"
                 >
                   <Card
-                    className={`relative h-full flex flex-col ${false // Placeholder for future 'popular' flag if backend adds it
-                      ? 'border-orange-500 shadow-lg shadow-orange-500/20'
-                      : ''
-                      }`}
+                    variant="default"
+                    className="relative flex flex-col p-12 rounded-[3.5rem] bg-[#0A0A0A] border-white/5 hover:border-cyan-400/30 transition-all duration-700 min-h-[500px]"
                   >
-                    {/* {plan.popular && (
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                        <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1">
-                          <Star className="w-3 h-3" /> Popular
-                        </div>
-                      </div>
-                    )} */}
-                    <div className="text-center mb-6">
-                      <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
-                      <div className="flex items-baseline justify-center gap-1">
-                        <span className="text-4xl font-black text-white glow-text-orange">
+                    <div className="text-center mb-10">
+                      <h3 className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.4em] mb-6">{plan.name}</h3>
+                      <div className="flex items-baseline justify-center gap-2">
+                        <span className="text-6xl font-black text-white tracking-tighter glow-primary group-hover:scale-110 transition-transform">
                           {formatCurrency(plan.finalPrice || plan.basePrice)}
                         </span>
                       </div>
-                      <p className="text-zinc-500 text-sm font-medium uppercase tracking-wider mt-2">
-                        {plan.durationDays} Days Access
+                      <p className="text-zinc-600 text-[8px] font-black uppercase tracking-[0.2em] mt-6">
+                        {plan.durationDays} DAYS PROTOCOL
                       </p>
                     </div>
 
-                    <div className="space-y-4 mb-8 flex-1 px-4">
+                    <div className="space-y-4 mb-12 flex-1 pt-10 border-t border-white/5">
                       {plan.features?.map((feature, idx) => (
-                        <div key={idx} className="flex items-start gap-3 text-sm text-zinc-300">
-                          <Check className="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                        <div key={idx} className="flex items-center gap-4 text-[10px] text-zinc-500 font-black uppercase tracking-widest">
+                          <Check className="w-3 h-3 text-cyan-400 flex-shrink-0" />
                           <span>{feature}</span>
                         </div>
                       ))}
                     </div>
 
-                    <div className="mt-auto">
-                      <Link href="/login">
-                        <Button
-                          variant={false ? 'primary' : 'outline'}
-                          className="w-full"
-                        >
-                          Get Started
-                        </Button>
-                      </Link>
-                    </div>
+                    <Link href="/login" className="mt-auto">
+                      <Button className="w-full h-16 rounded-2xl font-black text-[10px] uppercase tracking-widest group bg-white text-black hover:bg-cyan-400 transition-colors">
+                        INITIAITE SYNC
+                        <ArrowRight className="ml-3 w-4 h-4 group-hover:translate-x-2 transition-transform" />
+                      </Button>
+                    </Link>
                   </Card>
                 </motion.div>
               ))}
@@ -343,56 +334,41 @@ export default function HomePage() {
       </section >
 
       {/* Contact Section */}
-      < section id="contact" className="py-24" >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Visit Our
-                <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent"> Gym</span>
-              </h2>
-              <p className="text-zinc-400 mb-8">
-                Located in the heart of Drugmulla, Kupwara, our gym is equipped with the latest
-                fitness equipment to help you
-                achieve your goals.
-              </p>
+      < section id="contact" className="py-32" >
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div className="space-y-12">
+              <div>
+                <h2 className="text-5xl md:text-7xl font-black mb-8 tracking-tighter uppercase leading-[0.9]">
+                  LOCATE <br />
+                  <span className="text-cyan-400 glow-text">STATION</span>
+                </h2>
+                <p className="text-zinc-600 font-black uppercase text-[10px] tracking-[0.3em] leading-loose max-w-lg">
+                  Deployed in the core of <span className="text-white">Drugmulla</span>.
+                  Equipped with high-frequency kinetics units.
+                </p>
+              </div>
 
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-orange-500" />
+              <div className="space-y-8">
+                {[
+                  { icon: MapPin, label: 'COORDINATES', value: 'NH 701, FOREST BLOCK, DRUGMULLA, KUPWARA' },
+                  { icon: Phone, label: 'UPLINK', value: '+91 6005314228' },
+                  { icon: Clock, label: 'OPERATIONAL WINDOW', value: 'MON-SAT: 0600 - 2200 | SUN: 0800 - 1400' },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-8 group">
+                    <div className="w-16 h-16 bg-[#0D0D0D] border border-white/5 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:border-cyan-400/30 transition-all">
+                      <item.icon className="w-6 h-6 text-white group-hover:text-cyan-400 transition-colors" />
+                    </div>
+                    <div>
+                      <h4 className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.4em] mb-2">{item.label}</h4>
+                      <p className="text-sm font-black text-white uppercase tracking-tight">{item.value}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-medium text-white">Address</h4>
-                    <p className="text-zinc-500">F7HM+43V, NH 701, Forest Block, 193222, Drugmulla, Kupwara, Jammu and Kashmir, India</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-5 h-5 text-orange-500" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-white">Phone</h4>
-                    <p className="text-zinc-500">+91 1234567890</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-5 h-5 text-orange-500" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-white">Working Hours</h4>
-                    <p className="text-zinc-500">Mon-Fri: 6:00 AM - 10:00 PM</p>
-                    <p className="text-zinc-500">Sat: 7:00 AM - 8:00 PM</p>
-                    <p className="text-zinc-500">Sun: 8:00 AM - 2:00 PM</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
-            <div className="relative h-[400px] w-full rounded-2xl overflow-hidden border border-zinc-800">
+            <div className="relative h-[600px] w-full rounded-[3.5rem] overflow-hidden border border-white/5 group bg-[#0D0D0D] shadow-2xl">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3288.9865168336455!2d74.2826682!3d34.477866299999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e11f007b6d1065%3A0x415fd7b9ad5f56ea!2sUlifts%20Gym!5e0!3m2!1sen!2sin!4v1770022441721!5m2!1sen!2sin"
                 width="100%"
@@ -401,34 +377,37 @@ export default function HomePage() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="filter grayscale contrast-125 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
+                className="filter grayscale contrast-125 invert opacity-40 group-hover:opacity-80 transition-all duration-[2s] scale-110 group-hover:scale-100"
               />
+              <div className="absolute inset-0 pointer-events-none border-[20px] border-[#0D0D0D]" />
             </div>
           </div>
         </div>
       </section >
 
       {/* Footer */}
-      <footer className="py-12 border-t border-zinc-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <Link href="/">
-                <BrandLogo
-                  variant="default"
-                  className="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
-                  withGlow={false}
-                />
-              </Link>
+      <footer className="py-24 border-t border-white/5 relative bg-[#030303]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+            <Link href="/">
+              <BrandLogo
+                variant="default"
+                className="grayscale opacity-30 hover:grayscale-0 hover:opacity-100 transition-all duration-1000 scale-125"
+                withGlow={false}
+              />
+            </Link>
+
+            <div className="text-center md:text-right space-y-4">
+              <p className="text-zinc-700 font-bold uppercase text-[10px] tracking-[0.4em]">
+                © 2026 NAIZEN SYSTEMS. ALL ARCHIVES SECURED.
+              </p>
+              <div className="h-px w-12 bg-white/5 ml-auto hidden md:block" />
+              <p className="text-[10px] text-zinc-500 font-black uppercase tracking-widest leading-loose">
+                DEVELOPED BY <span className="text-white">SIEER LONE</span> <br />
+                KINETIC UPLINK: +91 6005314228 <br />
+                DIRECTIVE: SIEERSHAFILONE@GMAIL.COM
+              </p>
             </div>
-            <p className="text-zinc-500 text-sm">
-              © 2026 ULIFTS Gym. All rights reserved.
-            </p>
-            <p className="text-zinc-500 text-sm">
-              Developed and Maintained by Sieer <br />
-              Contact: 6005314228 <br />
-              Email: sieershafilone@gmail.com
-            </p>
           </div>
         </div>
       </footer>

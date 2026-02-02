@@ -71,53 +71,53 @@ export default function PlansPage() {
     };
 
     return (
-        <div className="space-y-10 animate-fade-in pb-12">
+        <div className="space-y-12 animate-fade-in pb-12">
             {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div>
-                    <h1 className="text-4xl font-extrabold text-white tracking-tight sm:text-5xl">
-                        Membership <span className="text-orange-500 glow-text-orange">Plans</span>
+                    <h1 className="text-5xl font-black text-white tracking-tighter sm:text-6xl">
+                        Membership <span className="text-cyan-400 glow-text">Matrix</span>
                     </h1>
-                    <p className="text-zinc-500 mt-2 font-medium tracking-wide">
-                        Configure and manage subscription tiers for your athletes.
+                    <p className="text-zinc-500 mt-3 font-medium tracking-widest uppercase text-[10px]">
+                        Architect and deploy <span className="text-white">Subscription Tiers</span>
                     </p>
                 </div>
-                <Button onClick={handleCreate} className="btn-premium group">
-                    <Plus size={18} className="mr-2 group-hover:rotate-90 transition-transform duration-300" />
-                    Create New Plan
+                <Button onClick={handleCreate} className="group rounded-2xl px-8 h-14">
+                    <Plus size={20} className="mr-3 group-hover:rotate-90 transition-transform duration-500" />
+                    Deploy New Tier
                 </Button>
             </div>
 
-            {/* Quick Stats (Computed from current plans) */}
+            {/* Quick Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <StatCard
-                    title="Active Plans"
+                    title="Active Tiers"
                     value={plans.length}
-                    icon={<CreditCard size={20} />}
-                    color="orange"
+                    icon={<CreditCard size={24} />}
+                    color="mint"
                 />
                 <StatCard
-                    title="Avg Price"
+                    title="Avg Yield"
                     value={plans.length > 0 ? formatCurrency(plans.reduce((acc, p) => acc + Number(p.finalPrice || p.basePrice), 0) / plans.length) : '₹0'}
-                    icon={<CreditCard size={20} />}
-                    color="blue"
+                    icon={<CreditCard size={24} />}
+                    color="indigo"
                 />
             </div>
 
             {/* Plans Grid */}
             {loading ? (
-                <div className="h-64 flex items-center justify-center">
+                <div className="h-96 flex items-center justify-center">
                     <Spinner size="lg" />
                 </div>
             ) : plans.length === 0 ? (
-                <div className="h-64 flex items-center justify-center">
+                <div className="h-96 flex items-center justify-center">
                     <EmptyState
-                        title="No Active Plans"
-                        description="Create a membership tier to get started."
-                        icon={<CreditCard size={48} className="text-zinc-700 mb-4" />}
+                        title="Ghost Matrix"
+                        description="No membership protocols detected in the registry."
+                        icon={<CreditCard size={64} className="text-zinc-800" />}
                         action={
-                            <Button onClick={handleCreate} variant="outline" className="mt-4">
-                                Create First Plan
+                            <Button onClick={handleCreate} variant="outline" className="mt-8 rounded-2xl">
+                                Initiate First Tier
                             </Button>
                         }
                     />
@@ -127,49 +127,53 @@ export default function PlansPage() {
                     {plans.map((plan, i) => (
                         <motion.div
                             key={plan.id}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.1 }}
+                            transition={{ delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                             className="h-full"
                         >
-                            <Card variant="glass" hover className="relative group overflow-hidden h-full flex flex-col">
-                                <div className="mb-8 p-1">
-                                    <h3 className="text-xl font-bold text-white mb-2">{plan.name}</h3>
-                                    <div className="flex items-baseline gap-1">
-                                        <span className="text-4xl font-black text-white glow-text-orange">
+                            <Card variant="default" hover glow className="h-full flex flex-col p-10 group overflow-hidden relative">
+                                <div className="absolute -right-12 -top-12 w-48 h-48 bg-cyan-400/5 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+                                <div className="mb-10 relative z-10">
+                                    <h3 className="text-2xl font-black text-white mb-4 tracking-tight group-hover:text-cyan-400 transition-colors">{plan.name}</h3>
+                                    <div className="flex items-baseline gap-2">
+                                        <span className="text-4xl font-extrabold text-white tracking-tighter tabular-nums">
                                             {formatCurrency(plan.finalPrice || plan.basePrice)}
                                         </span>
-                                        <span className="text-zinc-500 text-xs font-bold uppercase tracking-widest">
+                                        <span className="text-zinc-600 text-[10px] font-black uppercase tracking-[0.2em]">
                                             / {plan.durationDays} Days
                                         </span>
                                     </div>
-                                    <p className="text-zinc-500 text-xs mt-2 line-clamp-2 min-h-[2.5em]">
-                                        {plan.description || "No description provided."}
+                                    <p className="text-zinc-500 text-xs mt-4 font-medium leading-relaxed line-clamp-2">
+                                        {plan.description || "Core membership protocol with standard facility privileges."}
                                     </p>
                                 </div>
 
-                                <div className="space-y-4 mb-10 flex-1">
+                                <div className="space-y-4 mb-12 flex-1 relative z-10">
                                     {plan.features && plan.features.slice(0, 5).map((feature, idx) => (
-                                        <div key={idx} className="flex items-center gap-3 text-sm text-zinc-400">
-                                            <div className="w-5 h-5 min-w-[1.25rem] rounded-full bg-orange-500/10 flex items-center justify-center">
-                                                <CheckCircle2 size={12} className="text-orange-500" />
+                                        <div key={idx} className="flex items-center gap-4 text-xs font-bold text-zinc-400 group-hover:text-zinc-300 transition-colors">
+                                            <div className="w-6 h-6 rounded-xl bg-white/5 flex items-center justify-center border border-white/5 group-hover:border-cyan-400/30">
+                                                <CheckCircle2 size={14} className="text-cyan-400 shadow-[0_0_10px_rgba(45,212,191,0.3)]" />
                                             </div>
                                             <span>{feature}</span>
                                         </div>
                                     ))}
                                 </div>
 
-                                <div className="pt-6 border-t border-white/5 flex items-center justify-between gap-3">
-                                    <div className="flex flex-col mr-auto">
-                                        <span className="text-white font-bold">--</span>
-                                        <span className="text-[10px] text-zinc-500 uppercase tracking-widest font-black">Active</span>
+                                <div className="pt-8 border-t border-white/5 flex items-center justify-between gap-4 relative z-10">
+                                    <div className="flex flex-col">
+                                        <span className="text-white font-black text-xs tracking-tighter">PROTO-ACT</span>
+                                        <span className="text-[10px] text-zinc-600 uppercase tracking-widest font-black">Ready</span>
                                     </div>
-                                    <Button variant="ghost" size="sm" onClick={() => handleDelete(plan.id)} className="text-red-500 hover:text-red-400 hover:bg-red-500/10">
-                                        <Trash2 size={16} />
-                                    </Button>
-                                    <Button variant="secondary" size="sm" onClick={() => handleEdit(plan)}>
-                                        <Edit2 size={14} className="mr-2" /> Modify
-                                    </Button>
+                                    <div className="flex items-center gap-2">
+                                        <Button variant="ghost" size="sm" onClick={() => handleDelete(plan.id)} className="h-10 w-10 p-0 rounded-xl text-rose-500 hover:bg-rose-500/10">
+                                            <Trash2 size={18} />
+                                        </Button>
+                                        <Button variant="secondary" size="sm" onClick={() => handleEdit(plan)} className="rounded-xl px-5 h-10 border-white/5">
+                                            <Edit2 size={16} className="mr-2" /> RECONFIG
+                                        </Button>
+                                    </div>
                                 </div>
                             </Card>
                         </motion.div>
@@ -247,98 +251,103 @@ function PlanModal({ isOpen, onClose, initialData, onSuccess }: {
 
             if (initialData) {
                 await plansAPI.update(initialData.id, formattedData);
-                toast.success('Plan updated successfully');
+                toast.success('Matrix updated');
             } else {
                 await plansAPI.create(formattedData);
-                toast.success('Plan created successfully');
+                toast.success('Matrix deployed');
             }
             onSuccess();
         } catch (error) {
             console.error(error);
-            toast.error('Failed to save plan');
+            toast.error('Sync failed');
         }
     };
 
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl animate-in fade-in duration-300">
             <motion.div
-                initial={{ scale: 0.95, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="bg-[#09090b] w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-3xl border border-white/10 shadow-2xl flex flex-col"
+                initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                className="bg-[#050505] w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-[3rem] border border-white/5 shadow-[0_0_80px_rgba(0,0,0,0.5)] flex flex-col"
             >
-                <div className="p-6 border-b border-white/10 flex justify-between items-center bg-zinc-900/50 sticky top-0 z-10 backdrop-blur-md">
+                <div className="p-10 border-b border-white/5 flex justify-between items-center bg-white/[0.01] sticky top-0 z-10 backdrop-blur-3xl">
                     <div>
-                        <h2 className="text-lg font-black text-white uppercase tracking-wider">{initialData ? 'Edit Plan' : 'New Plan'}</h2>
-                        <p className="text-zinc-500 text-xs mt-0.5">{initialData ? 'Modify existing tier' : 'Create a new membership tier'}</p>
+                        <h2 className="text-2xl font-black text-white tracking-tight">{initialData ? 'RECONFIG' : 'INITIALIZE'}</h2>
+                        <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mt-1">PLAN PROTOCOL SETTINGS</p>
                     </div>
-                    <button onClick={onClose}><X size={20} className="text-zinc-400 hover:text-white" /></button>
+                    <button onClick={onClose} className="p-4 bg-white/5 rounded-2xl text-zinc-500 hover:text-white transition-colors">
+                        <X size={20} />
+                    </button>
                 </div>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-6">
-                    <div className="space-y-4">
+                <form onSubmit={handleSubmit(onSubmit)} className="p-10 space-y-10">
+                    <div className="space-y-8">
                         <Input
-                            label="Plan Name"
-                            placeholder="e.g. Gold Tier"
+                            label="Matrix Name"
+                            placeholder="e.g. NAIZEN TITAN"
                             {...register('name')}
                             error={errors.name?.message}
                         />
 
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-2 gap-6">
                             <Input
                                 type="number"
-                                label="Duration (Days)"
+                                label="Protocol Life (Days)"
                                 {...register('durationDays', { valueAsNumber: true })}
                                 error={errors.durationDays?.message}
                             />
                             <Input
                                 type="number"
-                                label="Price (₹)"
+                                label="Unit Value (₹)"
                                 {...register('basePrice', { valueAsNumber: true })}
                                 error={errors.basePrice?.message}
                             />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-zinc-300 mb-1.5">Description</label>
+                            <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-3 ml-1">Meta Description</label>
                             <textarea
-                                className="w-full px-4 py-2.5 bg-zinc-900 border border-zinc-700 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none h-20"
-                                placeholder="Brief description of the plan..."
+                                className="w-full px-6 py-4 bg-[#0D0D0D] border border-white/5 rounded-3xl text-white placeholder-zinc-700 focus:outline-none focus:border-cyan-400/50 focus:ring-4 focus:ring-cyan-400/5 transition-all duration-300 resize-none h-32 text-sm"
+                                placeholder="Define the core value proposition..."
                                 {...register('description')}
                             ></textarea>
+                            {errors.description && <p className="mt-2 text-xs text-rose-500 ml-1">{errors.description.message}</p>}
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-zinc-300 mb-1.5">Features</label>
-                            <div className="space-y-2">
+                            <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-3 ml-1">Protocol Features</label>
+                            <div className="space-y-3">
                                 {fields.map((field, index) => (
-                                    <div key={field.id} className="flex gap-2">
-                                        <input
-                                            {...register(`features.${index}.value`)}
-                                            className="flex-1 px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-xl text-white text-sm focus:ring-2 focus:ring-orange-500 outline-none"
-                                            placeholder="Feature description"
-                                        />
+                                    <div key={field.id} className="flex gap-3">
+                                        <div className="flex-1 relative group">
+                                            <input
+                                                {...register(`features.${index}.value`)}
+                                                className="w-full px-6 py-3 bg-[#0D0D0D] border border-white/5 rounded-2xl text-white text-sm focus:outline-none focus:border-cyan-400/50 transition-all duration-300"
+                                                placeholder="Feature capability"
+                                            />
+                                        </div>
                                         <button
                                             type="button"
                                             onClick={() => remove(index)}
-                                            className="p-2 text-red-500 hover:bg-red-500/10 rounded-lg transition-colors"
+                                            className="p-3 bg-white/5 text-rose-500 hover:bg-rose-500/10 rounded-2xl transition-all h-12 w-12 flex items-center justify-center border border-white/5"
                                         >
-                                            <Trash2 size={16} />
+                                            <Trash2 size={18} />
                                         </button>
                                     </div>
                                 ))}
-                                <Button type="button" variant="secondary" size="sm" onClick={() => append({ value: '' })} className="w-full mt-2">
-                                    <Plus size={14} className="mr-2" /> Add Feature
+                                <Button type="button" variant="secondary" onClick={() => append({ value: '' })} className="w-full h-12 rounded-2xl border-dashed border-2 border-white/5 hover:border-cyan-400/30">
+                                    <Plus size={16} className="mr-2" /> Inject Feature
                                 </Button>
                             </div>
                         </div>
                     </div>
 
-                    <div className="flex gap-3 pt-4 border-t border-white/5">
-                        <Button type="button" variant="ghost" onClick={onClose} className="w-full">Cancel</Button>
-                        <Button type="submit" disabled={isSubmitting} className="btn-premium w-full">
-                            {isSubmitting ? <Spinner size="sm" /> : (initialData ? 'Save Changes' : 'Create Plan')}
+                    <div className="flex gap-4 pt-4">
+                        <Button type="button" variant="ghost" onClick={onClose} className="w-1/3 h-14 rounded-2xl">Abort</Button>
+                        <Button type="submit" disabled={isSubmitting} className="w-2/3 h-14 rounded-2xl">
+                            {isSubmitting ? <Spinner size="sm" /> : (initialData ? 'COMMIT UPDATE' : 'DEPLOY MATRIX')}
                         </Button>
                     </div>
                 </form>

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { TrendingUp, Scale, Activity } from 'lucide-react';
-import { Card, Spinner } from '@/components/ui';
+import { Card, Spinner, Badge } from '@/components/ui';
 import { membersAPI } from '@/lib/api';
 import { useAuthStore } from '@/store';
 import { formatDate } from '@/lib/utils';
@@ -34,52 +34,86 @@ export default function ProgressPage() {
     const initial = records[records.length - 1];
 
     return (
-        <div className="space-y-8 animate-fade-in pb-10">
-            <div>
-                <h1 className="text-3xl font-extrabold text-white">Fitness <span className="text-orange-500">Progress</span></h1>
-                <p className="text-zinc-500 mt-2">Track your body metrics and composition.</p>
+        <div className="space-y-16 animate-fade-in pb-20">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/5 pb-12">
+                <div className="space-y-4">
+                    <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.5em]">Biometric Feed</p>
+                    <h1 className="text-6xl font-black text-white tracking-tighter uppercase leading-none">
+                        PERFORMANCE <span className="text-cyan-400">EVOLUTION</span>
+                    </h1>
+                    <p className="text-zinc-500 font-bold uppercase text-[9px] tracking-widest mt-6">Historical data of biological recomposition</p>
+                </div>
             </div>
 
             {latest && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <Card title="Current Weight" icon={<Scale size={18} className="text-blue-500" />}>
-                        <p className="text-3xl font-black text-white">{latest.weight} <span className="text-sm font-medium text-zinc-500">kg</span></p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                    <Card variant="default" className="p-8 rounded-[2.5rem] bg-white/[0.01] border-white/5 group hover:border-cyan-400/20 transition-all">
+                        <div className="flex items-center gap-4 mb-6">
+                            <div className="p-3 bg-cyan-400/10 rounded-xl text-cyan-400">
+                                <Scale size={20} />
+                            </div>
+                            <h3 className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Current Weight</h3>
+                        </div>
+                        <p className="text-5xl font-black text-white tracking-tighter tabular-nums">{latest.weight}<span className="text-xs font-black text-zinc-700 ml-2 uppercase tracking-widest">KG</span></p>
                         {initial && (
-                            <p className={`text-xs mt-2 font-medium ${latest.weight < initial.weight ? 'text-green-500' : 'text-zinc-500'}`}>
-                                {latest.weight < initial.weight ? '-' : '+'}{(latest.weight - initial.weight).toFixed(1)} kg since start
+                            <p className={`text-[10px] mt-4 font-black uppercase tracking-widest ${latest.weight < initial.weight ? 'text-cyan-400' : 'text-zinc-600'}`}>
+                                {latest.weight < initial.weight ? 'CALIBRATED —' : 'GAIN +'} {(Math.abs(latest.weight - initial.weight)).toFixed(1)} KG IN FLUX
                             </p>
                         )}
                     </Card>
-                    <Card title="Body Fat %" icon={<Activity size={18} className="text-orange-500" />}>
-                        <p className="text-3xl font-black text-white">{latest.bodyFat}%</p>
+
+                    <Card variant="default" className="p-8 rounded-[2.5rem] bg-white/[0.01] border-white/5 group hover:border-cyan-400/20 transition-all">
+                        <div className="flex items-center gap-4 mb-6">
+                            <div className="p-3 bg-indigo-400/10 rounded-xl text-indigo-400">
+                                <Activity size={20} />
+                            </div>
+                            <h3 className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Body Fat</h3>
+                        </div>
+                        <p className="text-5xl font-black text-white tracking-tighter tabular-nums">{latest.bodyFat}<span className="text-xs font-black text-zinc-700 ml-2 uppercase tracking-widest">%</span></p>
+                        <p className="text-[10px] mt-4 font-black uppercase tracking-widest text-zinc-600">COMPOSITION METRIC</p>
                     </Card>
                 </div>
             )}
 
-            <Card title="Measurement History">
+            <Card variant="default" className="rounded-[3rem] p-10 bg-[#080808] border-white/5">
+                <div className="flex items-center justify-between mb-12 border-b border-white/5 pb-10">
+                    <div className="space-y-1">
+                        <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Historical Archives</h3>
+                        <p className="text-[9px] font-black text-zinc-600 uppercase tracking-[0.4em]">Sequential metric synchronization logs</p>
+                    </div>
+                </div>
+
                 {records.length === 0 ? (
-                    <div className="text-center py-12 text-zinc-500">
-                        <TrendingUp size={48} className="mx-auto mb-4 opacity-20" />
-                        No progress records found.
+                    <div className="py-24 text-center bg-[#0D0D0D] rounded-3xl border border-white/5 border-dashed">
+                        <TrendingUp size={48} className="mx-auto mb-6 text-zinc-800" />
+                        <p className="text-zinc-600 font-black uppercase text-[10px] tracking-widest">No biometric data recorded</p>
                     </div>
                 ) : (
-                    <div className="overflow-x-auto">
+                    <div className="overflow-x-auto scrollbar-hide">
                         <table className="w-full text-left">
-                            <thead className="bg-zinc-900/50 text-xs text-zinc-500 uppercase tracking-wider">
-                                <tr>
-                                    <th className="p-4 rounded-l-xl">Date</th>
-                                    <th className="p-4">Weight (kg)</th>
-                                    <th className="p-4">Body Fat (%)</th>
-                                    <th className="p-4 rounded-r-xl">Notes</th>
+                            <thead>
+                                <tr className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em] border-b border-white/5">
+                                    <th className="p-6">Date</th>
+                                    <th className="p-6">Weight</th>
+                                    <th className="p-6">Body Fat</th>
+                                    <th className="p-6">Observations</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-zinc-800">
+                            <tbody className="divide-y divide-white/[0.02]">
                                 {records.map((record) => (
-                                    <tr key={record.id} className="group hover:bg-zinc-900/30 transition-colors">
-                                        <td className="p-4 text-white font-medium">{formatDate(record.recordedAt)}</td>
-                                        <td className="p-4 text-zinc-300">{record.weight}</td>
-                                        <td className="p-4 text-zinc-300">{record.bodyFat}</td>
-                                        <td className="p-4 text-zinc-500 text-sm italic">{record.notes || '-'}</td>
+                                    <tr key={record.id} className="group hover:bg-white/[0.01] transition-colors">
+                                        <td className="p-6">
+                                            <p className="text-[11px] font-black text-white uppercase tracking-widest leading-none">{formatDate(record.recordedAt)}</p>
+                                        </td>
+                                        <td className="p-6">
+                                            <p className="text-lg font-black text-white tracking-tighter tabular-nums">{record.weight}<span className="text-[9px] text-zinc-600 ml-2">KG</span></p>
+                                        </td>
+                                        <td className="p-6">
+                                            <p className="text-lg font-black text-white tracking-tighter tabular-nums">{record.bodyFat}<span className="text-[9px] text-zinc-600 ml-2">%</span></p>
+                                        </td>
+                                        <td className="p-6">
+                                            <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest max-w-xs">{record.notes || '—'}</p>
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>

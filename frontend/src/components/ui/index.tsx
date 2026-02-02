@@ -12,20 +12,20 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant = 'primary', size = 'md', loading, children, disabled, ...props }, ref) => {
-        const baseStyles = 'inline-flex items-center justify-center font-bold rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-wider font-sans';
+        const baseStyles = 'inline-flex items-center justify-center font-bold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest text-[10px] sm:text-xs rounded-full';
 
         const variants = {
-            primary: 'bg-gradient-to-r from-orange-500 to-red-600 text-white hover:shadow-lg hover:shadow-orange-500/30 focus:ring-orange-500 border border-white/10',
-            secondary: 'bg-white/5 backdrop-blur-md text-white hover:bg-white/10 focus:ring-white/20 border border-white/10',
-            outline: 'border-2 border-white/10 text-white hover:bg-white/5 focus:ring-white/20',
-            ghost: 'text-zinc-400 hover:text-white hover:bg-white/5 focus:ring-white/10',
-            danger: 'bg-red-600/20 text-red-500 hover:bg-red-600/30 focus:ring-red-500 border border-red-500/20',
+            primary: 'bg-gradient-to-r from-cyan-400 to-indigo-500 text-black hover:shadow-[0_0_30px_rgba(45,212,191,0.3)] hover:scale-[1.02] active:scale-[0.98]',
+            secondary: 'bg-white/5 backdrop-blur-md text-white hover:bg-white/10 border border-white/10',
+            outline: 'border-2 border-white/10 text-white hover:border-cyan-400/50 hover:text-cyan-400',
+            ghost: 'text-zinc-400 hover:text-white hover:bg-white/5',
+            danger: 'bg-red-500/10 text-red-500 hover:bg-red-500/20 border border-red-500/20',
         };
 
         const sizes = {
-            sm: 'px-4 py-2 text-[10px]',
-            md: 'px-6 py-3 text-xs',
-            lg: 'px-8 py-4 text-sm',
+            sm: 'px-4 py-2',
+            md: 'px-6 py-3',
+            lg: 'px-8 py-4',
         };
 
         return (
@@ -60,30 +60,30 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         return (
             <div className="w-full">
                 {label && (
-                    <label className="block text-sm font-medium text-zinc-300 mb-1.5">
+                    <label className="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-2 ml-1">
                         {label}
                     </label>
                 )}
-                <div className="relative">
+                <div className="relative group">
                     {icon && (
-                        <div className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500">
+                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-600 group-focus-within:text-cyan-400 transition-colors">
                             {icon}
                         </div>
                     )}
                     <input
                         ref={ref}
                         className={cn(
-                            'w-full px-4 py-2.5 bg-zinc-900 border border-zinc-700 rounded-xl text-white placeholder-zinc-500',
-                            'focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent',
-                            'transition-all duration-200',
-                            icon && 'pl-10',
-                            error && 'border-red-500 focus:ring-red-500',
+                            'w-full px-5 py-3 bg-[#0D0D0D] border border-white/5 rounded-2xl text-white placeholder-zinc-600',
+                            'focus:outline-none focus:border-cyan-400/50 focus:ring-4 focus:ring-cyan-400/5',
+                            'transition-all duration-300',
+                            icon && 'pl-12',
+                            error && 'border-red-500/50 focus:ring-red-500/10',
                             className
                         )}
                         {...props}
                     />
                 </div>
-                {error && <p className="mt-1.5 text-sm text-red-500">{error}</p>}
+                {error && <p className="mt-2 text-xs text-red-500 ml-1">{error}</p>}
             </div>
         );
     }
@@ -102,28 +102,28 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         return (
             <div className="w-full">
                 {label && (
-                    <label className="block text-sm font-medium text-zinc-300 mb-1.5">
+                    <label className="block text-xs font-bold text-zinc-500 uppercase tracking-widest mb-2 ml-1">
                         {label}
                     </label>
                 )}
                 <select
                     ref={ref}
                     className={cn(
-                        'w-full px-4 py-2.5 bg-zinc-900 border border-zinc-700 rounded-xl text-white',
-                        'focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent',
-                        'transition-all duration-200 cursor-pointer',
-                        error && 'border-red-500 focus:ring-red-500',
+                        'w-full px-5 py-3 bg-[#0D0D0D] border border-white/5 rounded-2xl text-white appearance-none cursor-pointer',
+                        'focus:outline-none focus:border-cyan-400/50 focus:ring-4 focus:ring-cyan-400/5',
+                        'transition-all duration-300',
+                        error && 'border-red-500/50 focus:ring-red-500/10',
                         className
                     )}
                     {...props}
                 >
                     {options.map((option) => (
-                        <option key={option.value} value={option.value}>
+                        <option key={option.value} value={option.value} className="bg-[#0D0D0D]">
                             {option.label}
                         </option>
                     ))}
                 </select>
-                {error && <p className="mt-1.5 text-sm text-red-500">{error}</p>}
+                {error && <p className="mt-2 text-xs text-red-500 ml-1">{error}</p>}
             </div>
         );
     }
@@ -145,20 +145,20 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
             <div
                 ref={ref}
                 className={cn(
-                    'rounded-[2rem] p-8 transition-all duration-500',
-                    variant === 'default' && 'bg-[#09090b] border border-white/5',
-                    variant === 'glass' && 'glass border border-white/5',
-                    variant === 'outline' && 'bg-transparent border-2 border-dashed border-white/5',
-                    hover && 'hover:border-white/10 hover:shadow-2xl hover:shadow-black',
-                    glow && 'hover:shadow-orange-500/5',
+                    'rounded-3xl p-8 transition-all duration-500',
+                    variant === 'default' && 'bg-[#0D0D0D] border border-white/5',
+                    variant === 'glass' && 'glass',
+                    variant === 'outline' && 'bg-transparent border-2 border-dashed border-white/10',
+                    hover && 'hover:bg-[#121212] hover:border-white/10',
+                    glow && 'hover:shadow-[0_0_50px_rgba(45,212,191,0.05)]',
                     className
                 )}
                 {...props}
             >
                 {(title || icon) && (
-                    <div className="flex items-center gap-3 mb-6">
-                        {icon && <div className="text-zinc-500">{icon}</div>}
-                        {title && <h3 className="text-lg font-bold text-white capitalize">{title}</h3>}
+                    <div className="flex items-center gap-4 mb-8">
+                        {icon && <div className="p-3 bg-white/5 rounded-2xl text-cyan-400">{icon}</div>}
+                        {title && <h3 className="text-xl font-bold text-white tracking-tight">{title}</h3>}
                     </div>
                 )}
                 {children}
@@ -181,17 +181,17 @@ export const Badge: React.FC<BadgeProps> = ({
 }) => {
     const variants = {
         default: 'bg-white/5 text-zinc-400 border border-white/10',
-        success: 'bg-green-500/10 text-green-500 border border-green-500/20 shadow-sm shadow-green-500/10',
-        warning: 'bg-orange-500/10 text-orange-500 border border-orange-500/20 shadow-sm shadow-orange-500/10',
-        danger: 'bg-red-500/10 text-red-500 border border-red-500/20 shadow-sm shadow-red-500/10',
-        info: 'bg-blue-500/10 text-blue-500 border border-blue-500/20 shadow-sm shadow-blue-500/10',
+        success: 'bg-cyan-400/10 text-cyan-400 border border-cyan-400/20',
+        warning: 'bg-amber-400/10 text-amber-400 border border-amber-400/20',
+        danger: 'bg-rose-500/10 text-rose-500 border border-rose-500/20',
+        info: 'bg-indigo-500/10 text-indigo-500 border border-indigo-500/20',
         outline: 'bg-transparent text-zinc-300 border border-white/20',
     };
 
     return (
         <span
             className={cn(
-                'inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest',
+                'inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest',
                 variants[variant],
                 className
             )}
@@ -219,16 +219,16 @@ export const Avatar: React.FC<AvatarProps> = ({
     ...props
 }) => {
     const sizes = {
-        sm: 'w-8 h-8 text-xs',
-        md: 'w-10 h-10 text-sm',
-        lg: 'w-12 h-12 text-base',
-        xl: 'w-16 h-16 text-lg',
+        sm: 'w-8 h-8 text-[10px]',
+        md: 'w-10 h-10 text-xs',
+        lg: 'w-12 h-12 text-sm',
+        xl: 'w-16 h-16 text-base',
     };
 
     return (
         <div
             className={cn(
-                'relative rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center font-semibold text-white overflow-hidden',
+                'relative rounded-2xl bg-gradient-to-br from-cyan-400 to-indigo-500 flex items-center justify-center font-bold text-black overflow-hidden shadow-lg',
                 sizes[size],
                 className
             )}
@@ -258,7 +258,7 @@ export const Spinner: React.FC<SpinnerProps> = ({ className, size = 'md' }) => {
     return (
         <div
             className={cn(
-                'animate-spin rounded-full border-2 border-zinc-700 border-t-orange-500',
+                'animate-spin rounded-full border-2 border-white/10 border-t-cyan-400',
                 sizes[size],
                 className
             )}
@@ -269,10 +269,10 @@ export const Spinner: React.FC<SpinnerProps> = ({ className, size = 'md' }) => {
 // Loading Overlay
 export const LoadingOverlay: React.FC<{ message?: string }> = ({ message }) => {
     return (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
-            <div className="flex flex-col items-center gap-4">
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-xl flex items-center justify-center z-50">
+            <div className="flex flex-col items-center gap-6">
                 <Spinner size="lg" />
-                {message && <p className="text-zinc-400">{message}</p>}
+                {message && <p className="text-zinc-500 font-medium tracking-widest uppercase text-xs">{message}</p>}
             </div>
         </div>
     );
@@ -293,10 +293,10 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
     action,
 }) => {
     return (
-        <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
-            {icon && <div className="text-zinc-600 mb-4">{icon}</div>}
-            <h3 className="text-lg font-semibold text-zinc-300 mb-2">{title}</h3>
-            {description && <p className="text-zinc-500 mb-4 max-w-sm">{description}</p>}
+        <div className="flex flex-col items-center justify-center py-20 px-4 text-center glass-card rounded-[3rem]">
+            {icon && <div className="p-5 bg-white/5 rounded-3xl text-zinc-600 mb-6">{icon}</div>}
+            <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
+            {description && <p className="text-zinc-500 mb-8 max-w-sm mx-auto">{description}</p>}
             {action}
         </div>
     );
@@ -309,7 +309,7 @@ interface StatCardProps {
     icon?: React.ReactNode;
     trend?: { value: number; positive: boolean };
     className?: string;
-    color?: 'orange' | 'blue' | 'green' | 'purple';
+    color?: 'mint' | 'indigo' | 'rose' | 'amber';
 }
 
 export const StatCard: React.FC<StatCardProps> = ({
@@ -318,32 +318,32 @@ export const StatCard: React.FC<StatCardProps> = ({
     icon,
     trend,
     className,
-    color = 'orange'
+    color = 'mint'
 }) => {
     const colors = {
-        orange: 'text-orange-500 bg-orange-500/10 blur-orange-500/10',
-        blue: 'text-blue-500 bg-blue-500/10 blur-blue-500/10',
-        green: 'text-green-500 bg-green-500/10 blur-green-500/10',
-        purple: 'text-purple-500 bg-purple-500/10 blur-purple-500/10',
+        mint: 'text-cyan-400 bg-cyan-400/10 blur-cyan-400/10 shadow-cyan-400/5',
+        indigo: 'text-indigo-400 bg-indigo-400/10 blur-indigo-400/10 shadow-indigo-400/5',
+        rose: 'text-rose-400 bg-rose-400/10 blur-rose-400/10 shadow-rose-400/5',
+        amber: 'text-amber-400 bg-amber-400/10 blur-amber-400/10 shadow-amber-400/5',
     };
 
     return (
-        <Card variant="glass" className={cn('relative group overflow-hidden', className)} hover>
-            <div className={`absolute -right-4 -top-4 w-24 h-24 rounded-full blur-[60px] opacity-20 transition-opacity duration-500 group-hover:opacity-40 ${colors[color].split(' ')[1]}`} />
+        <Card variant="default" className={cn('relative group overflow-hidden border-white/5', className)} hover glow>
+            <div className={`absolute -right-8 -top-8 w-32 h-32 rounded-full blur-[80px] opacity-0 transition-opacity duration-700 group-hover:opacity-20 ${colors[color].split(' ')[1]}`} />
 
             <div className="flex items-start justify-between relative z-10">
-                <div className="space-y-4">
-                    <p className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.2em]">{title}</p>
-                    <h3 className="text-3xl font-black text-white tracking-tighter tabular-nums font-mono">{value}</h3>
+                <div className="space-y-6">
+                    <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">{title}</p>
+                    <h3 className="text-4xl font-black text-white tracking-tighter tabular-nums">{value}</h3>
                     {trend && (
-                        <div className={cn('inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold font-mono',
-                            trend.positive ? 'bg-green-500/10 text-green-500' : 'bg-red-500/10 text-red-500')}>
+                        <div className={cn('inline-flex items-center px-2 py-1 rounded-lg text-[10px] font-black',
+                            trend.positive ? 'bg-cyan-400/10 text-cyan-400' : 'bg-rose-500/10 text-rose-500')}>
                             {trend.positive ? '↑' : '↓'} {Math.abs(trend.value)}%
                         </div>
                     )}
                 </div>
                 {icon && (
-                    <div className={cn('p-3.5 rounded-2xl transition-all duration-300 group-hover:scale-110', colors[color].split(' ')[0], 'bg-white/5 border border-white/5')}>
+                    <div className={cn('p-4 rounded-2xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-2xl', colors[color].split(' ')[0], 'bg-white/5 border border-white/10')}>
                         {icon}
                     </div>
                 )}

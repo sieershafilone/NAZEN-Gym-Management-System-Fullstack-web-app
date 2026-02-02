@@ -3,7 +3,7 @@ export default function Loading() {
         <div className="min-h-screen bg-black flex items-center justify-center">
             <div className="flex flex-col items-center gap-4">
                 <div className="animate-spin rounded-full h-12 w-12 border-2 border-zinc-800 border-t-orange-500" />
-                <p className="text-zinc-500 text-sm animate-pulse">Loading ULIFTS...</p>
+                <p className="text-zinc-500 text-sm animate-pulse uppercase tracking-[0.2em] font-black">NAIZEN Synchronization...</p>
             </div>
         </div>
     );

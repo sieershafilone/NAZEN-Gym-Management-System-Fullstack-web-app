@@ -90,124 +90,126 @@ export default function PaymentsPage() {
     };
 
     return (
-        <div className="space-y-10 animate-fade-in pb-12">
+        <div className="space-y-12 animate-fade-in pb-12">
             {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                <div>
-                    <h1 className="text-4xl font-extrabold text-white tracking-tight sm:text-5xl">
-                        Financial <span className="text-orange-500 glow-text-orange">Pulse</span>
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div className="space-y-4">
+                    <h1 className="text-5xl font-black text-white tracking-tighter sm:text-6xl">
+                        Financial <span className="text-cyan-400 glow-text">Pulse</span>
                     </h1>
-                    <p className="text-zinc-500 mt-2 font-medium tracking-wide">
-                        Monitor revenue streams and transaction history.
+                    <p className="text-zinc-500 mt-3 font-medium tracking-widest uppercase text-[10px]">
+                        Monitor <span className="text-white">Revenue Flux</span> & Transaction stability.
                     </p>
                 </div>
-                <div className="flex items-center gap-3">
-                    <Button variant="secondary" className="group hidden sm:flex">
-                        <Download size={18} className="mr-2 group-hover:text-blue-500 transition-colors" />
-                        Export Reports
+                <div className="flex items-center gap-4">
+                    <Button variant="secondary" className="group hidden sm:flex h-14 rounded-2xl px-6">
+                        <Download size={20} className="mr-3 group-hover:text-cyan-400 transition-colors" />
+                        Export Log
                     </Button>
-                    <Button onClick={() => setShowRecordModal(true)} className="btn-premium shadow-lg shadow-orange-500/20">
-                        <Plus size={18} className="mr-2" />
-                        Record Transaction
+                    <Button onClick={() => setShowRecordModal(true)} className="h-14 px-8 rounded-2xl group">
+                        <Plus size={20} className="mr-3 group-hover:rotate-90 transition-transform duration-500" />
+                        Record Flux
                     </Button>
                 </div>
             </div>
 
             {/* Metrics */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <StatCard title="Total Revenue" value={formatCurrency(stats.totalRevenue)} icon={<CreditCard size={18} />} color="orange" />
-                <StatCard title="Pending" value={formatCurrency(stats.pending)} icon={<CreditCard size={18} />} color="blue" />
-                <StatCard title="Refunds" value={formatCurrency(stats.refunds)} icon={<ArrowDownRight size={18} />} color="purple" />
-                <StatCard title="Avg Check" value={formatCurrency(stats.avgCheck)} icon={<ArrowUpRight size={18} />} color="green" />
+                <StatCard title="Total Yield" value={formatCurrency(stats.totalRevenue)} icon={<CreditCard size={20} />} color="mint" />
+                <StatCard title="Pending Sync" value={formatCurrency(stats.pending)} icon={<CreditCard size={20} />} color="indigo" />
+                <StatCard title="Reverse Flow" value={formatCurrency(stats.refunds)} icon={<ArrowDownRight size={20} />} color="rose" />
+                <StatCard title="Avg Intensity" value={formatCurrency(stats.avgCheck)} icon={<ArrowUpRight size={20} />} color="amber" />
             </div>
 
             {/* Content Area */}
-            <Card variant="glass" className="overflow-hidden min-h-[500px] flex flex-col">
-                <div className="p-6 border-b border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 bg-zinc-900/30">
-                    <div className="flex items-center gap-4 w-full sm:w-auto">
-                        <h2 className="text-xl font-bold text-white tracking-tight">Recent Transactions</h2>
+            <Card variant="default" className="overflow-hidden min-h-[600px] flex flex-col p-0 rounded-[2.5rem] border-white/5">
+                <div className="p-10 border-b border-white/5 flex flex-col sm:flex-row items-center justify-between gap-6 bg-white/[0.01]">
+                    <div className="flex items-center gap-6 w-full sm:w-auto">
+                        <h2 className="text-2xl font-black text-white tracking-tight">Recent Archives</h2>
                         {selectedIds.size > 0 && (
                             <motion.button
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 onClick={handleDeleteSelected}
-                                className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500/20 transition-colors text-sm font-bold"
+                                className="flex items-center gap-3 px-5 py-2.5 rounded-xl bg-rose-500/10 text-rose-500 border border-rose-500/20 hover:bg-rose-500/20 transition-all text-[10px] font-black uppercase tracking-widest"
                             >
-                                <Trash2 size={14} /> Delete ({selectedIds.size})
+                                <Trash2 size={14} /> Wipe ({selectedIds.size})
                             </motion.button>
                         )}
                     </div>
-                    <div className="flex items-center gap-4 bg-black/40 rounded-xl px-4 py-2 border border-white/5 w-full sm:w-64 focus-within:border-orange-500/50 transition-colors">
-                        <SearchIcon size={16} className="text-zinc-500" />
-                        <input type="text" placeholder="Find transaction..." className="bg-transparent border-none outline-none text-sm text-white placeholder-zinc-500 w-full" />
+                    <div className="flex items-center gap-4 bg-[#0D0D0D] rounded-2xl px-6 py-4 border border-white/5 w-full sm:w-80 focus-within:border-cyan-400/50 focus-within:ring-4 focus-within:ring-cyan-400/5 transition-all duration-300">
+                        <SearchIcon size={18} className="text-zinc-600" />
+                        <input type="text" placeholder="Locate transaction..." className="bg-transparent border-none outline-none text-sm text-white placeholder:text-zinc-700 w-full font-medium" />
                     </div>
                 </div>
 
-                <div className="overflow-x-auto flex-1">
+                <div className="overflow-x-auto flex-1 custom-scrollbar">
                     {loading ? (
-                        <div className="h-64 flex items-center justify-center">
+                        <div className="h-96 flex items-center justify-center">
                             <Spinner size="lg" />
                         </div>
                     ) : payments.length === 0 ? (
-                        <div className="h-64 flex items-center justify-center">
+                        <div className="h-96 flex items-center justify-center">
                             <EmptyState
-                                title="No Transactions"
-                                description="Record a new transaction to see it here."
-                                icon={<CreditCard size={48} className="text-zinc-700 mb-4" />}
+                                title="Pulse Dormant"
+                                description="No transaction artifacts detected in the current cycle."
+                                icon={<CreditCard size={64} className="text-zinc-800" />}
                             />
                         </div>
                     ) : (
-                        <table className="premium-table">
+                        <table className="w-full text-left border-collapse">
                             <thead>
-                                <tr>
-                                    <th className="w-12 text-center">
+                                <tr className="border-b border-white/5 bg-white/[0.01]">
+                                    <th className="w-20 px-10 py-6">
                                         <input
                                             type="checkbox"
                                             onChange={handleSelectAll}
                                             checked={payments.length > 0 && selectedIds.size === payments.length}
-                                            className="rounded border-zinc-700 bg-zinc-800 text-orange-500 focus:ring-0 checked:bg-orange-500 checked:border-orange-500"
+                                            className="w-5 h-5 rounded-lg border-white/10 bg-white/5 text-cyan-400 focus:ring-0 cursor-pointer transition-all checked:bg-cyan-400 checked:border-cyan-400"
                                         />
                                     </th>
-                                    <th>Transaction ID</th>
-                                    <th>Member</th>
-                                    <th>Status</th>
-                                    <th className="text-right">Amount</th>
-                                    <th>Date</th>
-                                    <th className="text-center">Action</th>
+                                    <th className="px-6 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest">Protocol ID</th>
+                                    <th className="px-6 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest">Target Athlete</th>
+                                    <th className="px-6 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest">Status</th>
+                                    <th className="px-6 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest text-right">Value</th>
+                                    <th className="px-6 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest">Execution Date</th>
+                                    <th className="px-10 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest text-center">Audit</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {payments.map((payment) => (
-                                    <tr key={payment.id} className="group">
-                                        <td className="text-center">
+                                    <tr key={payment.id} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors group">
+                                        <td className="px-10 py-6">
                                             <input
                                                 type="checkbox"
                                                 checked={selectedIds.has(payment.id)}
                                                 onChange={() => handleSelectRow(payment.id)}
-                                                className="rounded border-zinc-700 bg-zinc-800 text-orange-500 focus:ring-0"
+                                                className="w-5 h-5 rounded-lg border-white/10 bg-white/5 text-cyan-400 focus:ring-0 cursor-pointer transition-all checked:bg-cyan-400 checked:border-cyan-400"
                                             />
                                         </td>
-                                        <td className="font-mono text-zinc-400 text-xs">
+                                        <td className="px-6 py-6 font-mono text-zinc-600 text-[10px] font-bold group-hover:text-zinc-400 transition-colors">
                                             {payment.invoiceNumber}
                                         </td>
-                                        <td>
+                                        <td className="px-6 py-6">
                                             <div className="flex flex-col">
-                                                <span className="text-sm font-bold text-white">{payment.member?.user?.fullName || 'Unknown'}</span>
-                                                <span className="text-[10px] text-zinc-500 font-mono">{payment.member?.memberId}</span>
+                                                <span className="text-sm font-black text-white group-hover:text-cyan-400 transition-colors">{payment.member?.user?.fullName || 'UNKNOWN'}</span>
+                                                <span className="text-[10px] text-zinc-700 font-bold uppercase tracking-widest mt-1">{payment.member?.memberId}</span>
                                             </div>
                                         </td>
-                                        <td>
-                                            <Badge variant={payment.status === 'COMPLETED' ? 'success' : 'warning'}>{payment.status}</Badge>
+                                        <td className="px-6 py-6">
+                                            <Badge variant={payment.status === 'COMPLETED' ? 'success' : 'warning'} className="lowercase text-[8px] px-3">
+                                                {payment.status.toLowerCase()}
+                                            </Badge>
                                         </td>
-                                        <td className="text-right">
-                                            <span className="text-sm font-bold text-white glow-text-orange tabular-nums font-mono">{formatCurrency(Number(payment.amount))}</span>
+                                        <td className="px-6 py-6 text-right">
+                                            <span className="text-base font-black text-white tabular-nums">{formatCurrency(Number(payment.amount))}</span>
                                         </td>
-                                        <td className="text-xs font-medium text-zinc-500 tabular-nums font-mono">
+                                        <td className="px-6 py-6 text-[10px] font-bold text-zinc-600 uppercase tracking-widest tabular-nums">
                                             {formatDate(payment.createdAt)}
                                         </td>
-                                        <td className="text-center">
-                                            <button className="p-2 hover:bg-white/10 rounded-full transition-colors text-zinc-400 hover:text-white">
-                                                <ArrowUpRight size={14} />
+                                        <td className="px-10 py-6 text-center">
+                                            <button className="h-10 w-10 flex items-center justify-center bg-white/5 rounded-xl text-zinc-600 hover:text-white hover:bg-white/10 transition-all mx-auto">
+                                                <ArrowUpRight size={16} />
                                             </button>
                                         </td>
                                     </tr>
@@ -258,10 +260,10 @@ function RecordTransactionModal({ isOpen, onClose, onSuccess }: { isOpen: boolea
     const onSubmit = async (data: TransactionFormValues) => {
         try {
             await paymentsAPI.createManual(data);
-            toast.success('Transaction recorded');
+            toast.success('Sync complete');
             onSuccess();
         } catch (error) {
-            toast.error('Failed to record transaction');
+            toast.error('Sync failed');
         }
     };
 
@@ -271,52 +273,52 @@ function RecordTransactionModal({ isOpen, onClose, onSuccess }: { isOpen: boolea
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl animate-in fade-in duration-300">
             <motion.div
-                initial={{ scale: 0.95, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="bg-[#09090b] w-full max-w-lg rounded-3xl border border-white/10 shadow-2xl overflow-hidden flex flex-col"
+                initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                className="bg-[#050505] w-full max-w-xl rounded-[3rem] border border-white/5 shadow-2xl overflow-hidden flex flex-col"
             >
-                <div className="p-6 border-b border-white/10 flex justify-between items-center bg-zinc-900/50">
+                <div className="p-10 border-b border-white/5 flex justify-between items-center bg-white/[0.01]">
                     <div>
-                        <h2 className="text-lg font-black text-white uppercase tracking-wider">Record Transaction</h2>
-                        <p className="text-zinc-500 text-xs mt-0.5">Manually log a payment</p>
+                        <h2 className="text-2xl font-black text-white tracking-tight">RECORD FLUX</h2>
+                        <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mt-1">MANUAL TRANSACTION INJECTION</p>
                     </div>
-                    <button onClick={onClose}><X size={20} className="text-zinc-400 hover:text-white" /></button>
+                    <button onClick={onClose} className="p-4 bg-white/5 rounded-2xl text-zinc-500 hover:text-white transition-all"><X size={24} /></button>
                 </div>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-6">
-                    <div className="space-y-4">
-                        <div className="space-y-1">
-                            <label className="text-xs font-medium text-zinc-400">Select Member</label>
-                            <select {...register('memberId')} className="input-premium w-full">
-                                <option value="">-- Choose Member --</option>
+                <form onSubmit={handleSubmit(onSubmit)} className="p-10 space-y-10">
+                    <div className="space-y-8">
+                        <div className="space-y-3">
+                            <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Target Athlete</label>
+                            <select {...register('memberId')} className="w-full h-14 px-6 bg-[#0D0D0D] border border-white/5 rounded-2xl text-white appearance-none focus:outline-none focus:border-cyan-400/50 transition-all duration-300">
+                                <option value="">-- SELECT SUBJECT --</option>
                                 {members.map(m => (
                                     <option key={m.id} value={m.id}>{m.user?.fullName} ({m.memberId})</option>
                                 ))}
                             </select>
-                            {errors.memberId && <span className="text-red-500 text-xs">{errors.memberId.message}</span>}
+                            {errors.memberId && <span className="text-rose-500 text-[10px] font-bold uppercase block mt-1 ml-1">{errors.memberId.message}</span>}
                         </div>
 
-                        <div className="space-y-1">
-                            <label className="text-xs font-medium text-zinc-400">Select Plan</label>
-                            <select {...register('planId')} className="input-premium w-full">
-                                <option value="">-- Choose Plan --</option>
+                        <div className="space-y-3">
+                            <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Protocol Tier</label>
+                            <select {...register('planId')} className="w-full h-14 px-6 bg-[#0D0D0D] border border-white/5 rounded-2xl text-white appearance-none focus:outline-none focus:border-cyan-400/50 transition-all duration-300">
+                                <option value="">-- SELECT MATRIX --</option>
                                 {plans.map(p => (
-                                    <option key={p.id} value={p.id}>{p.name} - ₹{p.finalPrice}</option>
+                                    <option key={p.id} value={p.id}>{p.name} - {formatCurrency(p.finalPrice)}</option>
                                 ))}
                             </select>
-                            {errors.planId && <span className="text-red-500 text-xs">{errors.planId.message}</span>}
+                            {errors.planId && <span className="text-rose-500 text-[10px] font-bold uppercase block mt-1 ml-1">{errors.planId.message}</span>}
                         </div>
 
-                        <div className="space-y-1">
-                            <label className="text-xs font-medium text-zinc-400">Payment Method</label>
-                            <div className="grid grid-cols-3 gap-2">
+                        <div className="space-y-3">
+                            <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Transfer Protocol</label>
+                            <div className="grid grid-cols-3 gap-3">
                                 {['CASH', 'UPI', 'BANK_TRANSFER'].map(method => (
                                     <label key={method} className="cursor-pointer">
                                         <input type="radio" value={method} {...register('paymentMethod')} className="peer sr-only" />
-                                        <div className="p-2 text-center rounded-lg border border-white/10 bg-zinc-900 peer-checked:bg-white peer-checked:text-black peer-checked:border-white transition-all text-xs font-bold hover:bg-zinc-800">
-                                            {method.replace('_', ' ')}
+                                        <div className="h-12 flex items-center justify-center rounded-2xl border border-white/5 bg-[#0D0D0D] peer-checked:bg-white peer-checked:text-black peer-checked:border-white transition-all text-[10px] font-black uppercase tracking-widest hover:bg-white/5">
+                                            {method.split('_')[0]}
                                         </div>
                                     </label>
                                 ))}
@@ -324,17 +326,17 @@ function RecordTransactionModal({ isOpen, onClose, onSuccess }: { isOpen: boolea
                         </div>
 
                         {selectedPlan && (
-                            <div className="bg-orange-500/10 border border-orange-500/20 rounded-xl p-4 flex justify-between items-center">
-                                <span className="text-orange-200 text-sm font-medium">Total Amount</span>
-                                <span className="text-orange-500 text-xl font-black">₹{selectedPlan.finalPrice}</span>
+                            <div className="bg-cyan-400/5 border border-cyan-400/20 rounded-3xl p-8 flex flex-col items-center">
+                                <span className="text-zinc-600 text-[10px] font-black uppercase tracking-widest mb-2">Sync Value</span>
+                                <span className="text-4xl font-black text-white tracking-tighter tabular-nums">{formatCurrency(selectedPlan.finalPrice)}</span>
                             </div>
                         )}
                     </div>
 
-                    <div className="flex gap-3 pt-4 border-t border-white/5">
-                        <Button type="button" variant="ghost" onClick={onClose} className="w-full">Cancel</Button>
-                        <Button type="submit" disabled={isSubmitting} className="btn-premium w-full">
-                            {isSubmitting ? <Spinner size="sm" /> : 'Record Payment'}
+                    <div className="flex gap-4 pt-4">
+                        <Button type="button" variant="ghost" onClick={onClose} className="w-1/3 h-14 rounded-2xl">Abort</Button>
+                        <Button type="submit" disabled={isSubmitting} className="w-2/3 h-14 rounded-2xl">
+                            {isSubmitting ? <Spinner size="sm" /> : 'COMMIT TRANSFER'}
                         </Button>
                     </div>
                 </form>

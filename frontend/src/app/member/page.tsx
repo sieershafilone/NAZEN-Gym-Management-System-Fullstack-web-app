@@ -10,6 +10,7 @@ import {
     Clock,
     Target,
     ArrowRight,
+    Zap,
 } from 'lucide-react';
 import Link from 'next/link';
 import { Card, StatCard, Badge, Spinner } from '@/components/ui';
@@ -56,44 +57,40 @@ export default function MemberDashboardPage() {
     const daysRemaining = membership ? getDaysRemaining(membership.endDate) : 0;
 
     return (
-        <div className="space-y-6">
-            {/* Membership Status Card */}
+        <div className="space-y-12 animate-fade-in pb-12">
+            {/* Membership Status Segment */}
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
             >
-                <Card className="relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-red-500/10" />
-                    <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                        <div>
-                            <p className="text-sm text-zinc-500 mb-1">Current Membership</p>
-                            <h2 className="text-2xl font-bold text-white">
-                                {membership?.plan?.name || 'No Active Plan'}
+                <Card variant="default" className="relative overflow-hidden rounded-[3rem] p-10 bg-white/[0.01] border-white/5 group hover:bg-white/[0.03] transition-all duration-700">
+                    <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+
+                    <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-10">
+                        <div className="space-y-4">
+                            <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.4em]">Active Protocol</p>
+                            <h2 className="text-5xl font-black text-white tracking-tighter uppercase leading-none">
+                                {membership?.plan?.name || 'STANDBY MODE'}
                             </h2>
                             {membership && (
-                                <p className="text-zinc-400 mt-1">
-                                    Valid until {formatDate(membership.endDate)}
+                                <p className="text-zinc-500 font-bold uppercase text-[9px] tracking-widest mt-4">
+                                    SYNCHRONIZATION ACTIVE UNTIL <span className="text-white">{formatDate(membership.endDate)}</span>
                                 </p>
                             )}
                         </div>
 
                         {membership && (
-                            <div className="flex items-center gap-6">
+                            <div className="flex items-center gap-10 bg-[#0D0D0D] p-8 rounded-[2rem] border border-white/5 group-hover:border-cyan-400/20 transition-all duration-500">
                                 <div className="text-center">
-                                    <p className="text-3xl font-bold text-orange-500">{daysRemaining}</p>
-                                    <p className="text-sm text-zinc-500">Days Left</p>
+                                    <p className="text-5xl font-black text-cyan-400 tracking-tighter tabular-nums">{daysRemaining}</p>
+                                    <p className="text-[8px] text-zinc-600 font-black uppercase tracking-widest mt-2">Days Left</p>
                                 </div>
-                                <div className="h-16 w-px bg-zinc-800" />
+                                <div className="h-16 w-px bg-white/5" />
                                 <div className="text-center">
                                     <Badge
-                                        variant={
-                                            membership.status === 'ACTIVE'
-                                                ? 'success'
-                                                : membership.status === 'FROZEN'
-                                                    ? 'info'
-                                                    : 'danger'
-                                        }
-                                        className="text-base px-4 py-1"
+                                        variant="info"
+                                        className="bg-cyan-400/10 text-cyan-400 border-cyan-400/20 text-[10px] font-black tracking-widest px-8 py-3 rounded-2xl uppercase"
                                     >
                                         {membership.status}
                                     </Badge>
@@ -102,17 +99,21 @@ export default function MemberDashboardPage() {
                         )}
                     </div>
 
-                    {/* Progress bar for days remaining */}
+                    {/* Matrix Progress Flux */}
                     {membership && (
-                        <div className="mt-6">
-                            <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+                        <div className="mt-12 space-y-3">
+                            <div className="flex items-center justify-between text-[8px] font-black text-zinc-600 tracking-widest uppercase">
+                                <span>Operation Progress</span>
+                                <span className="text-cyan-400">{Math.round((daysRemaining / membership.plan!.durationDays) * 100)}% Intensity</span>
+                            </div>
+                            <div className="h-4 bg-[#0D0D0D] rounded-full overflow-hidden border border-white/5 p-1">
                                 <motion.div
                                     initial={{ width: 0 }}
                                     animate={{
                                         width: `${Math.min(100, (daysRemaining / membership.plan!.durationDays) * 100)}%`,
                                     }}
-                                    transition={{ duration: 1 }}
-                                    className="h-full bg-gradient-to-r from-orange-500 to-red-500"
+                                    transition={{ duration: 1.5, ease: "easeOut" }}
+                                    className="h-full bg-cyan-400 rounded-full shadow-[0_0_15px_rgba(34,211,238,0.5)]"
                                 />
                             </div>
                         </div>
@@ -120,148 +121,133 @@ export default function MemberDashboardPage() {
                 </Card>
             </motion.div>
 
-            {/* Stats Grid */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
-                >
-                    <StatCard
-                        title="This Month Visits"
-                        value={data.attendance.thisMonth}
-                        icon={<Calendar size={24} />}
-                    />
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                >
-                    <StatCard
-                        title="Current Weight"
-                        value={data.progress[0]?.weight ? `${data.progress[0].weight} kg` : 'N/A'}
-                        icon={<TrendingUp size={24} />}
-                    />
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                >
-                    <StatCard
-                        title="Active Workout"
-                        value={data.workout?.workoutPlan?.name || 'None'}
-                        icon={<Dumbbell size={24} />}
-                    />
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                >
-                    <StatCard
-                        title="Total Spent"
-                        value={formatCurrency(
-                            data.payments.reduce((acc, p) => acc + Number(p.amount), 0)
-                        )}
-                        icon={<CreditCard size={24} />}
-                    />
-                </motion.div>
+            {/* Metrics Cluster */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[
+                    { title: "Visits Matrix", value: data.attendance.thisMonth, icon: Calendar, color: "indigo" },
+                    { title: "Physical Mass", value: data.progress[0]?.weight ? `${data.progress[0].weight} KG` : 'N/A', icon: TrendingUp, color: "mint" },
+                    { title: "Active Protocol", value: data.workout?.workoutPlan?.name || 'NONE', icon: Dumbbell, color: "amber" },
+                    { title: "Yield Injection", value: formatCurrency(data.payments.reduce((acc, p) => acc + Number(p.amount), 0)), icon: CreditCard, color: "indigo" },
+                ].map((stat, i) => (
+                    <motion.div
+                        key={stat.title}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 * i }}
+                    >
+                        <StatCard
+                            title={stat.title}
+                            value={stat.value}
+                            icon={<stat.icon size={22} />}
+                            color={stat.color as any}
+                        />
+                    </motion.div>
+                ))}
             </div>
 
-            {/* Content Grid */}
-            <div className="grid lg:grid-cols-2 gap-6">
-                {/* Today's Workout */}
+            {/* Tactical Grid */}
+            <div className="grid lg:grid-cols-2 gap-10">
+                {/* Protocol Execution */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.5 }}
                 >
-                    <Card>
-                        <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                                <Dumbbell className="text-orange-500" size={20} />
-                                Today&apos;s Workout
-                            </h3>
-                            <Link href="/member/workouts" className="text-sm text-orange-500 hover:text-orange-400">
-                                View all →
+                    <Card variant="default" className="rounded-[2.5rem] p-10 bg-white/[0.01] border-white/5 group hover:bg-white/[0.03] transition-all">
+                        <div className="flex items-center justify-between mb-10">
+                            <div className="space-y-1">
+                                <h3 className="text-xl font-black text-white uppercase tracking-tighter flex items-center gap-3">
+                                    <div className="p-2 bg-cyan-400/10 rounded-xl text-cyan-400">
+                                        <Dumbbell size={20} />
+                                    </div>
+                                    Tactical Protocol
+                                </h3>
+                                <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest pl-11">Current training script</p>
+                            </div>
+                            <Link href="/member/workouts" className="h-10 w-10 flex items-center justify-center rounded-xl bg-white/5 text-zinc-500 hover:text-white transition-all">
+                                <ArrowRight size={18} />
                             </Link>
                         </div>
 
                         {data.workout ? (
-                            <div className="space-y-4">
-                                <div className="flex items-center justify-between">
+                            <div className="space-y-8">
+                                <div className="flex items-center justify-between bg-[#0D0D0D] p-6 rounded-2xl border border-white/5 group-hover:border-cyan-400/20 transition-all">
                                     <div>
-                                        <p className="font-medium text-white">{data.workout.workoutPlan?.name}</p>
-                                        <p className="text-sm text-zinc-500">{data.workout.workoutPlan?.type}</p>
+                                        <p className="text-lg font-black text-white uppercase tracking-tight">{data.workout.workoutPlan?.name}</p>
+                                        <p className="text-[9px] text-zinc-600 font-bold uppercase tracking-widest mt-1">{data.workout.workoutPlan?.type} MODE</p>
                                     </div>
-                                    <Badge>{data.workout.workoutPlan?.daysPerWeek} days/week</Badge>
+                                    <Badge variant="info" className="bg-white/5 text-[8px] font-black border-white/10 px-4 py-2 rounded-xl">
+                                        {data.workout.workoutPlan?.daysPerWeek} DAYS/WEEK
+                                    </Badge>
                                 </div>
 
                                 <Link
                                     href="/member/workouts"
-                                    className="flex items-center justify-center gap-2 w-full py-3 bg-zinc-800/50 rounded-xl text-orange-500 hover:bg-zinc-800 transition-colors"
+                                    className="flex items-center justify-center gap-3 w-full h-16 bg-white text-black rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-cyan-400 transition-all duration-300"
                                 >
-                                    Start Workout
-                                    <ArrowRight size={18} />
+                                    ENGAGE PROTOCOL
+                                    <Zap size={16} className="fill-current" />
                                 </Link>
                             </div>
                         ) : (
-                            <div className="text-center py-8">
-                                <Target className="w-12 h-12 text-zinc-700 mx-auto mb-4" />
-                                <p className="text-zinc-500">No workout plan assigned yet</p>
-                                <p className="text-sm text-zinc-600 mt-1">Contact your trainer to get one</p>
+                            <div className="text-center py-16 bg-[#0D0D0D] rounded-3xl border border-white/5 border-dashed">
+                                <Target className="w-16 h-16 text-zinc-800 mx-auto mb-6 animate-pulse" />
+                                <p className="text-zinc-600 font-black uppercase text-[10px] tracking-widest">No protocol assigned</p>
+                                <p className="text-[8px] text-zinc-800 font-bold uppercase tracking-widest mt-2">Request synchronization from Command</p>
                             </div>
                         )}
                     </Card>
                 </motion.div>
 
-                {/* Recent Attendance */}
+                {/* Visitation Logs */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.6 }}
                 >
-                    <Card>
-                        <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                                <Clock className="text-orange-500" size={20} />
-                                Recent Visits
-                            </h3>
-                            <Link href="/member/attendance" className="text-sm text-orange-500 hover:text-orange-400">
-                                View all →
+                    <Card variant="default" className="rounded-[2.5rem] p-10 bg-white/[0.01] border-white/5 group hover:bg-white/[0.03] transition-all">
+                        <div className="flex items-center justify-between mb-10">
+                            <div className="space-y-1">
+                                <h3 className="text-xl font-black text-white uppercase tracking-tighter flex items-center gap-3">
+                                    <div className="p-2 bg-rose-400/10 rounded-xl text-rose-400">
+                                        <Clock size={20} />
+                                    </div>
+                                    System Access Logs
+                                </h3>
+                                <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest pl-11">Recent site entries</p>
+                            </div>
+                            <Link href="/member/attendance" className="h-10 w-10 flex items-center justify-center rounded-xl bg-white/5 text-zinc-500 hover:text-white transition-all">
+                                <ArrowRight size={18} />
                             </Link>
                         </div>
 
-                        <div className="space-y-3">
+                        <div className="space-y-4">
                             {data.attendance.recent.length === 0 ? (
-                                <p className="text-zinc-500 text-center py-4">No visits recorded yet</p>
+                                <div className="text-center py-10 bg-[#0D0D0D] rounded-3xl border border-white/5 border-dashed">
+                                    <p className="text-zinc-600 font-black uppercase text-[10px] tracking-widest">No site entries detected</p>
+                                </div>
                             ) : (
                                 data.attendance.recent.slice(0, 5).map((record) => (
                                     <div
                                         key={record.id}
-                                        className="flex items-center justify-between p-3 bg-zinc-800/30 rounded-xl"
+                                        className="flex items-center justify-between p-5 bg-[#0D0D0D] border border-white/5 rounded-2xl group/item hover:border-cyan-400/20 transition-all"
                                     >
                                         <div>
-                                            <p className="text-sm text-white">{formatDate(record.checkInTime)}</p>
-                                            <p className="text-xs text-zinc-500">
+                                            <p className="text-[10px] font-black text-white uppercase tracking-widest">{formatDate(record.checkInTime)}</p>
+                                            <p className="text-[9px] text-zinc-600 font-bold uppercase tracking-widest mt-1">
                                                 {new Date(record.checkInTime).toLocaleTimeString('en-IN', {
                                                     hour: '2-digit',
                                                     minute: '2-digit',
                                                 })}
                                                 {record.checkOutTime &&
-                                                    ` - ${new Date(record.checkOutTime).toLocaleTimeString('en-IN', {
+                                                    ` — ${new Date(record.checkOutTime).toLocaleTimeString('en-IN', {
                                                         hour: '2-digit',
                                                         minute: '2-digit',
                                                     })}`}
                                             </p>
                                         </div>
-                                        <Badge variant={record.method === 'QR' ? 'info' : 'default'}>
-                                            {record.method}
+                                        <Badge variant="info" className="bg-white/5 text-[7px] font-black border-white/10 px-3 py-1 rounded-lg uppercase tracking-widest group-hover/item:text-cyan-400 transition-colors">
+                                            {record.method} GATE
                                         </Badge>
                                     </div>
                                 ))
@@ -271,31 +257,36 @@ export default function MemberDashboardPage() {
                 </motion.div>
             </div>
 
-            {/* Weight Progress */}
+            {/* Mass Flux Overview */}
             {data.progress.length > 0 && (
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.7 }}
                 >
-                    <Card>
-                        <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                                <TrendingUp className="text-orange-500" size={20} />
-                                Weight Progress
-                            </h3>
-                            <Link href="/member/progress" className="text-sm text-orange-500 hover:text-orange-400">
-                                View all →
-                            </Link>
+                    <Card variant="default" className="rounded-[3rem] p-10 bg-white/[0.01] border-white/5 group hover:bg-white/[0.03] transition-all overflow-hidden">
+                        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-emerald-500/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+
+                        <div className="flex items-center justify-between mb-12 relative z-10">
+                            <div className="space-y-1">
+                                <h3 className="text-2xl font-black text-white uppercase tracking-tighter flex items-center gap-4">
+                                    <div className="p-3 bg-emerald-400/10 rounded-2xl text-emerald-400">
+                                        <TrendingUp size={24} />
+                                    </div>
+                                    Physical Mass Flux
+                                </h3>
+                                <p className="text-[9px] font-black text-zinc-600 uppercase tracking-[0.4em] pl-16">Biometric data tracking</p>
+                            </div>
                         </div>
 
-                        <div className="flex items-center gap-8 overflow-x-auto pb-2">
-                            {data.progress.slice(0, 5).reverse().map((record, index) => (
-                                <div key={record.id} className="flex flex-col items-center min-w-[80px]">
-                                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center mb-2">
-                                        <span className="text-lg font-bold text-white">{record.weight}</span>
+                        <div className="flex items-center gap-12 overflow-x-auto pb-6 relative z-10 scrollbar-hide">
+                            {data.progress.slice(0, 6).reverse().map((record, index) => (
+                                <div key={record.id} className="flex flex-col items-center min-w-[120px] group/flux">
+                                    <div className="w-24 h-24 rounded-[2rem] bg-[#0D0D0D] border border-white/5 flex flex-col items-center justify-center mb-6 group-hover/flux:border-emerald-400/30 group-hover/flux:scale-110 transition-all duration-500">
+                                        <span className="text-2xl font-black text-white tracking-tighter tabular-nums">{record.weight}</span>
+                                        <span className="text-[7px] text-zinc-700 font-black uppercase tracking-widest mt-1">KG</span>
                                     </div>
-                                    <p className="text-xs text-zinc-500">{formatDate(record.recordedAt)}</p>
+                                    <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.2em] group-hover/flux:text-white transition-colors">{formatDate(record.recordedAt)}</p>
                                 </div>
                             ))}
                         </div>

@@ -12,96 +12,118 @@ export default function MemberProfilePage() {
     if (!user || !member) return null;
 
     return (
-        <div className="max-w-3xl mx-auto space-y-8 animate-fade-in pb-10">
+        <div className="max-w-5xl mx-auto space-y-16 animate-fade-in pb-20">
+            {/* Morphic Cover Segment */}
             <div className="relative">
-                <div className="h-32 bg-gradient-to-r from-orange-900/50 to-red-900/50 rounded-2xl border border-white/5" />
-                <div className="absolute -bottom-12 left-8">
-                    <div className="p-1.5 bg-black rounded-full">
-                        <Avatar
-                            src={user.profilePhoto}
-                            fallback={getInitials(user.fullName)}
-                            size="xl"
-                            className="w-24 h-24 text-2xl border-2 border-black"
-                        />
+                <div className="h-48 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-cyan-400/20 via-[#0D0D0D] to-[#050505] rounded-[3rem] border border-white/5" />
+                <div className="absolute -bottom-16 left-12 flex items-end gap-8">
+                    <div className="p-2 bg-[#050505] rounded-[2.5rem] shadow-2xl">
+                        <div className="p-1 rounded-[2rem] bg-gradient-to-br from-cyan-400/50 to-transparent">
+                            <Avatar
+                                src={user.profilePhoto}
+                                fallback={getInitials(user.fullName)}
+                                className="w-32 h-32 rounded-[1.8rem] text-3xl font-black border-4 border-[#0D0D0D]"
+                            />
+                        </div>
+                    </div>
+                    <div className="pb-6">
+                        <h1 className="text-5xl font-black text-white uppercase tracking-tighter leading-none">{user.fullName}</h1>
+                        <p className="text-cyan-400 font-mono text-[10px] font-black uppercase tracking-[0.4em] mt-3">Node ID: {member.memberId}</p>
                     </div>
                 </div>
-                <div className="absolute top-4 right-4">
-                    <Badge variant={member.memberships?.[0]?.status === 'ACTIVE' ? 'success' : 'warning'}>
-                        {member.memberships?.[0]?.status || 'INACTIVE'}
+                <div className="absolute top-8 right-8">
+                    <Badge variant="info" className="bg-cyan-400/10 text-cyan-400 border-cyan-400/20 text-[10px] font-black tracking-[0.2em] px-6 py-2.5 rounded-xl uppercase">
+                        {member.memberships?.[0]?.status || 'UNKNOWN'}
                     </Badge>
                 </div>
             </div>
 
-            <div className="pt-16 px-4">
-                <h1 className="text-3xl font-black text-white">{user.fullName}</h1>
-                <p className="text-zinc-500 font-mono text-sm mt-1">{member.memberId}</p>
-            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 pt-12">
+                <Card variant="default" className="lg:col-span-2 p-10 rounded-[3rem] bg-white/[0.01] border-white/5 group hover:bg-white/[0.02] transition-all">
+                    <div className="flex items-center gap-4 mb-10">
+                        <div className="p-3 bg-cyan-400/10 rounded-xl text-cyan-400">
+                            <User size={20} />
+                        </div>
+                        <h3 className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.4em]">Core Identification</h3>
+                    </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card title="Personal Info" icon={<User size={18} className="text-orange-500" />}>
-                    <div className="space-y-4">
-                        <div className="flex items-center gap-3">
-                            <Mail size={16} className="text-zinc-600" />
-                            <div>
-                                <p className="text-xs text-zinc-500 uppercase">Email</p>
-                                <p className="text-sm text-white">{user.email || 'N/A'}</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div className="space-y-6">
+                            <div className="flex items-center gap-6 p-6 bg-[#0D0D0D] border border-white/5 rounded-2xl group/item hover:border-cyan-400/20 transition-all">
+                                <Mail size={18} className="text-zinc-700 group-hover/item:text-cyan-400" />
+                                <div>
+                                    <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest">Digital Gateway</p>
+                                    <p className="text-[11px] font-black text-white uppercase tracking-widest mt-1">{user.email || 'UNSET'}</p>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-6 p-6 bg-[#0D0D0D] border border-white/5 rounded-2xl group/item hover:border-cyan-400/20 transition-all">
+                                <Phone size={18} className="text-zinc-700 group-hover/item:text-cyan-400" />
+                                <div>
+                                    <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest">Signal Line</p>
+                                    <p className="text-[11px] font-black text-white uppercase tracking-widest mt-1">{user.mobile}</p>
+                                </div>
                             </div>
                         </div>
-                        <div className="flex items-center gap-3">
-                            <Phone size={16} className="text-zinc-600" />
-                            <div>
-                                <p className="text-xs text-zinc-500 uppercase">Phone</p>
-                                <p className="text-sm text-white">{user.mobile}</p>
-                            </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                            <Calendar size={16} className="text-zinc-600" />
-                            <div>
-                                <p className="text-xs text-zinc-500 uppercase">DOB</p>
-                                <p className="text-sm text-white">{member.dateOfBirth ? new Date(member.dateOfBirth).toLocaleDateString() : 'N/A'}</p>
+                        <div className="space-y-6">
+                            <div className="flex items-center gap-6 p-6 bg-[#0D0D0D] border border-white/5 rounded-2xl group/item hover:border-cyan-400/20 transition-all">
+                                <Calendar size={18} className="text-zinc-700 group-hover/item:text-cyan-400" />
+                                <div>
+                                    <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest">Origin Date</p>
+                                    <p className="text-[11px] font-black text-white uppercase tracking-widest mt-1">{member.dateOfBirth ? new Date(member.dateOfBirth).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase() : 'CLASSIFIED'}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </Card>
 
-                <Card title="Physical Stats" icon={<ActivityIcon size={18} className="text-blue-500" />}>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-lg bg-zinc-900 flex items-center justify-center text-zinc-500">
-                                <Ruler size={20} />
-                            </div>
-                            <div>
-                                <p className="text-xs text-zinc-500 uppercase">Height</p>
-                                <p className="text-lg font-bold text-white">{member.height || '-'} <span className="text-xs font-normal text-zinc-600">cm</span></p>
-                            </div>
+                <Card variant="default" className="p-10 rounded-[3rem] bg-[#080808] border-white/5 overflow-hidden">
+                    <div className="flex items-center gap-4 mb-10">
+                        <div className="p-3 bg-indigo-400/10 rounded-xl text-indigo-400">
+                            <Activity size={20} />
                         </div>
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-lg bg-zinc-900 flex items-center justify-center text-zinc-500">
-                                <Weight size={20} />
+                        <h3 className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.4em]">Physical Metrics</h3>
+                    </div>
+
+                    <div className="space-y-8">
+                        <div className="flex justify-between items-center p-6 bg-[#0D0D0D] border border-white/5 rounded-3xl group/metric hover:border-cyan-400/20 transition-all">
+                            <div className="flex items-center gap-4">
+                                <div className="p-3 bg-white/5 rounded-xl text-zinc-600 group-hover/metric:text-cyan-400 transition-colors">
+                                    <Ruler size={18} />
+                                </div>
+                                <span className="text-[9px] font-black text-zinc-600 uppercase tracking-widest">Structure Elevation</span>
                             </div>
-                            <div>
-                                <p className="text-xs text-zinc-500 uppercase">Weight</p>
-                                <p className="text-lg font-bold text-white">{member.weight || '-'} <span className="text-xs font-normal text-zinc-600">kg</span></p>
+                            <p className="text-xl font-black text-white tracking-tighter tabular-nums">{member.height || '—'}<span className="text-[8px] ml-2 text-zinc-700">CM</span></p>
+                        </div>
+
+                        <div className="flex justify-between items-center p-6 bg-[#0D0D0D] border border-white/5 rounded-3xl group/metric hover:border-cyan-400/20 transition-all">
+                            <div className="flex items-center gap-4">
+                                <div className="p-3 bg-white/5 rounded-xl text-zinc-600 group-hover/metric:text-cyan-400 transition-colors">
+                                    <Weight size={18} />
+                                </div>
+                                <span className="text-[9px] font-black text-zinc-600 uppercase tracking-widest">Base Mass</span>
                             </div>
+                            <p className="text-xl font-black text-white tracking-tighter tabular-nums">{member.weight || '—'}<span className="text-[8px] ml-2 text-zinc-700">KG</span></p>
                         </div>
                     </div>
+
                     {member.fitnessGoal && (
-                        <div className="mt-6 pt-6 border-t border-white/5">
-                            <p className="text-xs text-zinc-500 uppercase mb-2">Fitness Goal</p>
-                            <p className="text-sm text-white italic">{member.fitnessGoal}</p>
+                        <div className="mt-10 pt-10 border-t border-white/5">
+                            <p className="text-[8px] font-black text-zinc-700 uppercase tracking-[0.4em] mb-4">Strategic Objective</p>
+                            <p className="text-[11px] font-black text-white uppercase tracking-widest leading-relaxed bg-white/5 p-6 rounded-2xl border border-white/5 border-dashed">
+                                "{member.fitnessGoal}"
+                            </p>
                         </div>
                     )}
                 </Card>
             </div>
 
-            <div className="flex justify-end pt-8">
-                <Button variant="outline" className="text-red-500 border-red-500/20 hover:bg-red-500/10">Request Profile Edit</Button>
+            <div className="flex justify-center pt-12">
+                <Button variant="outline" className="h-16 px-12 rounded-2xl bg-white/5 border-white/10 text-[10px] font-black uppercase tracking-[0.3em] hover:bg-cyan-400 hover:text-black hover:border-cyan-400 transition-all duration-500">
+                    Request Matrix Calibration
+                </Button>
             </div>
         </div>
     );
 }
 
-function ActivityIcon(props: any) {
-    return <Activity {...props} />;
-}
 import { Activity } from 'lucide-react';

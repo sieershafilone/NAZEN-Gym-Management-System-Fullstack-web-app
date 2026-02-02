@@ -27,7 +27,7 @@ import {
 } from 'lucide-react';
 import { Button, Card, Input, Badge, Avatar, Spinner, EmptyState, StatCard } from '@/components/ui';
 import { membersAPI, plansAPI } from '@/lib/api';
-import { formatDate, getInitials, getDaysRemaining } from '@/lib/utils';
+import { formatDate, getInitials, getDaysRemaining, cn, formatCurrency } from '@/lib/utils';
 import type { Member, MembershipPlan } from '@/types';
 import toast from 'react-hot-toast';
 
@@ -128,53 +128,55 @@ export default function MembersPage() {
         <div className="space-y-8 animate-fade-in pb-12">
             {/* --- Header Section --- */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                <div className="space-y-2">
-                    <h1 className="text-4xl font-black text-white tracking-tighter uppercase sm:text-5xl">
-                        Elite <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">Roster</span>
+                <div className="space-y-4">
+                    <h1 className="text-5xl font-black text-white tracking-tighter sm:text-6xl">
+                        Elite <span className="text-cyan-400 glow-text">Registry</span>
                     </h1>
-                    <p className="text-zinc-400 font-medium tracking-wide max-w-xl">
-                        Command center for athlete management. Monitor performance, track memberships, and manage access protocols.
+                    <p className="text-zinc-500 font-medium tracking-widest uppercase text-[10px] max-w-xl">
+                        Command center for <span className="text-white">Athlete Operations</span> & Access control.
                     </p>
                 </div>
                 <Button
                     onClick={() => setShowAddModal(true)}
-                    className="h-14 px-8 bg-white text-black hover:bg-orange-500 hover:text-white transition-all duration-300 font-black tracking-wider uppercase rounded-full shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.6)]"
+                    className="h-14 px-10 rounded-2xl group"
                 >
-                    <Plus size={20} className="mr-2" />
+                    <Plus size={20} className="mr-3 group-hover:rotate-90 transition-transform duration-500" />
                     Induct Athlete
                 </Button>
             </div>
 
             {/* --- Stats Row --- */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <StatCard title="Total Athletes" value={members.length.toString()} icon={<Users size={16} />} color="blue" />
-                <StatCard title="Active Protocols" value="12" icon={<Activity size={16} />} color="green" />
-                <StatCard title="Performance Risk" value="3" icon={<Dumbbell size={16} />} color="purple" />
-                <StatCard title="Pending Review" value="5" icon={<Shield size={16} />} color="orange" />
+                <StatCard title="Total Athletes" value={members.length} icon={<Users size={20} />} color="indigo" />
+                <StatCard title="Active Flux" value="12" icon={<Activity size={20} />} color="mint" />
+                <StatCard title="Power Index" value="3" icon={<Dumbbell size={20} />} color="indigo" />
+                <StatCard title="Security Level" value="5" icon={<Shield size={20} />} color="amber" />
             </div>
 
             {/* --- Controls & Filter Bar --- */}
-            <div className="bg-zinc-900/50 backdrop-blur-md border border-white/5 p-4 rounded-3xl flex flex-col md:flex-row gap-4 items-center">
-                <div className="relative flex-1 w-full">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={18} />
+            <div className="glass p-6 rounded-[2.5rem] flex flex-col md:flex-row gap-6 items-center">
+                <div className="relative flex-1 w-full group">
+                    <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-600 group-focus-within:text-cyan-400 transition-colors" size={20} />
                     <input
                         type="text"
-                        placeholder="Search by Code name, ID or Comms..."
+                        placeholder="Search athlete registry..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="w-full bg-black/40 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-orange-500/50 transition-all placeholder:text-zinc-600 font-medium"
+                        className="w-full bg-[#0D0D0D] border border-white/5 rounded-2xl py-4 pl-14 pr-6 text-white focus:outline-none focus:border-cyan-400/50 focus:ring-4 focus:ring-cyan-400/5 transition-all duration-300 placeholder:text-zinc-700 font-medium"
                     />
                 </div>
 
-                <div className="flex gap-2 w-full md:w-auto overflow-x-auto">
+                <div className="flex gap-3 w-full md:w-auto overflow-x-auto pb-1 md:pb-0 scroll-hide">
                     {(['ALL', 'ACTIVE', 'EXPIRED', 'FROZEN'] as const).map((status) => (
                         <button
                             key={status}
                             onClick={() => setStatusFilter(status)}
-                            className={`px-6 py-3 rounded-xl text-xs font-black uppercase tracking-wider transition-all whitespace-nowrap ${statusFilter === status
-                                ? 'bg-white text-black shadow-lg scale-105'
-                                : 'bg-black/40 text-zinc-500 hover:bg-white/10 hover:text-white'
-                                }`}
+                            className={cn(
+                                "px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap border",
+                                statusFilter === status
+                                    ? "bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                                    : "bg-white/5 text-zinc-500 border-white/5 hover:bg-white/10 hover:text-white"
+                            )}
                         >
                             {status}
                         </button>
@@ -183,18 +185,18 @@ export default function MembersPage() {
             </div>
 
             {/* --- Data Grid --- */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                 {loading ? (
                     <div className="col-span-full h-96 flex items-center justify-center">
                         <Spinner size="lg" />
                     </div>
                 ) : members.length === 0 ? (
-                    <div className="col-span-full min-h-[400px] flex items-center justify-center border-2 border-dashed border-zinc-800 rounded-3xl bg-zinc-900/20">
+                    <div className="col-span-full flex items-center justify-center">
                         <EmptyState
-                            icon={<Users size={48} className="text-zinc-700 mb-4" />}
-                            title="Roster Empty"
-                            description="No athletes match the current criteria."
-                            action={<Button variant="outline" onClick={() => { setSearch(''); setStatusFilter('ALL') }}>Clear Filters</Button>}
+                            icon={<Users size={64} className="text-zinc-800" />}
+                            title="Registry Empty"
+                            description="No athletes match the current security clearance filters."
+                            action={<Button variant="secondary" onClick={() => { setSearch(''); setStatusFilter('ALL') }} className="mt-4 rounded-xl">Reset Access</Button>}
                         />
                     </div>
                 ) : (
@@ -240,81 +242,72 @@ function MemberCard({ member, onView, onDelete, index }: { member: Member, onVie
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05 }}
-            className="group relative bg-[#111318] border border-white/5 rounded-3xl p-6 hover:border-orange-500/30 hover:shadow-2xl hover:shadow-black/50 transition-all duration-300 flex flex-col justify-between h-full"
+            transition={{ delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+            className="group relative bg-[#0D0D0D] border border-white/5 rounded-[2.5rem] p-10 hover:border-cyan-400/30 transition-all duration-500 flex flex-col justify-between h-full overflow-hidden"
         >
-            <div className="absolute top-0 left-0 w-full h-1 bg-zinc-800 group-hover:bg-orange-500 transition-colors" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-400/5 blur-[60px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
             {/* Header */}
-            <div className="flex justify-between items-start mb-6">
-                <div className="flex items-center gap-4">
+            <div className="flex justify-between items-start mb-10 relative z-10">
+                <div className="flex items-center gap-5">
                     <Avatar
                         src={member.user?.profilePhoto}
                         fallback={getInitials(member.user?.fullName || '?')}
-                        size="md"
-                        className="ring-2 ring-black group-hover:ring-orange-500 transition-all shadow-lg"
+                        size="lg"
+                        className="rounded-2xl shadow-xl shadow-black group-hover:scale-105 transition-transform duration-500"
                     />
                     <div>
-                        <h3 className="text-white font-bold text-lg leading-tight group-hover:text-orange-400 transition-colors truncate max-w-[140px]">
+                        <h3 className="text-white font-black text-xl leading-tight group-hover:text-cyan-400 transition-colors truncate max-w-[150px]">
                             {member.user?.fullName}
                         </h3>
-                        <div className="flex items-center gap-2 mt-1">
-                            <Badge variant={status === 'ACTIVE' ? 'success' : status === 'EXPIRED' ? 'danger' : 'default'}>
-                                {status}
+                        <div className="flex items-center gap-3 mt-2">
+                            <Badge variant={status === 'ACTIVE' ? 'success' : status === 'EXPIRED' ? 'danger' : 'default'} className="lowercase text-[8px] px-2 py-0.5">
+                                {status.toLowerCase()}
                             </Badge>
-                            <span className="text-[10px] bg-zinc-900 border border-white/5 px-1.5 py-0.5 rounded text-zinc-500 font-mono">
+                            <span className="text-[10px] text-zinc-600 font-bold uppercase tracking-widest">
                                 {member.memberId}
                             </span>
                         </div>
                     </div>
                 </div>
 
-                {/* Actions Dropdown Trigger (Simplified to buttons for now) */}
-                <div className="flex gap-1">
-                    <button onClick={onView} className="p-2 hover:bg-white/5 rounded-full text-zinc-500 hover:text-white transition-colors">
+                <div className="flex gap-2">
+                    <button onClick={onView} className="h-10 w-10 flex items-center justify-center bg-white/5 rounded-xl text-zinc-600 hover:text-white hover:bg-white/10 transition-all">
                         <Eye size={18} />
                     </button>
-                    <button onClick={onDelete} className="p-2 hover:bg-red-500/10 rounded-full text-zinc-500 hover:text-red-500 transition-colors">
+                    <button onClick={onDelete} className="h-10 w-10 flex items-center justify-center bg-white/5 rounded-xl text-zinc-600 hover:text-rose-500 hover:bg-rose-500/10 transition-all">
                         <Trash2 size={18} />
                     </button>
                 </div>
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
-                <div className="bg-black/40 rounded-xl p-3 border border-white/5">
-                    <p className="text-[10px] text-zinc-500 uppercase font-bold mb-1">Current Plan</p>
-                    <p className="text-sm font-bold text-white truncate">{activePlan?.plan?.name || 'None'}</p>
+            <div className="grid grid-cols-2 gap-4 mb-10 relative z-10">
+                <div className="bg-white/[0.02] rounded-[1.5rem] p-5 border border-white/5">
+                    <p className="text-[9px] text-zinc-600 uppercase font-black tracking-widest mb-1.5">Sector</p>
+                    <p className="text-sm font-bold text-white truncate">{activePlan?.plan?.name || '--'}</p>
                 </div>
-                <div className="bg-black/40 rounded-xl p-3 border border-white/5">
-                    <p className="text-[10px] text-zinc-500 uppercase font-bold mb-1">Access</p>
-                    <p className="text-sm font-mono text-zinc-300">
-                        {activePlan ? `${getDaysRemaining(activePlan.endDate)} days` : '--'}
+                <div className="bg-white/[0.02] rounded-[1.5rem] p-5 border border-white/5">
+                    <p className="text-[9px] text-zinc-600 uppercase font-black tracking-widest mb-1.5">Clearance</p>
+                    <p className="text-sm font-black text-cyan-400 tabular-nums">
+                        {activePlan ? `${getDaysRemaining(activePlan.endDate)}d` : '--'}
                     </p>
-                </div>
-                <div className="bg-black/40 rounded-xl p-3 border border-white/5">
-                    <p className="text-[10px] text-zinc-500 uppercase font-bold mb-1">Joined</p>
-                    <p className="text-sm font-mono text-zinc-300">{formatDate(member.joinDate)}</p>
-                </div>
-                <div className="bg-black/40 rounded-xl p-3 border border-white/5">
-                    <p className="text-[10px] text-zinc-500 uppercase font-bold mb-1">Mobile</p>
-                    <p className="text-sm font-mono text-zinc-300 truncate">{member.user?.mobile}</p>
                 </div>
             </div>
 
             {/* Footer */}
-            <div className="pt-4 border-t border-white/5 flex justify-between items-center">
-                <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-wider">
-                    {member.fitnessGoal || 'NO GOAL SET'}
+            <div className="pt-8 border-t border-white/5 flex justify-between items-center relative z-10">
+                <span className="text-[10px] font-black text-zinc-700 uppercase tracking-widest">
+                    {member.fitnessGoal || 'NEUTRAL OBJECTIVE'}
                 </span>
                 <motion.button
                     whileHover={{ x: 3 }}
                     onClick={onView}
-                    className="text-xs font-bold text-orange-500 flex items-center hover:text-orange-400"
+                    className="text-xs font-black text-white hover:text-cyan-400 flex items-center transition-colors uppercase tracking-widest"
                 >
-                    Full Dossier <ArrowUpRight size={12} className="ml-1" />
+                    DATA <ArrowUpRight size={14} className="ml-2" />
                 </motion.button>
             </div>
         </motion.div>
@@ -337,104 +330,94 @@ function AddMemberModal({ isOpen, onClose, plans, onSuccess }: { isOpen: boolean
                 height: data.height ? Number(data.height) : undefined,
                 weight: data.weight ? Number(data.weight) : undefined,
             });
-            toast.success('Athlete inducted successfully');
+            toast.success('Induction successful');
             reset();
             onSuccess();
         } catch (error) {
-            toast.error('Failed to create member');
+            toast.error('Induction error');
         }
     };
 
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl animate-in fade-in duration-300">
             <motion.div
-                initial={{ scale: 0.95, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="bg-[#09090b] w-full max-w-2xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
+                initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                className="bg-[#050505] w-full max-w-3xl rounded-[3rem] border border-white/5 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
             >
-                <div className="p-6 border-b border-white/10 flex justify-between items-center bg-zinc-900/50">
+                <div className="p-10 border-b border-white/5 flex justify-between items-center bg-white/[0.01]">
                     <div>
-                        <h2 className="text-xl font-black text-white uppercase tracking-wider">Induct New Athlete</h2>
-                        <p className="text-zinc-500 text-xs mt-1">Fill in the required protocol data.</p>
+                        <h2 className="text-2xl font-black text-white tracking-tight">ATHLETE INDUCTION</h2>
+                        <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mt-1">INITIAL PROTOCOL SEQUENCE</p>
                     </div>
-                    <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-full transition-colors"><X size={20} className="text-zinc-400" /></button>
+                    <button onClick={onClose} className="p-4 bg-white/5 rounded-2xl text-zinc-500 hover:text-white transition-colors"><X size={24} /></button>
                 </div>
 
-                <div className="overflow-y-auto p-6 custom-scrollbar">
-                    <form id="add-member-form" onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                        <div className="space-y-4">
-                            <h3 className="text-xs font-bold text-orange-500 uppercase tracking-widest mb-4">Identity Protocol</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="space-y-1">
-                                    <label className="text-xs font-medium text-zinc-400">Full Name</label>
-                                    <input {...register('fullName')} className="input-premium w-full" placeholder="ex. John Doe" />
-                                    {errors.fullName && <span className="text-red-500 text-xs">{errors.fullName.message}</span>}
-                                </div>
-                                <div className="space-y-1">
-                                    <label className="text-xs font-medium text-zinc-400">Date of Birth</label>
-                                    <input type="date" {...register('dateOfBirth')} className="input-premium w-full" />
-                                    {errors.dateOfBirth && <span className="text-red-500 text-xs">{errors.dateOfBirth.message}</span>}
-                                </div>
-                                <div className="space-y-1">
-                                    <label className="text-xs font-medium text-zinc-400">Gender</label>
-                                    <select {...register('gender')} className="input-premium w-full">
-                                        <option value="MALE">Male</option>
-                                        <option value="FEMALE">Female</option>
-                                        <option value="OTHER">Other</option>
+                <div className="overflow-y-auto p-10 custom-scrollbar scroll-hide">
+                    <form id="add-member-form" onSubmit={handleSubmit(onSubmit)} className="space-y-12">
+                        <section>
+                            <h3 className="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-8 flex items-center gap-3">
+                                <div className="w-8 h-[1px] bg-cyan-400/30" />
+                                Biological Identity
+                            </h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <Input label="Biological Name" placeholder="ex. JOHN DOE" {...register('fullName')} error={errors.fullName?.message} />
+                                <Input type="date" label="Origin Date (DOB)" {...register('dateOfBirth')} error={errors.dateOfBirth?.message} />
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Gender Class</label>
+                                    <select {...register('gender')} className="w-full px-5 py-3 bg-[#0D0D0D] border border-white/5 rounded-2xl text-white appearance-none focus:outline-none focus:border-cyan-400/50 transition-all duration-300">
+                                        <option value="MALE">MALE</option>
+                                        <option value="FEMALE">FEMALE</option>
+                                        <option value="OTHER">OTHER</option>
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </section>
 
-                        <div className="space-y-4 pt-4 border-t border-white/5">
-                            <h3 className="text-xs font-bold text-blue-500 uppercase tracking-widest mb-4">Comms Channel</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="space-y-1">
-                                    <label className="text-xs font-medium text-zinc-400">Mobile Number</label>
-                                    <input {...register('mobile')} className="input-premium w-full" placeholder="10-digit number" />
-                                    {errors.mobile && <span className="text-red-500 text-xs">{errors.mobile.message}</span>}
-                                </div>
-                                <div className="space-y-1">
-                                    <label className="text-xs font-medium text-zinc-400">Email (Optional)</label>
-                                    <input {...register('email')} className="input-premium w-full" placeholder="athlete@example.com" />
-                                    {errors.email && <span className="text-red-500 text-xs">{errors.email.message}</span>}
-                                </div>
+                        <section>
+                            <h3 className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-8 flex items-center gap-3">
+                                <div className="w-8 h-[1px] bg-indigo-400/30" />
+                                Comms Encryption
+                            </h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <Input label="Uplink Number" placeholder="10-DIGIT MOBILE" {...register('mobile')} error={errors.mobile?.message} />
+                                <Input label="Mail Protocol" placeholder="ATHLETE@DOMAIN.COM" {...register('email')} error={errors.email?.message} />
                             </div>
-                        </div>
+                        </section>
 
-                        <div className="space-y-4 pt-4 border-t border-white/5">
-                            <h3 className="text-xs font-bold text-green-500 uppercase tracking-widest mb-4">Access Level</h3>
-                            <div className="space-y-1">
-                                <label className="text-xs font-medium text-zinc-400">Select Plan</label>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    {plans.map(plan => (
-                                        <label key={plan.id} className="cursor-pointer relative group">
-                                            <input type="radio" value={plan.id} {...register('planId')} className="peer sr-only" />
-                                            <div className="p-4 rounded-xl border border-white/10 bg-zinc-900 peer-checked:bg-white/5 peer-checked:border-orange-500 transition-all hover:bg-zinc-800">
-                                                <div className="flex justify-between items-center mb-1">
-                                                    <span className="font-bold text-white">{plan.name}</span>
-                                                    <span className="text-xs text-orange-500 font-mono">₹{plan.finalPrice}</span>
-                                                </div>
-                                                <div className="text-xs text-zinc-500">{plan.durationDays} Days Access</div>
+                        <section>
+                            <h3 className="text-[10px] font-black text-amber-400 uppercase tracking-widest mb-8 flex items-center gap-3">
+                                <div className="w-8 h-[1px] bg-amber-400/30" />
+                                Clearance Level
+                            </h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {plans.map(plan => (
+                                    <label key={plan.id} className="cursor-pointer relative group">
+                                        <input type="radio" value={plan.id} {...register('planId')} className="peer sr-only" />
+                                        <div className="p-6 rounded-[1.5rem] border border-white/5 bg-[#0D0D0D] peer-checked:bg-white/[0.04] peer-checked:border-cyan-400/50 transition-all hover:bg-white/[0.02]">
+                                            <div className="flex justify-between items-center mb-3">
+                                                <span className="font-black text-white text-sm tracking-tight">{plan.name}</span>
+                                                <span className="text-[10px] text-cyan-400 font-bold uppercase">{formatCurrency(plan.finalPrice)}</span>
                                             </div>
-                                            <div className="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity">
-                                                <div className="bg-orange-500 rounded-full p-0.5"><Check size={10} className="text-black" /></div>
-                                            </div>
-                                        </label>
-                                    ))}
-                                </div>
-                                {errors.planId && <span className="text-red-500 text-xs">{errors.planId.message}</span>}
+                                            <div className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">{plan.durationDays} DAYS CLEARANCE</div>
+                                        </div>
+                                        <div className="absolute top-4 right-4 opacity-0 peer-checked:opacity-100 transition-opacity">
+                                            <div className="bg-cyan-400 rounded-lg p-1 shadow-[0_0_10px_rgba(45,212,191,0.5)]"><Check size={12} className="text-black font-black" /></div>
+                                        </div>
+                                    </label>
+                                ))}
+                                {errors.planId && <span className="text-rose-500 text-[10px] font-bold uppercase block mt-2 ml-1">{errors.planId.message}</span>}
                             </div>
-                        </div>
+                        </section>
                     </form>
                 </div>
 
-                <div className="p-6 border-t border-white/10 bg-zinc-900/50 flex justify-end gap-3">
-                    <Button variant="ghost" onClick={onClose}>Cancel</Button>
-                    <Button form="add-member-form" disabled={isSubmitting} className="btn-premium min-w-[140px]">
-                        {isSubmitting ? <Spinner size="sm" /> : <><Save size={18} className="mr-2" /> Confirm Induction</>}
+                <div className="p-10 border-t border-white/5 bg-white/[0.01] flex justify-end gap-6">
+                    <Button variant="ghost" onClick={onClose} className="px-8 h-14 rounded-2xl">Abort</Button>
+                    <Button form="add-member-form" disabled={isSubmitting} className="px-10 h-14 rounded-2xl">
+                        {isSubmitting ? <Spinner size="sm" /> : <>COMMIT INDUCTION</>}
                     </Button>
                 </div>
             </motion.div>
@@ -446,78 +429,87 @@ function ViewMemberModal({ isOpen, onClose, member }: { isOpen: boolean, onClose
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/98 backdrop-blur-2xl animate-in fade-in duration-400">
             <motion.div
-                initial={{ scale: 0.95, opacity: 0 }}
+                initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="bg-[#09090b] w-full max-w-3xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col relative"
+                className="bg-[#050505] w-full max-w-4xl rounded-[3rem] border border-white/5 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col relative"
             >
-                <div className="absolute top-0 left-0 w-full h-48 bg-gradient-to-b from-orange-900/20 to-transparent pointer-events-none" />
+                <div className="absolute top-0 left-0 w-full h-[300px] bg-gradient-to-b from-cyan-400/5 to-transparent pointer-events-none" />
 
-                <div className="p-8 relative z-10">
-                    <div className="flex justify-between items-start">
-                        <div className="flex gap-6">
-                            <Avatar src={member.user?.profilePhoto} fallback={getInitials(member.user?.fullName || '?')} size="xl" className="ring-4 ring-black shadow-2xl" />
-                            <div>
-                                <h1 className="text-3xl font-black text-white">{member.user?.fullName}</h1>
-                                <div className="flex items-center gap-3 mt-2">
-                                    <Badge variant="outline" className="font-mono">{member.memberId}</Badge>
-                                    <Badge variant="success">Active</Badge>
-                                </div>
+                <div className="p-12 relative z-10 flex justify-between items-start">
+                    <div className="flex gap-10">
+                        <Avatar src={member.user?.profilePhoto} fallback={getInitials(member.user?.fullName || '?')} size="xl" className="rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.5)] scale-125 border border-white/10" />
+                        <div className="ml-4">
+                            <h1 className="text-5xl font-black text-white tracking-tighter">{member.user?.fullName}</h1>
+                            <div className="flex items-center gap-4 mt-4">
+                                <Badge variant="default" className="bg-white/5 border-none font-black tracking-widest">{member.memberId}</Badge>
+                                <Badge variant="success" className="px-4 py-1">SECURED</Badge>
                             </div>
                         </div>
-                        <button onClick={onClose} className="p-2 bg-black/50 hover:bg-white/10 rounded-full text-white/50 hover:text-white transition-colors"><X size={24} /></button>
                     </div>
+                    <button onClick={onClose} className="p-5 bg-white/5 hover:bg-white/10 rounded-2xl text-zinc-500 hover:text-white transition-all"><X size={28} /></button>
                 </div>
 
-                <div className="px-8 pb-8 overflow-y-auto custom-scrollbar space-y-8">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="px-12 pb-12 overflow-y-auto custom-scrollbar scroll-hide space-y-12">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                         {[
-                            { label: 'Weight', value: member.weight ? `${member.weight} KG` : '--', icon: Dumbbell },
-                            { label: 'Height', value: member.height ? `${member.height} CM` : '--', icon: Activity },
-                            { label: 'Goal', value: member.fitnessGoal || 'TBD', icon: TrendingUp },
-                            { label: 'Joined', value: formatDate(member.joinDate), icon: Calendar },
+                            { label: 'Mass', value: member.weight ? `${member.weight} KG` : '--', icon: Dumbbell, color: 'indigo' },
+                            { label: 'Dimension', value: member.height ? `${member.height} CM` : '--', icon: Activity, color: 'mint' },
+                            { label: 'Directive', value: member.fitnessGoal || 'NEUTRAL', icon: TrendingUp, color: 'amber' },
+                            { label: 'Activated', value: formatDate(member.joinDate).toUpperCase(), icon: Calendar, color: 'indigo' },
                         ].map((stat, i) => (
-                            <div key={i} className="bg-white/5 rounded-2xl p-4 border border-white/5">
-                                <div className="flex items-center gap-2 mb-2 text-zinc-500 text-xs font-bold uppercase tracking-wider">
-                                    <stat.icon size={14} /> {stat.label}
+                            <div key={i} className="bg-white/[0.02] rounded-3xl p-6 border border-white/5 group hover:bg-white/[0.04] transition-all">
+                                <div className={cn(
+                                    "flex items-center gap-3 mb-3 text-[10px] font-black uppercase tracking-widest",
+                                    stat.color === 'indigo' && "text-indigo-400",
+                                    stat.color === 'mint' && "text-cyan-400",
+                                    stat.color === 'amber' && "text-amber-400"
+                                )}>
+                                    <stat.icon size={16} /> {stat.label}
                                 </div>
-                                <div className="text-xl font-bold text-white">{stat.value}</div>
+                                <div className="text-2xl font-black text-white tracking-tight">{stat.value}</div>
                             </div>
                         ))}
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <h3 className="text-sm font-bold text-white uppercase tracking-widest border-b border-white/10 pb-2 mb-4">Personal Data</h3>
-                            <div className="space-y-4">
-                                <InfoRow label="Mobile" value={member.user?.mobile} />
-                                <InfoRow label="Email" value={member.user?.email} />
-                                <InfoRow label="DOB" value={formatDate(member.dateOfBirth)} />
-                                <InfoRow label="Emergency" value={member.emergencyContact} />
+                    <div className="grid md:grid-cols-2 gap-12">
+                        <div className="glass p-10 rounded-[2.5rem]">
+                            <h3 className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-8">Metadata Protocols</h3>
+                            <div className="space-y-6">
+                                <InfoRow label="Access Channel" value={member.user?.mobile} />
+                                <InfoRow label="Mail Encryption" value={member.user?.email} />
+                                <InfoRow label="Generation Date" value={formatDate(member.dateOfBirth)} />
+                                <InfoRow label="Emergency Uplink" value={member.emergencyContact} />
                             </div>
                         </div>
-                        <div>
-                            <h3 className="text-sm font-bold text-white uppercase tracking-widest border-b border-white/10 pb-2 mb-4">Membership Status</h3>
+                        <div className="glass p-10 rounded-[2.5rem]">
+                            <h3 className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-8">Access Logic</h3>
                             {member.memberships?.[0] ? (
-                                <div className="bg-orange-500/10 border border-orange-500/20 rounded-2xl p-5">
-                                    <div className="flex justify-between items-start mb-2">
-                                        <span className="text-orange-400 font-bold text-lg">{member.memberships[0].plan?.name}</span>
-                                        <Badge variant="success">Active</Badge>
+                                <div className="space-y-8">
+                                    <div className="flex justify-between items-end">
+                                        <div>
+                                            <p className="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-2">Protocol Current</p>
+                                            <h4 className="text-3xl font-black text-white tracking-tighter">{member.memberships[0].plan?.name}</h4>
+                                        </div>
+                                        <Badge variant="success" className="mb-1 px-4">VALID</Badge>
                                     </div>
-                                    <div className="text-sm text-zinc-400">
-                                        Valid until <span className="text-white font-bold">{formatDate(member.memberships[0].endDate)}</span>
+                                    <div className="p-6 bg-white/[0.02] rounded-2xl border border-white/5">
+                                        <p className="text-[10px] font-black text-zinc-600 uppercase tracking-widest mb-2 text-center">Protocol Life Termination</p>
+                                        <div className="text-xl font-black text-white text-center tracking-tight">{formatDate(member.memberships[0].endDate)}</div>
                                     </div>
                                 </div>
                             ) : (
-                                <div className="text-zinc-500 italic">No active membership found.</div>
+                                <div className="h-full flex items-center justify-center border-2 border-dashed border-white/5 rounded-[2rem]">
+                                    <p className="text-zinc-700 text-xs font-black uppercase tracking-widest">Protocol Null</p>
+                                </div>
                             )}
                         </div>
                     </div>
                 </div>
 
-                <div className="p-6 border-t border-white/10 bg-zinc-900/50 flex justify-end gap-3 mt-auto">
-                    <Button variant="secondary" onClick={onClose}>Close Dossier</Button>
+                <div className="p-10 border-t border-white/5 bg-white/[0.01] flex justify-end mt-auto">
+                    <Button variant="secondary" onClick={onClose} className="px-10 h-14 rounded-2xl">Terminate Dossier</Button>
                 </div>
             </motion.div>
         </div>
@@ -525,8 +517,8 @@ function ViewMemberModal({ isOpen, onClose, member }: { isOpen: boolean, onClose
 }
 
 const InfoRow = ({ label, value }: { label: string, value?: string }) => (
-    <div className="flex justify-between items-center py-2 border-b border-dashed border-white/5 last:border-0">
-        <span className="text-zinc-500 text-sm">{label}</span>
-        <span className="text-zinc-200 font-medium text-sm">{value || 'N/A'}</span>
+    <div className="flex justify-between items-center py-4 border-b border-white/5 last:border-0 hover:bg-white/[0.01] px-2 transition-colors rounded-xl">
+        <span className="text-zinc-600 text-xs font-bold uppercase tracking-widest">{label}</span>
+        <span className="text-white font-black text-sm tracking-tight">{value || '--'}</span>
     </div>
 );

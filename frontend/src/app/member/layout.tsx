@@ -65,8 +65,8 @@ export default function MemberLayout({
 
     if (isLoading || !isAuthenticated || user?.role !== 'MEMBER') {
         return (
-            <div className="min-h-screen bg-black flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-2 border-zinc-700 border-t-orange-500" />
+            <div className="min-h-screen bg-[#050505] flex items-center justify-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-2 border-white/5 border-t-cyan-400" />
             </div>
         );
     }
@@ -75,7 +75,7 @@ export default function MemberLayout({
     const daysRemaining = membership ? getDaysRemaining(membership.endDate) : 0;
 
     return (
-        <div className="min-h-screen bg-black">
+        <div className="min-h-screen bg-[#050505]">
             {/* Mobile Sidebar Overlay */}
             <AnimatePresence>
                 {sidebarOpen && (
@@ -83,7 +83,7 @@ export default function MemberLayout({
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+                        className="fixed inset-0 bg-black/80 backdrop-blur-md z-40 lg:hidden"
                         onClick={() => setSidebarOpen(false)}
                     />
                 )}
@@ -91,53 +91,53 @@ export default function MemberLayout({
 
             {/* Sidebar */}
             <aside
-                className={`fixed left-0 top-0 h-full w-64 bg-zinc-950 border-r border-zinc-800 z-50 transform transition-transform duration-300 lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+                className={`fixed left-0 top-0 h-full w-72 bg-[#080808] border-r border-white/5 z-50 transform transition-transform duration-500 ease-[0.16, 1, 0.3, 1] lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
                     }`}
             >
-                {/* Logo */}
-                <div className="h-16 flex items-center justify-between px-4 border-b border-zinc-800">
-                    <Link href="/member" className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center overflow-hidden">
+                {/* Logo Section */}
+                <div className="h-24 flex items-center justify-between px-8 border-b border-white/5">
+                    <Link href="/member" className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-[#0D0D0D] border border-cyan-400/20 rounded-2xl flex items-center justify-center overflow-hidden shadow-[0_0_20px_rgba(34,211,238,0.1)]">
                             <Image
                                 src="/logo.png"
-                                alt="ULIFTS Logo"
-                                width={32}
-                                height={32}
-                                className="object-contain"
+                                alt="NAIZEN Logo"
+                                width={36}
+                                height={36}
+                                className="object-contain grayscale brightness-200"
                             />
                         </div>
                         <div>
-                            <span className="font-bold text-white">ULIFTS</span>
-                            <span className="text-zinc-500 text-xs block -mt-0.5">Member Portal</span>
+                            <span className="font-black text-white tracking-tighter text-xl">NAIZEN</span>
+                            <span className="text-zinc-600 text-[8px] font-black uppercase tracking-[0.3em] block mt-1">Subject Hub</span>
                         </div>
                     </Link>
                     <button
                         onClick={() => setSidebarOpen(false)}
-                        className="lg:hidden text-zinc-500 hover:text-white"
+                        className="lg:hidden text-zinc-600 hover:text-white transition-colors"
                     >
                         <X size={20} />
                     </button>
                 </div>
 
-                {/* Membership Status */}
+                {/* Membership Pulse */}
                 {membership && (
-                    <div className="p-4 border-b border-zinc-800">
-                        <div className="bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/20 rounded-xl p-3">
-                            <p className="text-xs text-zinc-400 mb-1">{membership.plan?.name}</p>
+                    <div className="p-8 border-b border-white/5 bg-white/[0.01]">
+                        <div className="bg-[#0D0D0D] border border-white/5 rounded-3xl p-5 group hover:border-cyan-400/20 transition-all duration-500">
+                            <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest mb-3">{membership.plan?.name}</p>
                             <div className="flex items-center justify-between">
-                                <Badge variant={membership.status === 'ACTIVE' ? 'success' : 'warning'}>
+                                <Badge variant="info" className="bg-cyan-400/10 text-cyan-400 border-cyan-400/20 text-[8px] font-black tracking-widest px-3 py-1.5 rounded-xl">
                                     {membership.status}
                                 </Badge>
-                                <span className="text-sm text-orange-500 font-medium">
-                                    {daysRemaining} days left
+                                <span className="text-[10px] text-white font-black uppercase tracking-widest group-hover:text-cyan-400 transition-colors">
+                                    {daysRemaining}D REMAINING
                                 </span>
                             </div>
                         </div>
                     </div>
                 )}
 
-                {/* Navigation */}
-                <nav className="p-4 space-y-1">
+                {/* Navigation Links */}
+                <nav className="p-6 space-y-2 mt-4">
                     {memberNavItems.map((item) => {
                         const isActive = pathname === item.href ||
                             (item.href !== '/member' && pathname.startsWith(item.href));
@@ -146,102 +146,109 @@ export default function MemberLayout({
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className={`flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 ${isActive
-                                    ? 'bg-gradient-to-r from-orange-500/10 to-red-500/10 text-orange-500 border border-orange-500/20'
-                                    : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
+                                className={`flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-300 group ${isActive
+                                    ? 'bg-white/5 text-white border border-white/10 shadow-[0_10px_20px_rgba(0,0,0,0.2)]'
+                                    : 'text-zinc-500 hover:text-white hover:bg-white/[0.02]'
                                     }`}
                             >
-                                <item.icon size={20} />
-                                <span className="font-medium">{item.label}</span>
+                                <item.icon size={20} className={isActive ? 'text-cyan-400' : 'group-hover:text-cyan-400 transition-colors'} />
+                                <span className="text-[10px] font-black uppercase tracking-[0.2em]">{item.label}</span>
                             </Link>
                         );
                     })}
                 </nav>
 
-                {/* Bottom section */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-zinc-800">
+                {/* Exit Command */}
+                <div className="absolute bottom-0 left-0 right-0 p-8 border-t border-white/5 bg-[#030303]">
                     <button
                         onClick={handleLogout}
-                        className="flex items-center gap-3 w-full px-4 py-2.5 rounded-xl text-zinc-400 hover:text-red-500 hover:bg-red-500/10 transition-all duration-200"
+                        className="flex items-center gap-4 w-full px-6 py-4 rounded-2xl text-zinc-600 hover:text-rose-400 hover:bg-rose-400/5 transition-all duration-300 group"
                     >
-                        <LogOut size={20} />
-                        <span className="font-medium">Logout</span>
+                        <LogOut size={20} className="group-hover:translate-x-1 transition-transform" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em]">Terminate Phase</span>
                     </button>
-                </div>
-
-                {/* Copyright */}
-                <div className="absolute bottom-1 w-full text-center pb-2">
-                    <p className="text-[10px] text-zinc-600">© 2026 ULIFTS Gym</p>
+                    <div className="mt-6 text-center">
+                        <p className="text-[8px] font-black text-zinc-800 uppercase tracking-[0.4em]">© 2026 NAIZEN SYSTEMS</p>
+                    </div>
                 </div>
             </aside>
 
-            {/* Main Content */}
-            <div className="lg:pl-64">
-                {/* Top Bar */}
-                <header className="sticky top-0 z-30 h-16 bg-black/80 backdrop-blur-xl border-b border-zinc-800 flex items-center justify-between px-4 lg:px-6">
-                    <div className="flex items-center gap-4">
+            {/* Main Operational Area */}
+            <div className="lg:pl-72">
+                {/* Unified Top Header */}
+                <header className="sticky top-0 z-30 h-24 bg-[#050505]/80 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-8 lg:px-12">
+                    <div className="flex items-center gap-6">
                         <button
                             onClick={toggleSidebar}
-                            className="lg:hidden text-zinc-400 hover:text-white"
+                            className="lg:hidden text-zinc-500 hover:text-white transition-colors"
                         >
                             <Menu size={24} />
                         </button>
-                        <h1 className="text-lg font-semibold text-white hidden sm:block">
-                            Welcome, {user?.fullName?.split(' ')[0]}
-                        </h1>
+                        <div className="space-y-1">
+                            <h1 className="text-xl font-black text-white uppercase tracking-tighter hidden sm:block">
+                                WELCOME, <span className="text-cyan-400">{user?.fullName?.split(' ')[0]}</span>
+                            </h1>
+                            <p className="text-[8px] font-black text-zinc-600 uppercase tracking-[0.3em] hidden sm:block">Subject identification successful</p>
+                        </div>
                     </div>
 
-                    <div className="flex items-center gap-4">
-                        {/* QR Code */}
+                    <div className="flex items-center gap-6">
+                        {/* QR Matrix */}
                         <Link
                             href="/member/qr"
-                            className="p-2 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-xl transition-colors"
+                            className="h-12 w-12 flex items-center justify-center text-zinc-500 hover:text-cyan-400 hover:bg-white/5 border border-white/5 rounded-2xl transition-all duration-300 group"
                         >
-                            <QrCode size={20} />
+                            <QrCode size={20} className="group-hover:scale-110 transition-transform" />
                         </Link>
 
-                        {/* Notifications */}
-                        <button className="relative p-2 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-xl transition-colors">
-                            <Bell size={20} />
+                        {/* Alerts */}
+                        <button className="relative h-12 w-12 flex items-center justify-center text-zinc-500 hover:text-cyan-400 hover:bg-white/5 border border-white/5 rounded-2xl transition-all duration-300 group">
+                            <Bell size={20} className="group-hover:rotate-12 transition-transform" />
+                            <span className="absolute top-3 right-3 w-2 h-2 bg-rose-500 rounded-full border-2 border-[#050505]" />
                         </button>
 
-                        {/* User Menu */}
+                        <div className="w-px h-8 bg-white/5 mx-2" />
+
+                        {/* User Matrix */}
                         <div className="relative">
                             <button
                                 onClick={() => setShowUserMenu(!showUserMenu)}
-                                className="flex items-center gap-3 hover:bg-zinc-800 rounded-xl px-3 py-2 transition-colors"
+                                className="flex items-center gap-4 bg-[#0D0D0D] border border-white/5 hover:border-cyan-400/20 rounded-2xl pl-2 pr-5 py-2 transition-all duration-500 group"
                             >
-                                <Avatar
-                                    src={user?.profilePhoto}
-                                    fallback={getInitials(user?.fullName || 'M')}
-                                    size="sm"
-                                />
-                                <div className="hidden sm:block text-left">
-                                    <p className="text-sm font-medium text-white">{user?.fullName}</p>
-                                    <p className="text-xs text-zinc-500">{user?.member?.memberId}</p>
+                                <div className="p-0.5 rounded-xl border border-white/10 group-hover:border-cyan-400/30 transition-colors">
+                                    <Avatar
+                                        src={user?.profilePhoto}
+                                        fallback={getInitials(user?.fullName || 'M')}
+                                        className="h-10 w-10 rounded-[10px]"
+                                    />
                                 </div>
-                                <ChevronDown size={16} className="text-zinc-500" />
+                                <div className="hidden sm:block text-left">
+                                    <p className="text-[10px] font-black text-white uppercase tracking-widest">{user?.fullName}</p>
+                                    <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest mt-0.5">{user?.member?.memberId}</p>
+                                </div>
+                                <ChevronDown size={14} className="text-zinc-600 group-hover:text-cyan-400 transition-colors" />
                             </button>
 
                             <AnimatePresence>
                                 {showUserMenu && (
                                     <motion.div
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: 10 }}
-                                        className="absolute right-0 top-full mt-2 w-48 bg-zinc-900 border border-zinc-800 rounded-xl shadow-xl overflow-hidden"
+                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        className="absolute right-0 top-full mt-4 w-60 bg-[#0D0D0D] border border-white/5 rounded-[2rem] shadow-2xl overflow-hidden z-50 p-2"
                                     >
                                         <Link
                                             href="/member/profile"
-                                            className="block px-4 py-3 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
+                                            className="flex items-center gap-4 px-6 py-4 rounded-2xl text-[10px] font-black text-zinc-500 hover:text-white hover:bg-white/5 transition-all uppercase tracking-widest"
                                         >
-                                            Profile Settings
+                                            Profile Matrix
                                         </Link>
+                                        <div className="h-px bg-white/5 mx-4 my-1" />
                                         <button
                                             onClick={handleLogout}
-                                            className="block w-full text-left px-4 py-3 text-sm text-red-500 hover:bg-red-500/10 transition-colors"
+                                            className="flex items-center gap-4 w-full px-6 py-4 rounded-2xl text-[10px] font-black text-rose-500 hover:bg-rose-500/5 transition-all uppercase tracking-widest"
                                         >
-                                            Logout
+                                            Exit Session
                                         </button>
                                     </motion.div>
                                 )}
@@ -250,8 +257,10 @@ export default function MemberLayout({
                     </div>
                 </header>
 
-                {/* Page Content */}
-                <main className="p-4 lg:p-6">{children}</main>
+                {/* Page Content Operational Center */}
+                <main className="p-8 lg:p-12 max-w-[1600px] mx-auto min-h-[calc(100vh-6rem)]">
+                    {children}
+                </main>
             </div>
         </div>
     );

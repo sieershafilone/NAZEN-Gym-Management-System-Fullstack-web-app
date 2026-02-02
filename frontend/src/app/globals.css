@@ -1,29 +1,30 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #0B0D10;
-  --color-foreground: #f8fafc;
-  --color-card: #111318;
-  --color-accent: #FF6A00;
-  --color-accent-foreground: #ffffff;
+  --color-background: #050505;
+  --color-foreground: #F2F2F2;
+  --color-card: #0D0D0D;
+  --color-accent: #2DD4BF;
+  --color-accent-foreground: #050505;
+  --color-secondary: #6366F1;
 
   --font-sans: 'Inter', system-ui, sans-serif;
-  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-heading: 'Outfit', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
 :root {
-  --background: #0B0D10;
-  --foreground: #f8fafc;
-  --card: #111318;
-  --card-foreground: #f8fafc;
-  --primary: #FF6A00;
-  --primary-foreground: #ffffff;
-  --secondary: #C92A2A;
+  --background: #050505;
+  --foreground: #F2F2F2;
+  --card: #0D0D0D;
+  --card-foreground: #F2F2F2;
+  --primary: #2DD4BF;
+  --primary-foreground: #050505;
+  --secondary: #6366F1;
   --secondary-foreground: #ffffff;
-  --border: #1F2937;
-  --input: #1F2937;
-  --ring: #FF6A00;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.05);
+  --ring: #2DD4BF;
 }
 
 html,
@@ -65,30 +66,45 @@ h6 {
   background: #374151;
 }
 
-/* Glassmorphism Classes */
+/* Cyber Glassmorphism */
 .glass {
-  background: rgba(17, 19, 24, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
+  background: rgba(13, 13, 13, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Utilities */
+.glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(45, 212, 191, 0.3);
+  box-shadow: 0 0 30px rgba(45, 212, 191, 0.1);
+}
+
+/* Luxury Cyber Gradients */
 .text-luxury {
-  background: linear-gradient(135deg, #FF6A00 0%, #C92A2A 100%);
+  background: linear-gradient(135deg, #2DD4BF 0%, #6366F1 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+.bg-cyber-gradient {
+  background: linear-gradient(135deg, rgba(45, 212, 191, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+}
+
 .glow-text {
-  text-shadow: 0 0 20px rgba(255, 106, 0, 0.5);
+  text-shadow: 0 0 15px rgba(45, 212, 191, 0.4);
+}
+
+.glow-primary {
+  box-shadow: 0 0 20px rgba(45, 212, 191, 0.2);
 }
 
 /* Animations */

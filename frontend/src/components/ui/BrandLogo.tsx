@@ -37,24 +37,24 @@ export const BrandLogo = ({ className, variant = 'default', withGlow = true }: B
             {/* Ambient Glow - Subtle "Behind the Glass" effect */}
             {withGlow && (
                 <div
-                    className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-red-600/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                    className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-indigo-500/20 blur-3xl rounded-full opacity-60 transition-opacity duration-700"
                     aria-hidden="true"
                 />
             )}
 
             {/* Logo Image with engineered alignment */}
-            <div className="relative w-full h-full filter drop-shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_15px_rgba(255,100,50,0.3)] transition-all duration-300">
+            <div className="relative w-full h-full filter drop-shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-all duration-300">
                 <Image
                     src="/logo-white.png"
-                    alt="ULIFTS Gym"
+                    alt="NAIZEN"
                     fill
                     className={cn(
                         // Clean projection
-                        "object-contain",
+                        "object-contain select-none",
                         // Optical alignment tweaks
-                        variant === 'default' && "object-center md:object-left",
-                        variant === 'large' && "object-center",
-                        variant === 'icon' && "object-center"
+                        variant === 'default' && "p-2",
+                        variant === 'large' && "p-4",
+                        variant === 'icon' && "p-1"
                     )}
                     priority
                 />

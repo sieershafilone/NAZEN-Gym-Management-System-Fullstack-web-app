@@ -9,13 +9,13 @@ const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono" });
 
 export const metadata: Metadata = {
-  title: "ULIFTS – Powered by Being Strong | Gym Management System",
-  description: "Premium gym management system for ULIFTS Gym, Drugmulla, Kupwara, Jammu and Kashmir. Member management, payments, attendance tracking, and workout plans.",
-  keywords: ["gym", "fitness", "Drugmulla, Kupwara", "Jammu Kashmir", "ULIFTS", "workout", "membership"],
-  authors: [{ name: "ULIFTS Gym" }],
+  title: "NAIZEN – Elite Hybrid Training | Performance Matrix",
+  description: "High-intensity gym management and performance monitoring for NAIZEN, Drugmulla, Kupwara. Engineered for the elite 1%.",
+  keywords: ["gym", "fitness", "Kupwara", "NAIZEN", "workout", "performance matrix"],
+  authors: [{ name: "NAIZEN" }],
   openGraph: {
-    title: "ULIFTS – Powered by Being Strong",
-    description: "Transform Your Body, Transform Your Life",
+    title: "NAIZEN | Elite Performance Matrix",
+    description: "Recalibrate Your Physical Logic",
     type: "website",
   },
 };
@@ -26,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} bg-background text-foreground antialiased font-sans`}>
+    <html lang="en" className="dark scroll-smooth">
+      <body className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} bg-[#050505] text-white antialiased font-sans`}>
         <Providers>
           {children}
           <Toaster
@@ -35,21 +35,25 @@ export default function RootLayout({
             toastOptions={{
               duration: 4000,
               style: {
-                background: '#18181b',
+                background: '#0D0D0D',
                 color: '#fff',
-                border: '1px solid #27272a',
-                borderRadius: '12px',
+                border: '1px solid rgba(255,255,255,0.05)',
+                borderRadius: '16px',
+                fontSize: '11px',
+                fontWeight: '900',
+                textTransform: 'uppercase',
+                letterSpacing: '0.1em',
               },
               success: {
                 iconTheme: {
-                  primary: '#22c55e',
-                  secondary: '#fff',
+                  primary: '#4ADE80',
+                  secondary: '#000',
                 },
               },
               error: {
                 iconTheme: {
-                  primary: '#ef4444',
-                  secondary: '#fff',
+                  primary: '#FB7185',
+                  secondary: '#000',
                 },
               },
             }}

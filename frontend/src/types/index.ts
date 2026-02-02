@@ -1,4 +1,4 @@
-// API Types for ULIFTS Gym Management System
+// API Types for NAIZEN Gym Management System
 
 // User & Auth Types
 export interface User {
