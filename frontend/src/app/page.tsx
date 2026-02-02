@@ -364,7 +364,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h4 className="font-medium text-white">Address</h4>
-                    <p className="text-zinc-500">97XQ+CW3, Drugmulla, Kupwara, Jammu and Kashmir – 193221, India</p>
+                    <p className="text-zinc-500">F7HM+43V, NH 701, Forest Block, 193222, Drugmulla, Kupwara, Jammu and Kashmir, India</p>
                   </div>
                 </div>
 
@@ -394,7 +394,7 @@ export default function HomePage() {
 
             <div className="relative h-[400px] w-full rounded-2xl overflow-hidden border border-zinc-800">
               <iframe
-                src="https://maps.google.com/maps?q=34.4286596,74.3468516&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3288.9865168336455!2d74.2826682!3d34.477866299999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e11f007b6d1065%3A0x415fd7b9ad5f56ea!2sUlifts%20Gym!5e0!3m2!1sen!2sin!4v1770022441721!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
