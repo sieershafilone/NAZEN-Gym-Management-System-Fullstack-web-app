@@ -75,14 +75,13 @@ const formatCurrency = (amount) => {
     }).format(amount);
 };
 
-// Calculate GST
-const calculateGST = (amount, gstPercent = 18) => {
-    const gstAmount = (amount * gstPercent) / 100;
+// Calculate GST (Disabled - returns 0)
+const calculateGST = (amount, gstPercent = 0) => {
     return {
         baseAmount: amount,
-        gstPercent,
-        gstAmount: parseFloat(gstAmount.toFixed(2)),
-        totalAmount: parseFloat((amount + gstAmount).toFixed(2)),
+        gstPercent: 0,
+        gstAmount: 0,
+        totalAmount: amount,
     };
 };
 

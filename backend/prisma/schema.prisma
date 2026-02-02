@@ -126,7 +126,7 @@ model MembershipPlan {
   name         String
   durationDays Int
   basePrice    Decimal  @db.Decimal(10, 2)
-  gstPercent   Decimal  @default(18) @db.Decimal(5, 2)
+  gstPercent   Decimal  @default(0) @db.Decimal(5, 2)
   finalPrice   Decimal  @db.Decimal(10, 2)
   description  String?
   features     Json?    // Array of features

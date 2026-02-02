@@ -46,7 +46,7 @@ const generateInvoicePDF = (invoiceData) => {
             doc.moveDown(2);
 
             // Invoice Title
-            doc.fontSize(16).font('Helvetica-Bold').text('TAX INVOICE', { align: 'center' });
+            doc.fontSize(16).font('Helvetica-Bold').text('PAYMENT RECEIPT', { align: 'center' });
             doc.moveDown();
 
             // Invoice Details
@@ -93,19 +93,8 @@ const generateInvoicePDF = (invoiceData) => {
 
             // Totals
             const totalsX = 350;
-            doc.text('Subtotal:', totalsX);
-            doc.text(formatCurrency(baseAmount), 450, doc.y - 12, { align: 'right' });
-
-            doc.moveDown(0.5);
-            doc.text(`GST (${gstPercent}%):`, totalsX);
-            doc.text(formatCurrency(gstAmount), 450, doc.y - 12, { align: 'right' });
-
-            doc.moveDown(0.5);
-            doc.moveTo(totalsX, doc.y).lineTo(550, doc.y).stroke();
-            doc.moveDown(0.5);
-
             doc.font('Helvetica-Bold');
-            doc.text('Total:', totalsX);
+            doc.text('Total Amount:', totalsX);
             doc.text(formatCurrency(totalAmount), 450, doc.y - 12, { align: 'right' });
 
             doc.moveDown(2);
