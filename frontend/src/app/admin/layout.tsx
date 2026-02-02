@@ -102,7 +102,7 @@ export default function AdminLayout({
                     }`}
             >
                 {/* Logo */}
-                <div className="h-32 flex items-center justify-between px-6 border-b border-white/5">
+                <div className="h-20 md:h-32 flex items-center justify-between px-6 border-b border-white/5">
                     <Link href="/admin" className="flex items-center gap-4 group">
                         <BrandLogo variant="default" />
                     </Link>
@@ -171,7 +171,7 @@ export default function AdminLayout({
             {/* Main Content */}
             <div className="lg:pl-72 relative min-h-screen z-10">
                 {/* Top Bar */}
-                <header className="sticky top-0 z-30 h-32 bg-[#020617]/40 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-6 lg:px-10">
+                <header className="sticky top-0 z-30 h-20 md:h-32 bg-[#020617]/40 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-6 lg:px-10">
                     <div className="flex items-center gap-6">
                         <button
                             onClick={toggleSidebar}

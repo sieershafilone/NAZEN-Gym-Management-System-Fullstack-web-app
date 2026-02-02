@@ -95,7 +95,7 @@ export default function MemberLayout({
                     }`}
             >
                 {/* Logo Section */}
-                <div className="h-32 flex items-center justify-between px-8 border-b border-white/5">
+                <div className="h-20 md:h-32 flex items-center justify-between px-8 border-b border-white/5">
                     <Link href="/member" className="flex items-center gap-4">
                         <BrandLogo variant="default" />
                     </Link>
@@ -164,7 +164,7 @@ export default function MemberLayout({
             {/* Main Content Area */}
             <div className="lg:pl-72">
                 {/* Unified Top Header */}
-                <header className="sticky top-0 z-30 h-32 bg-[#050505]/80 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-6 lg:px-10">
+                <header className="sticky top-0 z-30 h-20 md:h-32 bg-[#050505]/80 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-6 lg:px-10">
                     <div className="flex items-center gap-6">
                         <button
                             onClick={toggleSidebar}

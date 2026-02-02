@@ -28,9 +28,9 @@ export const BrandLogo = ({ className, variant = 'default', withGlow = true }: B
             className={cn(
                 "relative flex items-center justify-center",
                 // Optical alignment container - Height based sizing for natural aspect ratio
-                variant === 'default' && "h-28 w-72",
-                variant === 'large' && "h-48 w-96",
-                variant === 'icon' && "h-24 w-24",
+                variant === 'default' && "h-14 w-40 sm:h-28 sm:w-72",
+                variant === 'large' && "h-32 w-64 sm:h-48 sm:w-96",
+                variant === 'icon' && "h-12 w-12 sm:h-24 sm:w-24",
                 className
             )}
         >

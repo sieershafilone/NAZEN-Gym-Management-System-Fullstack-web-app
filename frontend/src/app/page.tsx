@@ -82,7 +82,7 @@ export default function HomePage() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/80 backdrop-blur-2xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
-          <div className="flex items-center justify-between h-36">
+          <div className="flex items-center justify-between h-20 md:h-36">
             <div className="flex items-center gap-4">
               <Link href="/">
                 <BrandLogo variant="default" />
@@ -131,41 +131,41 @@ export default function HomePage() {
               </span>
             </div>
 
-            <h1 className="text-6xl md:text-[6.5rem] font-black mb-10 leading-[0.9] tracking-tighter">
+            <h1 className="text-4xl sm:text-6xl md:text-[6.5rem] font-black mb-10 leading-[0.9] tracking-tighter">
               EVOLVE YOUR <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-500">FITNESS</span>
               <span className="text-cyan-400 glow-text"> JOURNEY</span>
             </h1>
 
-            <p className="text-lg text-zinc-500 max-w-2xl mx-auto mb-12 font-bold uppercase tracking-widest leading-relaxed">
+            <p className="text-sm md:text-lg text-zinc-500 max-w-2xl mx-auto mb-12 font-bold uppercase tracking-widest leading-relaxed px-4">
               Join <span className="text-white">ULIFTS-ONE MORE REP</span> – THE PREMIER GYM IN DRUGMULLA,
               DESIGNED FOR THE <span className="text-white">DEDICATED</span>.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <Link href="/login">
-                <Button size="lg" className="h-16 px-12 rounded-2xl font-black text-[12px] uppercase tracking-[0.2em] group shadow-xl">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 px-6">
+              <Link href="/login" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto h-14 sm:h-16 px-8 sm:px-12 rounded-2xl font-black text-[10px] sm:text-[12px] uppercase tracking-[0.2em] group shadow-xl">
                   Get Started
-                  <ArrowRight className="ml-4 w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                  <ArrowRight className="ml-4 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-2 transition-transform" />
                 </Button>
               </Link>
-              <a href="#plans">
-                <Button size="lg" variant="secondary" className="h-16 px-12 rounded-2xl font-black text-[12px] uppercase tracking-[0.2em] border-white/5 hover:bg-white/5 transition-all">
+              <a href="#plans" className="w-full sm:w-auto">
+                <Button size="lg" variant="secondary" className="w-full sm:w-auto h-14 sm:h-16 px-8 sm:px-12 rounded-2xl font-black text-[10px] sm:text-[12px] uppercase tracking-[0.2em] border-white/5 hover:bg-white/5 transition-all">
                   View Plans
                 </Button>
               </a>
             </div>
 
             {/* Metrics */}
-            <div className="flex items-center justify-center gap-12 mt-24">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12 mt-20 sm:mt-24">
               <div className="text-center group">
-                <p className="text-5xl font-black text-white tracking-tighter group-hover:text-cyan-400 transition-colors">50+</p>
-                <p className="text-zinc-600 text-[10px] uppercase tracking-widest font-black mt-2">Active Members</p>
+                <p className="text-4xl sm:text-5xl font-black text-white tracking-tighter group-hover:text-cyan-400 transition-colors">50+</p>
+                <p className="text-zinc-600 text-[8px] sm:text-[10px] uppercase tracking-widest font-black mt-2">Active Members</p>
               </div>
-              <div className="w-px h-16 bg-white/5" />
+              <div className="hidden sm:block w-px h-16 bg-white/5" />
               <div className="text-center group">
-                <p className="text-5xl font-black text-white tracking-tighter group-hover:text-cyan-400 transition-colors">30+</p>
-                <p className="text-zinc-600 text-[10px] uppercase tracking-widest font-black mt-2">Gym Equipment</p>
+                <p className="text-4xl sm:text-5xl font-black text-white tracking-tighter group-hover:text-cyan-400 transition-colors">30+</p>
+                <p className="text-zinc-600 text-[8px] sm:text-[10px] uppercase tracking-widest font-black mt-2">Gym Equipment</p>
               </div>
             </div>
           </motion.div>
