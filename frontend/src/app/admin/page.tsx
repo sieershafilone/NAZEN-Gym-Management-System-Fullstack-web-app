@@ -113,62 +113,63 @@ export default function AdminDashboardPage() {
                     transition={{ delay: 0.5 }}
                     className="lg:col-span-2"
                 >
-                    <div className="glass rounded-[3rem] overflow-hidden">
-                        <div className="p-10 border-b border-white/5 flex items-center justify-between bg-white/[0.01]">
-                            <div>
-                                <h2 className="text-2xl font-bold text-white tracking-tight">Recent Payments</h2>
-                                <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-1">View latest transactions</p>
+                    <div className="glass rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl">
+                        <div className="p-6 md:p-10 border-b border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/[0.01]">
+                            <div className="text-center sm:text-left">
+                                <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight uppercase">Payments</h2>
+                                <p className="text-[8px] md:text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-1">Latest Transactions</p>
                             </div>
-                            <Link href="/admin/payments">
-                                <Button variant="secondary" size="sm" className="rounded-2xl">View All</Button>
+                            <Link href="/admin/payments" className="w-full sm:w-auto">
+                                <Button variant="secondary" size="sm" className="w-full rounded-xl sm:rounded-2xl text-[10px] font-black uppercase tracking-widest">View All</Button>
                             </Link>
                         </div>
 
-                        <div className="p-6 overflow-x-auto">
-                            <table className="w-full text-left border-separate border-spacing-y-3">
+                        <div className="p-4 md:p-6 overflow-x-auto custom-scrollbar scroll-hide">
+                            <table className="w-full text-left border-separate border-spacing-y-2 md:border-spacing-y-3 min-w-[600px] md:min-w-0">
                                 <thead>
                                     <tr>
-                                        <th className="px-6 py-4 text-[10px] text-zinc-600 uppercase tracking-widest font-black">Member</th>
-                                        <th className="px-6 py-4 text-[10px] text-zinc-600 uppercase tracking-widest font-black">Plan</th>
-                                        <th className="px-6 py-4 text-[10px] text-zinc-600 uppercase tracking-widest font-black">Amount</th>
-                                        <th className="px-6 py-4 text-[10px] text-zinc-600 uppercase tracking-widest font-black">Status</th>
-                                        <th className="px-6 py-4 text-[10px] text-zinc-600 uppercase tracking-widest font-black">Timeline</th>
+                                        <th className="px-4 md:px-6 py-4 text-[9px] md:text-[10px] text-zinc-600 uppercase tracking-widest font-black">Member</th>
+                                        <th className="px-4 md:px-6 py-4 text-[9px] md:text-[10px] text-zinc-600 uppercase tracking-widest font-black">Plan</th>
+                                        <th className="px-4 md:px-6 py-4 text-[9px] md:text-[10px] text-zinc-600 uppercase tracking-widest font-black">Amount</th>
+                                        <th className="px-4 md:px-6 py-4 text-[9px] md:text-[10px] text-zinc-600 uppercase tracking-widest font-black">Status</th>
+                                        <th className="px-4 md:px-6 py-4 text-[9px] md:text-[10px] text-zinc-600 uppercase tracking-widest font-black">Timeline</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {data.recentPayments.length === 0 ? (
                                         <tr>
-                                            <td colSpan={5} className="text-center py-16 text-zinc-600 font-bold tracking-widest uppercase text-xs">No recent payments found.</td>
+                                            <td colSpan={5} className="text-center py-16 text-zinc-600 font-bold tracking-widest uppercase text-xs">No entries.</td>
                                         </tr>
                                     ) : (
                                         data.recentPayments.map((payment) => (
-                                            <tr key={payment.id} className="group hover:bg-white/[0.02] transition-colors rounded-2xl">
-                                                <td className="px-6 py-4 first:rounded-l-2xl">
-                                                    <div className="flex items-center gap-4">
+                                            <tr key={payment.id} className="group hover:bg-white/[0.02] transition-colors">
+                                                <td className="px-4 md:px-6 py-3 md:py-4 first:rounded-l-2xl border-y border-l border-white/5">
+                                                    <div className="flex items-center gap-3 md:gap-4">
                                                         <Avatar
                                                             fallback={getInitials(payment.member?.user?.fullName || 'M')}
                                                             size="sm"
+                                                            className="rounded-xl"
                                                         />
-                                                        <span className="text-sm font-bold text-white group-hover:text-cyan-400 transition-colors">
+                                                        <span className="text-xs md:text-sm font-bold text-white group-hover:text-cyan-400 transition-colors truncate max-w-[100px] md:max-w-none">
                                                             {payment.member?.user?.fullName}
                                                         </span>
                                                     </div>
                                                 </td>
-                                                <td className="px-6 py-4">
-                                                    <Badge variant="default" className="bg-white/5 border-none lowercase">
+                                                <td className="px-4 md:px-6 py-3 md:py-4 border-y border-white/5">
+                                                    <Badge variant="default" className="bg-white/5 border-none lowercase text-[8px] md:text-[10px]">
                                                         {payment.membership?.plan?.name}
                                                     </Badge>
                                                 </td>
-                                                <td className="px-6 py-4">
-                                                    <span className="text-sm font-black text-white tracking-tight">
+                                                <td className="px-4 md:px-6 py-3 md:py-4 border-y border-white/5">
+                                                    <span className="text-xs md:text-sm font-black text-white tracking-tight tabular-nums">
                                                         {formatCurrency(payment.amount)}
                                                     </span>
                                                 </td>
-                                                <td className="px-6 py-4">
-                                                    <Badge variant="success">Cleared</Badge>
+                                                <td className="px-4 md:px-6 py-3 md:py-4 border-y border-white/5">
+                                                    <Badge variant="success" className="text-[8px] md:text-[10px]">Cleared</Badge>
                                                 </td>
-                                                <td className="px-6 py-4 last:rounded-r-2xl">
-                                                    <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-tighter">
+                                                <td className="px-4 md:px-6 py-3 md:py-4 last:rounded-r-2xl border-y border-r border-white/5">
+                                                    <span className="text-[9px] md:text-[10px] font-bold text-zinc-500 uppercase tracking-tighter whitespace-nowrap">
                                                         {formatRelativeTime(payment.createdAt)}
                                                     </span>
                                                 </td>
@@ -187,19 +188,19 @@ export default function AdminDashboardPage() {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.6 }}
-                        className="glass rounded-[3rem] p-10"
+                        className="glass rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 shadow-2xl"
                     >
-                        <div className="flex items-center justify-between mb-10">
+                        <div className="flex items-center justify-between mb-8 md:mb-10">
                             <div>
-                                <h2 className="text-xl font-bold text-white tracking-tight flex items-center gap-3">
+                                <h2 className="text-lg md:text-xl font-bold text-white tracking-tight flex items-center gap-3 uppercase">
                                     <div className="p-2 bg-rose-500/10 rounded-xl text-rose-500">
-                                        <AlertCircle size={20} />
+                                        <AlertCircle size={18} />
                                     </div>
-                                    Expiring Soon
+                                    Expiring
                                 </h2>
-                                <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-1">Renewal Watchlist</p>
+                                <p className="text-[8px] md:text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-1">Renewal Watchlist</p>
                             </div>
-                            <div className="w-10 h-10 flex items-center justify-center rounded-2xl bg-rose-500 font-black text-black">
+                            <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-xl md:rounded-2xl bg-rose-500 font-black text-black text-sm">
                                 {data.expiringMemberships.length}
                             </div>
                         </div>
