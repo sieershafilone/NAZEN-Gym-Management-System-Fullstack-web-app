@@ -394,7 +394,7 @@ export default function HomePage() {
 
             <div className="relative h-[400px] w-full rounded-2xl overflow-hidden border border-zinc-800">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10500!2d74.2898507!3d34.3985659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e11d001124d89d%3A0xe0ed0b9e05a75016!2s97XQ%2BCW3%2C%20Drugmulla, Kupwara%2C%20Jammu%20and%20Kashmir%20193221!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                src="https://maps.google.com/maps?q=34.4286596,74.3468516&t=&z=15&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
