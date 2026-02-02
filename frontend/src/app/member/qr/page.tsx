@@ -31,11 +31,11 @@ export default function QRPage() {
         <div className="flex flex-col items-center justify-center min-h-[70vh] animate-fade-in relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-500/5 via-transparent to-transparent" />
 
-            <Card variant="default" className="max-w-md w-full p-12 text-center flex flex-col items-center gap-10 rounded-[3rem] bg-white/[0.01] border-white/5 relative z-10 backdrop-blur-xl group hover:border-cyan-400/20 transition-all duration-700">
+            <Card variant="default" className="max-w-md w-full p-12 text-center flex flex-col items-center gap-10 rounded-[3rem] bg-white/[0.03] border-white/10 relative z-10 backdrop-blur-3xl group hover:border-cyan-400/20 transition-all duration-700 shadow-xl">
                 <div className="space-y-3">
-                    <p className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.5em]">Identity Token</p>
-                    <h1 className="text-4xl font-black text-white uppercase tracking-tighter">ACCESS <span className="text-cyan-400">MATRIX</span></h1>
-                    <p className="text-zinc-600 text-[9px] font-black uppercase tracking-[0.2em]">NAIZEN Gateway Protocol</p>
+                    <p className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.5em]">Member Pass</p>
+                    <h1 className="text-4xl font-black text-white uppercase tracking-tighter">CHECK-IN <span className="text-cyan-400">QR</span></h1>
+                    <p className="text-zinc-600 text-[9px] font-black uppercase tracking-[0.2em]">ULIFTS Gym Access</p>
                 </div>
 
                 <div className="relative group/qr">
@@ -61,8 +61,8 @@ export default function QRPage() {
                         <p className="font-mono text-[11px] font-black text-white tracking-[0.3em]">{user?.member?.memberId}</p>
                     </div>
                     <p className="text-[9px] font-black text-zinc-600 uppercase tracking-widest leading-relaxed">
-                        Present this sequence to the <span className="text-white">Validation Gateway</span> <br />
-                        Initial entry/exit synchronization required.
+                        Present this QR code to the <span className="text-white">Scanner</span> <br />
+                        Scan at the front desk for entry.
                     </p>
                 </div>
             </Card>

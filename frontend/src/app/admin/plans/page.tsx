@@ -76,22 +76,22 @@ export default function PlansPage() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div>
                     <h1 className="text-5xl font-black text-white tracking-tighter sm:text-6xl">
-                        Membership <span className="text-cyan-400 glow-text">Matrix</span>
+                        Membership <span className="text-cyan-400 glow-text">Plans</span>
                     </h1>
                     <p className="text-zinc-500 mt-3 font-medium tracking-widest uppercase text-[10px]">
-                        Architect and deploy <span className="text-white">Subscription Tiers</span>
+                        Create and manage your <span className="text-white">Gym Plans</span>
                     </p>
                 </div>
                 <Button onClick={handleCreate} className="group rounded-2xl px-8 h-14">
                     <Plus size={20} className="mr-3 group-hover:rotate-90 transition-transform duration-500" />
-                    Deploy New Tier
+                    Create New Plan
                 </Button>
             </div>
 
             {/* Quick Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <StatCard
-                    title="Active Tiers"
+                    title="Active Plans"
                     value={plans.length}
                     icon={<CreditCard size={24} />}
                     color="mint"
@@ -112,12 +112,12 @@ export default function PlansPage() {
             ) : plans.length === 0 ? (
                 <div className="h-96 flex items-center justify-center">
                     <EmptyState
-                        title="Ghost Matrix"
-                        description="No membership protocols detected in the registry."
+                        title="No Plans"
+                        description="You haven't created any plans yet."
                         icon={<CreditCard size={64} className="text-zinc-800" />}
                         action={
                             <Button onClick={handleCreate} variant="outline" className="mt-8 rounded-2xl">
-                                Initiate First Tier
+                                Create First Plan
                             </Button>
                         }
                     />
@@ -132,7 +132,7 @@ export default function PlansPage() {
                             transition={{ delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                             className="h-full"
                         >
-                            <Card variant="default" hover glow className="h-full flex flex-col p-10 group overflow-hidden relative">
+                            <Card variant="default" className="h-full flex flex-col p-10 bg-white/[0.03] backdrop-blur-3xl border-white/10 group overflow-hidden relative shadow-xl">
                                 <div className="absolute -right-12 -top-12 w-48 h-48 bg-cyan-400/5 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
                                 <div className="mb-10 relative z-10">
@@ -146,7 +146,7 @@ export default function PlansPage() {
                                         </span>
                                     </div>
                                     <p className="text-zinc-500 text-xs mt-4 font-medium leading-relaxed line-clamp-2">
-                                        {plan.description || "Core membership protocol with standard facility privileges."}
+                                        {plan.description || "Core membership plan with standard facility privileges."}
                                     </p>
                                 </div>
 
@@ -163,15 +163,15 @@ export default function PlansPage() {
 
                                 <div className="pt-8 border-t border-white/5 flex items-center justify-between gap-4 relative z-10">
                                     <div className="flex flex-col">
-                                        <span className="text-white font-black text-xs tracking-tighter">PROTO-ACT</span>
-                                        <span className="text-[10px] text-zinc-600 uppercase tracking-widest font-black">Ready</span>
+                                        <span className="text-white font-black text-xs tracking-tighter">ACTIVE</span>
+                                        <span className="text-[10px] text-zinc-600 uppercase tracking-widest font-black">Ready for sale</span>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <Button variant="ghost" size="sm" onClick={() => handleDelete(plan.id)} className="h-10 w-10 p-0 rounded-xl text-rose-500 hover:bg-rose-500/10">
                                             <Trash2 size={18} />
                                         </Button>
                                         <Button variant="secondary" size="sm" onClick={() => handleEdit(plan)} className="rounded-xl px-5 h-10 border-white/5">
-                                            <Edit2 size={16} className="mr-2" /> RECONFIG
+                                            <Edit2 size={16} className="mr-2" /> EDIT
                                         </Button>
                                     </div>
                                 </div>
@@ -251,15 +251,15 @@ function PlanModal({ isOpen, onClose, initialData, onSuccess }: {
 
             if (initialData) {
                 await plansAPI.update(initialData.id, formattedData);
-                toast.success('Matrix updated');
+                toast.success('Plan updated');
             } else {
                 await plansAPI.create(formattedData);
-                toast.success('Matrix deployed');
+                toast.success('Plan created');
             }
             onSuccess();
         } catch (error) {
             console.error(error);
-            toast.error('Sync failed');
+            toast.error('Update failed');
         }
     };
 
@@ -274,8 +274,8 @@ function PlanModal({ isOpen, onClose, initialData, onSuccess }: {
             >
                 <div className="p-10 border-b border-white/5 flex justify-between items-center bg-white/[0.01] sticky top-0 z-10 backdrop-blur-3xl">
                     <div>
-                        <h2 className="text-2xl font-black text-white tracking-tight">{initialData ? 'RECONFIG' : 'INITIALIZE'}</h2>
-                        <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mt-1">PLAN PROTOCOL SETTINGS</p>
+                        <h2 className="text-2xl font-black text-white tracking-tight">{initialData ? 'EDIT PLAN' : 'NEW PLAN'}</h2>
+                        <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mt-1">PLAN DETAILS</p>
                     </div>
                     <button onClick={onClose} className="p-4 bg-white/5 rounded-2xl text-zinc-500 hover:text-white transition-colors">
                         <X size={20} />
@@ -285,8 +285,8 @@ function PlanModal({ isOpen, onClose, initialData, onSuccess }: {
                 <form onSubmit={handleSubmit(onSubmit)} className="p-10 space-y-10">
                     <div className="space-y-8">
                         <Input
-                            label="Matrix Name"
-                            placeholder="e.g. NAIZEN TITAN"
+                            label="Plan Name"
+                            placeholder="e.g. Gold Annual"
                             {...register('name')}
                             error={errors.name?.message}
                         />
@@ -294,20 +294,20 @@ function PlanModal({ isOpen, onClose, initialData, onSuccess }: {
                         <div className="grid grid-cols-2 gap-6">
                             <Input
                                 type="number"
-                                label="Protocol Life (Days)"
+                                label="Duration (Days)"
                                 {...register('durationDays', { valueAsNumber: true })}
                                 error={errors.durationDays?.message}
                             />
                             <Input
                                 type="number"
-                                label="Unit Value (₹)"
+                                label="Price (₹)"
                                 {...register('basePrice', { valueAsNumber: true })}
                                 error={errors.basePrice?.message}
                             />
                         </div>
 
                         <div>
-                            <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-3 ml-1">Meta Description</label>
+                            <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-3 ml-1">Description</label>
                             <textarea
                                 className="w-full px-6 py-4 bg-[#0D0D0D] border border-white/5 rounded-3xl text-white placeholder-zinc-700 focus:outline-none focus:border-cyan-400/50 focus:ring-4 focus:ring-cyan-400/5 transition-all duration-300 resize-none h-32 text-sm"
                                 placeholder="Define the core value proposition..."
@@ -317,7 +317,7 @@ function PlanModal({ isOpen, onClose, initialData, onSuccess }: {
                         </div>
 
                         <div>
-                            <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-3 ml-1">Protocol Features</label>
+                            <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-3 ml-1">Plan Features</label>
                             <div className="space-y-3">
                                 {fields.map((field, index) => (
                                     <div key={field.id} className="flex gap-3">
@@ -345,9 +345,9 @@ function PlanModal({ isOpen, onClose, initialData, onSuccess }: {
                     </div>
 
                     <div className="flex gap-4 pt-4">
-                        <Button type="button" variant="ghost" onClick={onClose} className="w-1/3 h-14 rounded-2xl">Abort</Button>
+                        <Button type="button" variant="ghost" onClick={onClose} className="w-1/3 h-14 rounded-2xl text-zinc-500">Cancel</Button>
                         <Button type="submit" disabled={isSubmitting} className="w-2/3 h-14 rounded-2xl">
-                            {isSubmitting ? <Spinner size="sm" /> : (initialData ? 'COMMIT UPDATE' : 'DEPLOY MATRIX')}
+                            {isSubmitting ? <Spinner size="sm" /> : (initialData ? 'SAVE CHANGES' : 'CREATE PLAN')}
                         </Button>
                     </div>
                 </form>

@@ -44,22 +44,22 @@ export default function AttendancePage() {
         <div className="space-y-16 animate-fade-in pb-20">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/5 pb-12">
                 <div className="space-y-4">
-                    <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.5em]">Activity Pulse</p>
+                    <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.5em]">Visits</p>
                     <h1 className="text-6xl font-black text-white tracking-tighter uppercase leading-none">
-                        ATTENDANCE <span className="text-cyan-400">RECORD</span>
+                        ATTENDANCE <span className="text-cyan-400">HISTORY</span>
                     </h1>
-                    <p className="text-zinc-500 font-bold uppercase text-[9px] tracking-widest mt-6">Track your biological synchronization consistency</p>
+                    <p className="text-zinc-500 font-bold uppercase text-[9px] tracking-widest mt-6">View your complete gym visit history</p>
                 </div>
             </div>
 
-            {/* Matrix Metrics Segment */}
+            {/* Attendance Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                 {[
-                    { label: "Total Sessions", value: stats.total, icon: CheckCircle, color: "indigo" },
+                    { label: "Total Visits", value: stats.total, icon: CheckCircle, color: "indigo" },
                     { label: "This Month", value: stats.thisMonth, icon: CalendarIcon, color: "indigo" },
-                    { label: "Avg. Intensity", value: `${stats.avgDuration} MINS`, icon: Clock, color: "indigo" }
+                    { label: "Avg. Duration", value: `${stats.avgDuration} MINS`, icon: Clock, color: "indigo" }
                 ].map((stat, i) => (
-                    <Card key={i} variant="default" className="flex items-center gap-6 p-8 rounded-[2.5rem] bg-white/[0.01] border-white/5 group hover:bg-white/[0.03] hover:border-cyan-400/20 transition-all duration-500">
+                    <Card key={i} variant="default" className="flex items-center gap-6 p-8 rounded-[2.5rem] bg-white/[0.03] backdrop-blur-3xl border-white/10 group hover:border-cyan-400/20 transition-all duration-500 shadow-xl">
                         <div className="h-16 w-16 bg-[#0D0D0D] border border-white/5 rounded-2xl flex items-center justify-center text-zinc-700 group-hover:text-cyan-400 transition-all shadow-[0_0_20px_rgba(0,0,0,0.2)]">
                             <stat.icon size={28} />
                         </div>
@@ -71,14 +71,14 @@ export default function AttendancePage() {
                 ))}
             </div>
 
-            {/* Visitation Flux List */}
-            <Card variant="default" className="rounded-[3rem] p-10 bg-[#080808] border-white/5 flex flex-col">
+            {/* Attendance List */}
+            <Card variant="default" className="rounded-[3rem] p-10 bg-white/[0.03] backdrop-blur-3xl border-white/10 flex flex-col shadow-xl">
                 <div className="flex items-center justify-between mb-12">
                     <div className="space-y-1">
                         <h3 className="text-2xl font-black text-white uppercase tracking-tighter flex items-center gap-4">
-                            Recent Visitation Flux
+                            Recent Visits
                         </h3>
-                        <p className="text-[9px] font-black text-zinc-600 uppercase tracking-[0.4em]">Site entry sequence logs</p>
+                        <p className="text-[9px] font-black text-zinc-600 uppercase tracking-[0.4em]">Your visit logs</p>
                     </div>
                 </div>
 
@@ -86,7 +86,7 @@ export default function AttendancePage() {
                     <div className="py-20 flex justify-center"><Spinner size="lg" /></div>
                 ) : attendance.length === 0 ? (
                     <div className="py-20 text-center bg-[#0D0D0D] rounded-3xl border border-white/5 border-dashed">
-                        <p className="text-zinc-600 font-black uppercase text-[10px] tracking-widest">No activity detected in the archives</p>
+                        <p className="text-zinc-600 font-black uppercase text-[10px] tracking-widest">No visits recorded yet</p>
                     </div>
                 ) : (
                     <div className="space-y-4 max-h-[600px] overflow-y-auto pr-4 scrollbar-hide">
@@ -102,14 +102,14 @@ export default function AttendancePage() {
                                             <span className="text-xl font-black text-white tracking-tighter">
                                                 {new Date(record.checkInTime).getDate()}
                                             </span>
-                                            <span className="text-[7px] font-black text-zinc-600 uppercase">EVENT</span>
+                                            <span className="text-[7px] font-black text-zinc-600 uppercase">DATE</span>
                                         </div>
                                         <div>
                                             <p className="text-[11px] font-black text-white uppercase tracking-widest leading-none">{formatDate(record.checkInTime)}</p>
                                             <p className="text-[9px] text-zinc-600 font-bold uppercase tracking-widest mt-2">
                                                 {new Date(record.checkInTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                                 {' — '}
-                                                {record.checkOutTime ? new Date(record.checkOutTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'SESSION ONGOING'}
+                                                {record.checkOutTime ? new Date(record.checkOutTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'ONGOING'}
                                             </p>
                                         </div>
                                     </div>
@@ -118,12 +118,12 @@ export default function AttendancePage() {
                                         <div className="text-right">
                                             <p className="text-[8px] font-black text-zinc-700 uppercase tracking-widest">Duration</p>
                                             <p className="text-sm font-black text-white uppercase tracking-widest mt-1">
-                                                {duration ? `${duration} MINS` : <span className="text-cyan-400 animate-pulse">ACTIVE</span>}
+                                                {duration ? `${duration} MINS` : <span className="text-cyan-400 animate-pulse">IN GYM</span>}
                                             </p>
                                         </div>
                                         <div className="w-px h-10 bg-white/5 hidden sm:block" />
                                         <Badge variant="info" className="bg-white/5 text-[8px] font-black text-zinc-600 border-white/10 px-4 py-2 rounded-xl uppercase tracking-widest group-hover:text-cyan-400 transition-colors">
-                                            {record.method} GATEWAY
+                                            {record.method} ACCESS
                                         </Badge>
                                     </div>
                                 </div>

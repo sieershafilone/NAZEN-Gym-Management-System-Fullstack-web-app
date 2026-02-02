@@ -94,22 +94,22 @@ export default function LoginPage() {
                     <BrandLogo variant="large" className="scale-125" />
                 </div>
 
-                <Card variant="default" className="p-10 rounded-[2.5rem] border-white/5 bg-white/[0.01] backdrop-blur-3xl shadow-2xl">
+                <Card variant="default" className="p-10 rounded-[2.5rem] border-white/10 bg-white/[0.03] backdrop-blur-3xl shadow-2xl">
                     <div className="text-center mb-10">
                         <h2 className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.4em] mb-4">
-                            Operational Entry
+                            Welcome Back
                         </h2>
                         <h3 className="text-3xl font-black text-white tracking-tighter uppercase mb-4">
-                            Access <span className="text-cyan-400">System</span>
+                            Member <span className="text-cyan-400">Login</span>
                         </h3>
                         <p className="text-zinc-600 font-bold uppercase text-[8px] tracking-[0.2em] leading-relaxed max-w-[240px] mx-auto">
-                            Secure terminal for <span className="text-white">Authorized</span> training subjects only.
+                            Enter your credentials to access your <span className="text-white">Dashboard</span>.
                         </p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6" autoComplete="off">
                         <Input
-                            label="IDENTIFIER (MOBILE)"
+                            label="Mobile Number"
                             type="tel"
                             placeholder=""
                             value={formData.mobile}
@@ -121,7 +121,7 @@ export default function LoginPage() {
 
                         <div className="relative group/pass">
                             <Input
-                                label="CIPHER (PASSWORD)"
+                                label="Password"
                                 type={showPassword ? 'text' : 'password'}
                                 placeholder=""
                                 value={formData.password}
@@ -145,15 +145,15 @@ export default function LoginPage() {
                             size="lg"
                             loading={loading}
                         >
-                            Execute Authentication
+                            Login
                         </Button>
                     </form>
 
                     <div className="mt-10 text-center pt-8 border-t border-white/5">
                         <p className="text-zinc-600 font-bold uppercase text-[9px] tracking-widest">
-                            No credentials detected?{' '} <br className="md:hidden" />
+                            Need help logging in?{' '} <br className="md:hidden" />
                             <Link href="/contact" className="text-cyan-400 hover:text-white transition-colors ml-1">
-                                Reach Operations
+                                Contact Staff
                             </Link>
                         </p>
                     </div>
@@ -162,7 +162,7 @@ export default function LoginPage() {
                 {/* Footer Logistics */}
                 <div className="mt-12 text-center">
                     <p className="text-zinc-800 font-black uppercase text-[8px] tracking-[0.4em]">
-                        © 2026 NAIZEN SYSTEMS. ALL ARCHIVES SECURED.
+                        © 2026 ULIFTS GYM. ALL RIGHTS RESERVED.
                     </p>
                 </div>
             </motion.div>

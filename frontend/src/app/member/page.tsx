@@ -64,18 +64,18 @@ export default function MemberDashboardPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
             >
-                <Card variant="default" className="relative overflow-hidden rounded-[3rem] p-10 bg-white/[0.01] border-white/5 group hover:bg-white/[0.03] transition-all duration-700">
+                <Card variant="default" className="relative overflow-hidden rounded-[3rem] p-10 bg-white/[0.03] backdrop-blur-3xl border-white/10 group hover:border-cyan-400/20 transition-all duration-700 shadow-2xl">
                     <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
 
                     <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-10">
                         <div className="space-y-4">
-                            <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.4em]">Active Protocol</p>
+                            <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.4em]">Membership Status</p>
                             <h2 className="text-5xl font-black text-white tracking-tighter uppercase leading-none">
-                                {membership?.plan?.name || 'STANDBY MODE'}
+                                {membership?.plan?.name || 'No Active Plan'}
                             </h2>
                             {membership && (
                                 <p className="text-zinc-500 font-bold uppercase text-[9px] tracking-widest mt-4">
-                                    SYNCHRONIZATION ACTIVE UNTIL <span className="text-white">{formatDate(membership.endDate)}</span>
+                                    Active Until <span className="text-white">{formatDate(membership.endDate)}</span>
                                 </p>
                             )}
                         </div>
@@ -99,12 +99,12 @@ export default function MemberDashboardPage() {
                         )}
                     </div>
 
-                    {/* Matrix Progress Flux */}
+                    {/* Membership Progress */}
                     {membership && (
                         <div className="mt-12 space-y-3">
                             <div className="flex items-center justify-between text-[8px] font-black text-zinc-600 tracking-widest uppercase">
-                                <span>Operation Progress</span>
-                                <span className="text-cyan-400">{Math.round((daysRemaining / membership.plan!.durationDays) * 100)}% Intensity</span>
+                                <span>Membership Progress</span>
+                                <span className="text-cyan-400">{Math.round((daysRemaining / membership.plan!.durationDays) * 100)}% Used</span>
                             </div>
                             <div className="h-4 bg-[#0D0D0D] rounded-full overflow-hidden border border-white/5 p-1">
                                 <motion.div
@@ -124,10 +124,10 @@ export default function MemberDashboardPage() {
             {/* Metrics Cluster */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                    { title: "Visits Matrix", value: data.attendance.thisMonth, icon: Calendar, color: "indigo" },
-                    { title: "Physical Mass", value: data.progress[0]?.weight ? `${data.progress[0].weight} KG` : 'N/A', icon: TrendingUp, color: "mint" },
-                    { title: "Active Protocol", value: data.workout?.workoutPlan?.name || 'NONE', icon: Dumbbell, color: "amber" },
-                    { title: "Yield Injection", value: formatCurrency(data.payments.reduce((acc, p) => acc + Number(p.amount), 0)), icon: CreditCard, color: "indigo" },
+                    { title: "Recent Visits", value: data.attendance.thisMonth, icon: Calendar, color: "indigo" },
+                    { title: "Body Weight", value: data.progress[0]?.weight ? `${data.progress[0].weight} KG` : 'N/A', icon: TrendingUp, color: "mint" },
+                    { title: "Workout Plan", value: data.workout?.workoutPlan?.name || 'NONE', icon: Dumbbell, color: "amber" },
+                    { title: "Total Payments", value: formatCurrency(data.payments.reduce((acc, p) => acc + Number(p.amount), 0)), icon: CreditCard, color: "indigo" },
                 ].map((stat, i) => (
                     <motion.div
                         key={stat.title}
@@ -145,24 +145,24 @@ export default function MemberDashboardPage() {
                 ))}
             </div>
 
-            {/* Tactical Grid */}
+            {/* Dashboard Sections */}
             <div className="grid lg:grid-cols-2 gap-10">
-                {/* Protocol Execution */}
+                {/* Workout Plan */}
                 <motion.div
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.5 }}
                 >
-                    <Card variant="default" className="rounded-[2.5rem] p-10 bg-white/[0.01] border-white/5 group hover:bg-white/[0.03] transition-all">
+                    <Card variant="default" className="rounded-[2.5rem] p-10 bg-white/[0.03] backdrop-blur-3xl border-white/10 group hover:border-cyan-400/20 transition-all shadow-xl">
                         <div className="flex items-center justify-between mb-10">
                             <div className="space-y-1">
                                 <h3 className="text-xl font-black text-white uppercase tracking-tighter flex items-center gap-3">
                                     <div className="p-2 bg-cyan-400/10 rounded-xl text-cyan-400">
                                         <Dumbbell size={20} />
                                     </div>
-                                    Tactical Protocol
+                                    Workout Plan
                                 </h3>
-                                <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest pl-11">Current training script</p>
+                                <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest pl-11">Your assigned workout</p>
                             </div>
                             <Link href="/member/workouts" className="h-10 w-10 flex items-center justify-center rounded-xl bg-white/5 text-zinc-500 hover:text-white transition-all">
                                 <ArrowRight size={18} />
@@ -174,47 +174,46 @@ export default function MemberDashboardPage() {
                                 <div className="flex items-center justify-between bg-[#0D0D0D] p-6 rounded-2xl border border-white/5 group-hover:border-cyan-400/20 transition-all">
                                     <div>
                                         <p className="text-lg font-black text-white uppercase tracking-tight">{data.workout.workoutPlan?.name}</p>
-                                        <p className="text-[9px] text-zinc-600 font-bold uppercase tracking-widest mt-1">{data.workout.workoutPlan?.type} MODE</p>
+                                        <p className="text-[9px] text-zinc-600 font-bold uppercase tracking-widest mt-1">{data.workout.workoutPlan?.type} WORKOUT</p>
                                     </div>
                                     <Badge variant="info" className="bg-white/5 text-[8px] font-black border-white/10 px-4 py-2 rounded-xl">
                                         {data.workout.workoutPlan?.daysPerWeek} DAYS/WEEK
                                     </Badge>
                                 </div>
-
                                 <Link
                                     href="/member/workouts"
                                     className="flex items-center justify-center gap-3 w-full h-16 bg-white text-black rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-cyan-400 transition-all duration-300"
                                 >
-                                    ENGAGE PROTOCOL
+                                    VIEW WORKOUT
                                     <Zap size={16} className="fill-current" />
                                 </Link>
                             </div>
                         ) : (
                             <div className="text-center py-16 bg-[#0D0D0D] rounded-3xl border border-white/5 border-dashed">
                                 <Target className="w-16 h-16 text-zinc-800 mx-auto mb-6 animate-pulse" />
-                                <p className="text-zinc-600 font-black uppercase text-[10px] tracking-widest">No protocol assigned</p>
-                                <p className="text-[8px] text-zinc-800 font-bold uppercase tracking-widest mt-2">Request synchronization from Command</p>
+                                <p className="text-zinc-600 font-black uppercase text-[10px] tracking-widest">No workout plan assigned</p>
+                                <p className="text-[8px] text-zinc-800 font-bold uppercase tracking-widest mt-2">Ask for a plan at the gym</p>
                             </div>
                         )}
                     </Card>
                 </motion.div>
 
-                {/* Visitation Logs */}
+                {/* Attendance History */}
                 <motion.div
                     initial={{ opacity: 0, x: 30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.6 }}
                 >
-                    <Card variant="default" className="rounded-[2.5rem] p-10 bg-white/[0.01] border-white/5 group hover:bg-white/[0.03] transition-all">
+                    <Card variant="default" className="rounded-[2.5rem] p-10 bg-white/[0.03] backdrop-blur-3xl border-white/10 group hover:border-cyan-400/20 transition-all shadow-xl">
                         <div className="flex items-center justify-between mb-10">
                             <div className="space-y-1">
                                 <h3 className="text-xl font-black text-white uppercase tracking-tighter flex items-center gap-3">
                                     <div className="p-2 bg-rose-400/10 rounded-xl text-rose-400">
                                         <Clock size={20} />
                                     </div>
-                                    System Access Logs
+                                    Attendance History
                                 </h3>
-                                <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest pl-11">Recent site entries</p>
+                                <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest pl-11">Your recent check-ins</p>
                             </div>
                             <Link href="/member/attendance" className="h-10 w-10 flex items-center justify-center rounded-xl bg-white/5 text-zinc-500 hover:text-white transition-all">
                                 <ArrowRight size={18} />
@@ -224,7 +223,7 @@ export default function MemberDashboardPage() {
                         <div className="space-y-4">
                             {data.attendance.recent.length === 0 ? (
                                 <div className="text-center py-10 bg-[#0D0D0D] rounded-3xl border border-white/5 border-dashed">
-                                    <p className="text-zinc-600 font-black uppercase text-[10px] tracking-widest">No site entries detected</p>
+                                    <p className="text-zinc-600 font-black uppercase text-[10px] tracking-widest">No entry logs found</p>
                                 </div>
                             ) : (
                                 data.attendance.recent.slice(0, 5).map((record) => (
@@ -247,7 +246,7 @@ export default function MemberDashboardPage() {
                                             </p>
                                         </div>
                                         <Badge variant="info" className="bg-white/5 text-[7px] font-black border-white/10 px-3 py-1 rounded-lg uppercase tracking-widest group-hover/item:text-cyan-400 transition-colors">
-                                            {record.method} GATE
+                                            {record.method} Access
                                         </Badge>
                                     </div>
                                 ))
@@ -257,14 +256,14 @@ export default function MemberDashboardPage() {
                 </motion.div>
             </div>
 
-            {/* Mass Flux Overview */}
+            {/* Weight Progress */}
             {data.progress.length > 0 && (
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.7 }}
                 >
-                    <Card variant="default" className="rounded-[3rem] p-10 bg-white/[0.01] border-white/5 group hover:bg-white/[0.03] transition-all overflow-hidden">
+                    <Card variant="default" className="rounded-[3rem] p-10 bg-white/[0.03] backdrop-blur-3xl border-white/10 group hover:border-cyan-400/20 transition-all overflow-hidden shadow-xl">
                         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-emerald-500/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
 
                         <div className="flex items-center justify-between mb-12 relative z-10">
@@ -273,9 +272,9 @@ export default function MemberDashboardPage() {
                                     <div className="p-3 bg-emerald-400/10 rounded-2xl text-emerald-400">
                                         <TrendingUp size={24} />
                                     </div>
-                                    Physical Mass Flux
+                                    Weight Tracker
                                 </h3>
-                                <p className="text-[9px] font-black text-zinc-600 uppercase tracking-[0.4em] pl-16">Biometric data tracking</p>
+                                <p className="text-[9px] font-black text-zinc-600 uppercase tracking-[0.4em] pl-16">Track your weight progress</p>
                             </div>
                         </div>
 

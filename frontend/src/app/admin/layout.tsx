@@ -70,17 +70,17 @@ export default function AdminLayout({
     if (isLoading || !isAuthenticated || user?.role !== 'ADMIN') {
         return (
             <div className="min-h-screen bg-black flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-2 border-zinc-700 border-t-orange-500" />
+                <div className="animate-spin rounded-full h-12 w-12 border-2 border-zinc-700 border-t-cyan-400" />
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-[#020617] text-slate-200 selection:bg-orange-500/30">
+        <div className="min-h-screen bg-[#050505] text-slate-200 selection:bg-cyan-500/30">
             {/* Background Glows */}
             <div className="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden z-0">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-orange-500/10 rounded-full blur-[120px]" />
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/5 rounded-full blur-[120px]" />
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-cyan-500/10 rounded-full blur-[120px]" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-500/5 rounded-full blur-[120px]" />
             </div>
 
             {/* Mobile Sidebar Overlay */}
@@ -125,17 +125,17 @@ export default function AdminLayout({
                                 key={item.href}
                                 href={item.href}
                                 className={`flex items-center gap-4 px-5 py-3.5 rounded-2xl transition-all duration-300 group relative ${isActive
-                                    ? 'bg-gradient-to-r from-orange-500/20 to-transparent text-white border border-orange-500/20 shadow-lg shadow-orange-500/5'
+                                    ? 'bg-gradient-to-r from-cyan-500/20 to-transparent text-white border border-cyan-500/20 shadow-lg shadow-cyan-500/5'
                                     : 'text-zinc-400 hover:text-white hover:bg-white/5'
                                     }`}
                             >
                                 {isActive && (
                                     <motion.div
                                         layoutId="activeNav"
-                                        className="absolute left-0 w-1 h-6 bg-orange-500 rounded-r-full"
+                                        className="absolute left-0 w-1 h-6 bg-cyan-400 rounded-r-full"
                                     />
                                 )}
-                                <item.icon size={20} className={`${isActive ? 'text-orange-500' : 'group-hover:text-orange-400'} transition-colors duration-300`} />
+                                <item.icon size={20} className={`${isActive ? 'text-cyan-400' : 'group-hover:text-cyan-400/80'} transition-colors duration-300`} />
                                 <span className="font-medium tracking-wide">{item.label}</span>
                             </Link>
                         );
@@ -164,7 +164,7 @@ export default function AdminLayout({
 
                 {/* Copyright */}
                 <div className="absolute bottom-1 w-full text-center pb-2">
-                    <p className="text-[10px] text-zinc-600">© 2026 NAIZEN</p>
+                    <p className="text-[10px] text-zinc-600 uppercase tracking-widest font-black">© 2026 ULIFTS GYM</p>
                 </div>
             </aside>
 
@@ -190,11 +190,11 @@ export default function AdminLayout({
 
                     <div className="flex items-center gap-6">
                         {/* Search Bar - Premium Style */}
-                        <div className="hidden md:flex items-center gap-3 bg-white/5 border border-white/5 focus-within:border-orange-500/30 rounded-2xl px-5 py-2.5 w-72 transition-all duration-300">
+                        <div className="hidden md:flex items-center gap-3 bg-white/5 border border-white/5 focus-within:border-cyan-400/30 rounded-2xl px-5 py-2.5 w-72 transition-all duration-300">
                             <Search size={18} className="text-zinc-500" />
                             <input
                                 type="text"
-                                placeholder="Universal Search..."
+                                placeholder="Search..."
                                 className="bg-transparent border-none outline-none text-sm text-white placeholder-zinc-500 w-full font-medium"
                             />
                         </div>
@@ -202,7 +202,7 @@ export default function AdminLayout({
                         {/* Notifications */}
                         <button className="relative p-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-2xl transition-all border border-transparent hover:border-white/5">
                             <Bell size={20} />
-                            <span className="absolute top-3 right-3 w-2 h-2 bg-orange-500 rounded-full shadow-lg shadow-orange-500/50" />
+                            <span className="absolute top-3 right-3 w-2 h-2 bg-cyan-400 rounded-full shadow-lg shadow-cyan-400/50" />
                         </button>
 
                         <div className="h-10 w-px bg-white/5 hidden sm:block" />

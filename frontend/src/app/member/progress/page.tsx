@@ -37,17 +37,17 @@ export default function ProgressPage() {
         <div className="space-y-16 animate-fade-in pb-20">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/5 pb-12">
                 <div className="space-y-4">
-                    <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.5em]">Biometric Feed</p>
+                    <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.5em]">Body Stats</p>
                     <h1 className="text-6xl font-black text-white tracking-tighter uppercase leading-none">
-                        PERFORMANCE <span className="text-cyan-400">EVOLUTION</span>
+                        BODY <span className="text-cyan-400">PROGRESS</span>
                     </h1>
-                    <p className="text-zinc-500 font-bold uppercase text-[9px] tracking-widest mt-6">Historical data of biological recomposition</p>
+                    <p className="text-zinc-500 font-bold uppercase text-[9px] tracking-widest mt-6">Track your weight and body progress over time</p>
                 </div>
             </div>
 
             {latest && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-                    <Card variant="default" className="p-8 rounded-[2.5rem] bg-white/[0.01] border-white/5 group hover:border-cyan-400/20 transition-all">
+                    <Card variant="default" className="p-8 rounded-[2.5rem] bg-white/[0.03] backdrop-blur-3xl border-white/10 group hover:border-cyan-400/20 transition-all shadow-xl">
                         <div className="flex items-center gap-4 mb-6">
                             <div className="p-3 bg-cyan-400/10 rounded-xl text-cyan-400">
                                 <Scale size={20} />
@@ -57,12 +57,12 @@ export default function ProgressPage() {
                         <p className="text-5xl font-black text-white tracking-tighter tabular-nums">{latest.weight}<span className="text-xs font-black text-zinc-700 ml-2 uppercase tracking-widest">KG</span></p>
                         {initial && (
                             <p className={`text-[10px] mt-4 font-black uppercase tracking-widest ${latest.weight < initial.weight ? 'text-cyan-400' : 'text-zinc-600'}`}>
-                                {latest.weight < initial.weight ? 'CALIBRATED —' : 'GAIN +'} {(Math.abs(latest.weight - initial.weight)).toFixed(1)} KG IN FLUX
+                                {latest.weight < initial.weight ? 'LOST —' : 'GAINED +'} {(Math.abs(latest.weight - initial.weight)).toFixed(1)} KG TOTAL
                             </p>
                         )}
                     </Card>
 
-                    <Card variant="default" className="p-8 rounded-[2.5rem] bg-white/[0.01] border-white/5 group hover:border-cyan-400/20 transition-all">
+                    <Card variant="default" className="p-8 rounded-[2.5rem] bg-white/[0.03] backdrop-blur-3xl border-white/10 group hover:border-cyan-400/20 transition-all shadow-xl">
                         <div className="flex items-center gap-4 mb-6">
                             <div className="p-3 bg-indigo-400/10 rounded-xl text-indigo-400">
                                 <Activity size={20} />
@@ -70,23 +70,23 @@ export default function ProgressPage() {
                             <h3 className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Body Fat</h3>
                         </div>
                         <p className="text-5xl font-black text-white tracking-tighter tabular-nums">{latest.bodyFat}<span className="text-xs font-black text-zinc-700 ml-2 uppercase tracking-widest">%</span></p>
-                        <p className="text-[10px] mt-4 font-black uppercase tracking-widest text-zinc-600">COMPOSITION METRIC</p>
+                        <p className="text-[10px] mt-4 font-black uppercase tracking-widest text-zinc-600">BODY FAT %</p>
                     </Card>
                 </div>
             )}
 
-            <Card variant="default" className="rounded-[3rem] p-10 bg-[#080808] border-white/5">
+            <Card variant="default" className="rounded-[3rem] p-10 bg-white/[0.03] backdrop-blur-3xl border-white/10 shadow-xl">
                 <div className="flex items-center justify-between mb-12 border-b border-white/5 pb-10">
                     <div className="space-y-1">
-                        <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Historical Archives</h3>
-                        <p className="text-[9px] font-black text-zinc-600 uppercase tracking-[0.4em]">Sequential metric synchronization logs</p>
+                        <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Progress History</h3>
+                        <p className="text-[9px] font-black text-zinc-600 uppercase tracking-[0.4em]">Record of your past measurements</p>
                     </div>
                 </div>
 
                 {records.length === 0 ? (
                     <div className="py-24 text-center bg-[#0D0D0D] rounded-3xl border border-white/5 border-dashed">
                         <TrendingUp size={48} className="mx-auto mb-6 text-zinc-800" />
-                        <p className="text-zinc-600 font-black uppercase text-[10px] tracking-widest">No biometric data recorded</p>
+                        <p className="text-zinc-600 font-black uppercase text-[10px] tracking-widest">No progress recorded yet</p>
                     </div>
                 ) : (
                     <div className="overflow-x-auto scrollbar-hide">

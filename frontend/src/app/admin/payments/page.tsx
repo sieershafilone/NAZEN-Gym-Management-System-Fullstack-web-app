@@ -46,7 +46,7 @@ export default function PaymentsPage() {
             const response = await paymentsAPI.getAll();
             setPayments(response.data.data.payments);
         } catch (error) {
-            toast.error('Failed to load transactions');
+            toast.error('Failed to load payments');
         } finally {
             setLoading(false);
         }
@@ -95,37 +95,37 @@ export default function PaymentsPage() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div className="space-y-4">
                     <h1 className="text-5xl font-black text-white tracking-tighter sm:text-6xl">
-                        Financial <span className="text-cyan-400 glow-text">Pulse</span>
+                        Gym <span className="text-cyan-400 glow-text">Payments</span>
                     </h1>
                     <p className="text-zinc-500 mt-3 font-medium tracking-widest uppercase text-[10px]">
-                        Monitor <span className="text-white">Revenue Flux</span> & Transaction stability.
+                        Monitor <span className="text-white">Revenue</span> & Transaction history.
                     </p>
                 </div>
                 <div className="flex items-center gap-4">
                     <Button variant="secondary" className="group hidden sm:flex h-14 rounded-2xl px-6">
                         <Download size={20} className="mr-3 group-hover:text-cyan-400 transition-colors" />
-                        Export Log
+                        Export CSV
                     </Button>
                     <Button onClick={() => setShowRecordModal(true)} className="h-14 px-8 rounded-2xl group">
                         <Plus size={20} className="mr-3 group-hover:rotate-90 transition-transform duration-500" />
-                        Record Flux
+                        Record Payment
                     </Button>
                 </div>
             </div>
 
             {/* Metrics */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <StatCard title="Total Yield" value={formatCurrency(stats.totalRevenue)} icon={<CreditCard size={20} />} color="mint" />
-                <StatCard title="Pending Sync" value={formatCurrency(stats.pending)} icon={<CreditCard size={20} />} color="indigo" />
-                <StatCard title="Reverse Flow" value={formatCurrency(stats.refunds)} icon={<ArrowDownRight size={20} />} color="rose" />
-                <StatCard title="Avg Intensity" value={formatCurrency(stats.avgCheck)} icon={<ArrowUpRight size={20} />} color="amber" />
+                <StatCard title="Total Revenue" value={formatCurrency(stats.totalRevenue)} icon={<CreditCard size={20} />} color="mint" />
+                <StatCard title="Pending" value={formatCurrency(stats.pending)} icon={<CreditCard size={20} />} color="indigo" />
+                <StatCard title="Refunds" value={formatCurrency(stats.refunds)} icon={<ArrowDownRight size={20} />} color="rose" />
+                <StatCard title="Average Payment" value={formatCurrency(stats.avgCheck)} icon={<ArrowUpRight size={20} />} color="amber" />
             </div>
 
             {/* Content Area */}
-            <Card variant="default" className="overflow-hidden min-h-[600px] flex flex-col p-0 rounded-[2.5rem] border-white/5">
+            <Card variant="default" className="overflow-hidden min-h-[600px] flex flex-col p-0 bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[2.5rem] shadow-xl">
                 <div className="p-10 border-b border-white/5 flex flex-col sm:flex-row items-center justify-between gap-6 bg-white/[0.01]">
                     <div className="flex items-center gap-6 w-full sm:w-auto">
-                        <h2 className="text-2xl font-black text-white tracking-tight">Recent Archives</h2>
+                        <h2 className="text-2xl font-black text-white tracking-tight">Transaction History</h2>
                         {selectedIds.size > 0 && (
                             <motion.button
                                 initial={{ opacity: 0, scale: 0.9 }}
@@ -133,13 +133,13 @@ export default function PaymentsPage() {
                                 onClick={handleDeleteSelected}
                                 className="flex items-center gap-3 px-5 py-2.5 rounded-xl bg-rose-500/10 text-rose-500 border border-rose-500/20 hover:bg-rose-500/20 transition-all text-[10px] font-black uppercase tracking-widest"
                             >
-                                <Trash2 size={14} /> Wipe ({selectedIds.size})
+                                <Trash2 size={14} /> Delete ({selectedIds.size})
                             </motion.button>
                         )}
                     </div>
                     <div className="flex items-center gap-4 bg-[#0D0D0D] rounded-2xl px-6 py-4 border border-white/5 w-full sm:w-80 focus-within:border-cyan-400/50 focus-within:ring-4 focus-within:ring-cyan-400/5 transition-all duration-300">
                         <SearchIcon size={18} className="text-zinc-600" />
-                        <input type="text" placeholder="Locate transaction..." className="bg-transparent border-none outline-none text-sm text-white placeholder:text-zinc-700 w-full font-medium" />
+                        <input type="text" placeholder="Search transactions..." className="bg-transparent border-none outline-none text-sm text-white placeholder:text-zinc-700 w-full font-medium" />
                     </div>
                 </div>
 
@@ -151,8 +151,8 @@ export default function PaymentsPage() {
                     ) : payments.length === 0 ? (
                         <div className="h-96 flex items-center justify-center">
                             <EmptyState
-                                title="Pulse Dormant"
-                                description="No transaction artifacts detected in the current cycle."
+                                title="No Transactions"
+                                description="No payments have been recorded yet."
                                 icon={<CreditCard size={64} className="text-zinc-800" />}
                             />
                         </div>
@@ -168,12 +168,12 @@ export default function PaymentsPage() {
                                             className="w-5 h-5 rounded-lg border-white/10 bg-white/5 text-cyan-400 focus:ring-0 cursor-pointer transition-all checked:bg-cyan-400 checked:border-cyan-400"
                                         />
                                     </th>
-                                    <th className="px-6 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest">Protocol ID</th>
-                                    <th className="px-6 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest">Target Athlete</th>
+                                    <th className="px-6 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest">Invoice No.</th>
+                                    <th className="px-6 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest">Member Name</th>
                                     <th className="px-6 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest">Status</th>
-                                    <th className="px-6 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest text-right">Value</th>
-                                    <th className="px-6 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest">Execution Date</th>
-                                    <th className="px-10 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest text-center">Audit</th>
+                                    <th className="px-6 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest text-right">Amount</th>
+                                    <th className="px-6 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest">Payment Date</th>
+                                    <th className="px-10 py-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest text-center">Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -260,10 +260,10 @@ function RecordTransactionModal({ isOpen, onClose, onSuccess }: { isOpen: boolea
     const onSubmit = async (data: TransactionFormValues) => {
         try {
             await paymentsAPI.createManual(data);
-            toast.success('Sync complete');
+            toast.success('Payment recorded');
             onSuccess();
         } catch (error) {
-            toast.error('Sync failed');
+            toast.error('Failed to record');
         }
     };
 
@@ -281,8 +281,8 @@ function RecordTransactionModal({ isOpen, onClose, onSuccess }: { isOpen: boolea
             >
                 <div className="p-10 border-b border-white/5 flex justify-between items-center bg-white/[0.01]">
                     <div>
-                        <h2 className="text-2xl font-black text-white tracking-tight">RECORD FLUX</h2>
-                        <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mt-1">MANUAL TRANSACTION INJECTION</p>
+                        <h2 className="text-2xl font-black text-white tracking-tight">RECORD PAYMENT</h2>
+                        <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mt-1">MANUAL PAYMENT ENTRY</p>
                     </div>
                     <button onClick={onClose} className="p-4 bg-white/5 rounded-2xl text-zinc-500 hover:text-white transition-all"><X size={24} /></button>
                 </div>
@@ -290,9 +290,9 @@ function RecordTransactionModal({ isOpen, onClose, onSuccess }: { isOpen: boolea
                 <form onSubmit={handleSubmit(onSubmit)} className="p-10 space-y-10">
                     <div className="space-y-8">
                         <div className="space-y-3">
-                            <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Target Athlete</label>
+                            <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Member</label>
                             <select {...register('memberId')} className="w-full h-14 px-6 bg-[#0D0D0D] border border-white/5 rounded-2xl text-white appearance-none focus:outline-none focus:border-cyan-400/50 transition-all duration-300">
-                                <option value="">-- SELECT SUBJECT --</option>
+                                <option value="">-- SELECT MEMBER --</option>
                                 {members.map(m => (
                                     <option key={m.id} value={m.id}>{m.user?.fullName} ({m.memberId})</option>
                                 ))}
@@ -301,9 +301,9 @@ function RecordTransactionModal({ isOpen, onClose, onSuccess }: { isOpen: boolea
                         </div>
 
                         <div className="space-y-3">
-                            <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Protocol Tier</label>
+                            <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Membership Plan</label>
                             <select {...register('planId')} className="w-full h-14 px-6 bg-[#0D0D0D] border border-white/5 rounded-2xl text-white appearance-none focus:outline-none focus:border-cyan-400/50 transition-all duration-300">
-                                <option value="">-- SELECT MATRIX --</option>
+                                <option value="">-- SELECT PLAN --</option>
                                 {plans.map(p => (
                                     <option key={p.id} value={p.id}>{p.name} - {formatCurrency(p.finalPrice)}</option>
                                 ))}
@@ -312,7 +312,7 @@ function RecordTransactionModal({ isOpen, onClose, onSuccess }: { isOpen: boolea
                         </div>
 
                         <div className="space-y-3">
-                            <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Transfer Protocol</label>
+                            <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Payment Method</label>
                             <div className="grid grid-cols-3 gap-3">
                                 {['CASH', 'UPI', 'BANK_TRANSFER'].map(method => (
                                     <label key={method} className="cursor-pointer">
@@ -327,7 +327,7 @@ function RecordTransactionModal({ isOpen, onClose, onSuccess }: { isOpen: boolea
 
                         {selectedPlan && (
                             <div className="bg-cyan-400/5 border border-cyan-400/20 rounded-3xl p-8 flex flex-col items-center">
-                                <span className="text-zinc-600 text-[10px] font-black uppercase tracking-widest mb-2">Sync Value</span>
+                                <span className="text-zinc-600 text-[10px] font-black uppercase tracking-widest mb-2">Amount</span>
                                 <span className="text-4xl font-black text-white tracking-tighter tabular-nums">{formatCurrency(selectedPlan.finalPrice)}</span>
                             </div>
                         )}
@@ -336,7 +336,7 @@ function RecordTransactionModal({ isOpen, onClose, onSuccess }: { isOpen: boolea
                     <div className="flex gap-4 pt-4">
                         <Button type="button" variant="ghost" onClick={onClose} className="w-1/3 h-14 rounded-2xl">Abort</Button>
                         <Button type="submit" disabled={isSubmitting} className="w-2/3 h-14 rounded-2xl">
-                            {isSubmitting ? <Spinner size="sm" /> : 'COMMIT TRANSFER'}
+                            {isSubmitting ? <Spinner size="sm" /> : 'RECORD PAYMENT'}
                         </Button>
                     </div>
                 </form>

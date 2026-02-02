@@ -3,7 +3,7 @@
 import { useAuthStore } from '@/store';
 import { Card, Avatar, Badge, Button } from '@/components/ui';
 import { getInitials } from '@/lib/utils';
-import { Mail, Phone, Calendar, User, Ruler, Weight } from 'lucide-react';
+import { Mail, Phone, Calendar, User, Ruler, Weight, Activity } from 'lucide-react';
 
 export default function MemberProfilePage() {
     const { user } = useAuthStore();
@@ -13,7 +13,7 @@ export default function MemberProfilePage() {
 
     return (
         <div className="max-w-5xl mx-auto space-y-16 animate-fade-in pb-20">
-            {/* Morphic Cover Segment */}
+            {/* Profile Header */}
             <div className="relative">
                 <div className="h-48 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-cyan-400/20 via-[#0D0D0D] to-[#050505] rounded-[3rem] border border-white/5" />
                 <div className="absolute -bottom-16 left-12 flex items-end gap-8">
@@ -28,7 +28,7 @@ export default function MemberProfilePage() {
                     </div>
                     <div className="pb-6">
                         <h1 className="text-5xl font-black text-white uppercase tracking-tighter leading-none">{user.fullName}</h1>
-                        <p className="text-cyan-400 font-mono text-[10px] font-black uppercase tracking-[0.4em] mt-3">Node ID: {member.memberId}</p>
+                        <p className="text-cyan-400 font-mono text-[10px] font-black uppercase tracking-[0.4em] mt-3">Member ID: {member.memberId}</p>
                     </div>
                 </div>
                 <div className="absolute top-8 right-8">
@@ -39,12 +39,12 @@ export default function MemberProfilePage() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 pt-12">
-                <Card variant="default" className="lg:col-span-2 p-10 rounded-[3rem] bg-white/[0.01] border-white/5 group hover:bg-white/[0.02] transition-all">
+                <Card variant="default" className="lg:col-span-2 p-10 rounded-[3rem] bg-white/[0.03] backdrop-blur-3xl border-white/10 group hover:bg-white/5 transition-all shadow-xl">
                     <div className="flex items-center gap-4 mb-10">
                         <div className="p-3 bg-cyan-400/10 rounded-xl text-cyan-400">
                             <User size={20} />
                         </div>
-                        <h3 className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.4em]">Core Identification</h3>
+                        <h3 className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.4em]">Personal Information</h3>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -52,14 +52,14 @@ export default function MemberProfilePage() {
                             <div className="flex items-center gap-6 p-6 bg-[#0D0D0D] border border-white/5 rounded-2xl group/item hover:border-cyan-400/20 transition-all">
                                 <Mail size={18} className="text-zinc-700 group-hover/item:text-cyan-400" />
                                 <div>
-                                    <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest">Digital Gateway</p>
-                                    <p className="text-[11px] font-black text-white uppercase tracking-widest mt-1">{user.email || 'UNSET'}</p>
+                                    <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest">Email Address</p>
+                                    <p className="text-[11px] font-black text-white uppercase tracking-widest mt-1">{user.email || 'NOT SET'}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-6 p-6 bg-[#0D0D0D] border border-white/5 rounded-2xl group/item hover:border-cyan-400/20 transition-all">
                                 <Phone size={18} className="text-zinc-700 group-hover/item:text-cyan-400" />
                                 <div>
-                                    <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest">Signal Line</p>
+                                    <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest">Phone Number</p>
                                     <p className="text-[11px] font-black text-white uppercase tracking-widest mt-1">{user.mobile}</p>
                                 </div>
                             </div>
@@ -68,20 +68,20 @@ export default function MemberProfilePage() {
                             <div className="flex items-center gap-6 p-6 bg-[#0D0D0D] border border-white/5 rounded-2xl group/item hover:border-cyan-400/20 transition-all">
                                 <Calendar size={18} className="text-zinc-700 group-hover/item:text-cyan-400" />
                                 <div>
-                                    <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest">Origin Date</p>
-                                    <p className="text-[11px] font-black text-white uppercase tracking-widest mt-1">{member.dateOfBirth ? new Date(member.dateOfBirth).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase() : 'CLASSIFIED'}</p>
+                                    <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest">Date of Birth</p>
+                                    <p className="text-[11px] font-black text-white uppercase tracking-widest mt-1">{member.dateOfBirth ? new Date(member.dateOfBirth).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase() : 'NOT SET'}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </Card>
 
-                <Card variant="default" className="p-10 rounded-[3rem] bg-[#080808] border-white/5 overflow-hidden">
+                <Card variant="default" className="p-10 rounded-[3rem] bg-white/[0.03] backdrop-blur-3xl border-white/10 overflow-hidden shadow-xl">
                     <div className="flex items-center gap-4 mb-10">
                         <div className="p-3 bg-indigo-400/10 rounded-xl text-indigo-400">
                             <Activity size={20} />
                         </div>
-                        <h3 className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.4em]">Physical Metrics</h3>
+                        <h3 className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.4em]">Body Measurements</h3>
                     </div>
 
                     <div className="space-y-8">
@@ -90,7 +90,7 @@ export default function MemberProfilePage() {
                                 <div className="p-3 bg-white/5 rounded-xl text-zinc-600 group-hover/metric:text-cyan-400 transition-colors">
                                     <Ruler size={18} />
                                 </div>
-                                <span className="text-[9px] font-black text-zinc-600 uppercase tracking-widest">Structure Elevation</span>
+                                <span className="text-[9px] font-black text-zinc-600 uppercase tracking-widest">Height</span>
                             </div>
                             <p className="text-xl font-black text-white tracking-tighter tabular-nums">{member.height || '—'}<span className="text-[8px] ml-2 text-zinc-700">CM</span></p>
                         </div>
@@ -100,7 +100,7 @@ export default function MemberProfilePage() {
                                 <div className="p-3 bg-white/5 rounded-xl text-zinc-600 group-hover/metric:text-cyan-400 transition-colors">
                                     <Weight size={18} />
                                 </div>
-                                <span className="text-[9px] font-black text-zinc-600 uppercase tracking-widest">Base Mass</span>
+                                <span className="text-[9px] font-black text-zinc-600 uppercase tracking-widest">Weight</span>
                             </div>
                             <p className="text-xl font-black text-white tracking-tighter tabular-nums">{member.weight || '—'}<span className="text-[8px] ml-2 text-zinc-700">KG</span></p>
                         </div>
@@ -108,7 +108,7 @@ export default function MemberProfilePage() {
 
                     {member.fitnessGoal && (
                         <div className="mt-10 pt-10 border-t border-white/5">
-                            <p className="text-[8px] font-black text-zinc-700 uppercase tracking-[0.4em] mb-4">Strategic Objective</p>
+                            <p className="text-[8px] font-black text-zinc-700 uppercase tracking-[0.4em] mb-4">Fitness Goal</p>
                             <p className="text-[11px] font-black text-white uppercase tracking-widest leading-relaxed bg-white/5 p-6 rounded-2xl border border-white/5 border-dashed">
                                 "{member.fitnessGoal}"
                             </p>
@@ -119,11 +119,10 @@ export default function MemberProfilePage() {
 
             <div className="flex justify-center pt-12">
                 <Button variant="outline" className="h-16 px-12 rounded-2xl bg-white/5 border-white/10 text-[10px] font-black uppercase tracking-[0.3em] hover:bg-cyan-400 hover:text-black hover:border-cyan-400 transition-all duration-500">
-                    Request Matrix Calibration
+                    Edit Profile
                 </Button>
             </div>
         </div>
     );
 }
 
-import { Activity } from 'lucide-react';

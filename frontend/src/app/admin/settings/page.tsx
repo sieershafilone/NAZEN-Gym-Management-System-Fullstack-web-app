@@ -8,7 +8,7 @@ import { Settings, Shield, Bell, Globe, Save } from 'lucide-react';
 import { Card, Button, Input, Select } from '@/components/ui';
 
 export default function SettingsPage() {
-    const [activeTab, setActiveTab] = React.useState('General Profile');
+    const [activeTab, setActiveTab] = React.useState('General');
     const [loading, setLoading] = React.useState(true);
     const [saving, setSaving] = React.useState(false);
 
@@ -194,10 +194,10 @@ export default function SettingsPage() {
     };
 
     const tabs = [
-        { label: 'General Profile', icon: Globe },
-        { label: 'Security & Access', icon: Shield },
-        { label: 'Notification Matrix', icon: Bell },
-        { label: 'System Prefs', icon: Settings },
+        { label: 'General', icon: Globe },
+        { label: 'Security', icon: Shield },
+        { label: 'Notifications', icon: Bell },
+        { label: 'System', icon: Settings },
     ];
 
     return (
@@ -206,10 +206,10 @@ export default function SettingsPage() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div className="space-y-4">
                     <h1 className="text-5xl font-black text-white tracking-tighter sm:text-6xl">
-                        System <span className="text-cyan-400 glow-text">Control</span>
+                        Gym <span className="text-cyan-400 glow-text">Settings</span>
                     </h1>
                     <p className="text-zinc-500 mt-3 font-medium tracking-widest uppercase text-[10px]">
-                        Configure your gym's <span className="text-white">Digital Fingerprint</span> and preferences.
+                        Configure your gym's <span className="text-white">Profile</span> and preferences.
                     </p>
                 </div>
                 <Button
@@ -219,7 +219,7 @@ export default function SettingsPage() {
                     loading={saving}
                 >
                     <Save size={20} className="mr-3 group-hover:scale-110 transition-transform" />
-                    Commit Protocols
+                    Commit Changes
                 </Button>
             </div>
 
@@ -244,31 +244,31 @@ export default function SettingsPage() {
                 {/* Configuration Area */}
                 <div className="lg:col-span-2 space-y-10">
                     {/* General Profile Section */}
-                    {activeTab === 'General Profile' && (
+                    {activeTab === 'General' && (
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-10">
                             <Card variant="default" className="space-y-12 p-12 border-white/5 rounded-[2.5rem] bg-white/[0.01]">
                                 <section>
                                     <h3 className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.3em] mb-10 flex items-center gap-4">
                                         <div className="w-12 h-[1px] bg-cyan-400/30" />
-                                        Identity Logic
+                                        Gym Details
                                     </h3>
                                     <div className="grid sm:grid-cols-2 gap-8">
                                         <Input
-                                            label="Entity Name"
+                                            label="Gym Name"
                                             name="gymName"
                                             value={formData.gymName}
                                             onChange={handleChange}
-                                            placeholder="NAIZEN High Performance"
+                                            placeholder="ULIFTS Gym"
                                         />
                                         <Input
-                                            label="Uplink Protocol"
+                                            label="Public Email"
                                             name="operationalEmail"
                                             value={formData.operationalEmail}
                                             onChange={handleChange}
-                                            placeholder="hq@naizengym.com"
+                                            placeholder="contact@uliftsgym.com"
                                         />
                                         <Input
-                                            label="Primary Link"
+                                            label="Contact Number"
                                             name="primaryContact"
                                             value={formData.primaryContact}
                                             onChange={handleChange}
@@ -296,7 +296,7 @@ export default function SettingsPage() {
                                     </h3>
                                     <div className="grid sm:grid-cols-2 gap-8">
                                         <div className="space-y-2">
-                                            <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Value Metric</label>
+                                            <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Timezone</label>
                                             <select
                                                 name="currencyUnit"
                                                 value={formData.currencyUnit}
@@ -308,7 +308,7 @@ export default function SettingsPage() {
                                             </select>
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Chronology Format</label>
+                                            <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Date Format</label>
                                             <select
                                                 name="dateProtocol"
                                                 value={formData.dateProtocol}
@@ -326,22 +326,22 @@ export default function SettingsPage() {
                     )}
 
                     {/* Security Section */}
-                    {activeTab === 'Security & Access' && (
+                    {activeTab === 'Security' && (
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-10">
                             <Card variant="default" className="space-y-10 p-12 border-white/5 rounded-[2.5rem] bg-white/[0.01]">
-                                <h3 className="text-[10px] font-black text-rose-500 uppercase tracking-[0.2em] mb-4">Command Clearance</h3>
+                                <h3 className="text-[10px] font-black text-rose-500 uppercase tracking-[0.2em] mb-4">Security Settings</h3>
 
                                 <div className="space-y-8 pb-10 border-b border-white/5">
-                                    <h4 className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Phone Link Update</h4>
+                                    <h4 className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Update Mobile Number</h4>
                                     <div className="grid sm:grid-cols-2 gap-8">
                                         <Input
-                                            label="Current Uplink"
+                                            label="Current Mobile"
                                             value={mobileData.currentMobile}
                                             disabled
                                             className="opacity-30"
                                         />
                                         <Input
-                                            label="New Uplink"
+                                            label="New Mobile"
                                             name="newMobile"
                                             value={mobileData.newMobile}
                                             onChange={handleMobileChange}
@@ -355,12 +355,12 @@ export default function SettingsPage() {
                                         disabled={updatingMobile || !mobileData.newMobile}
                                         className="h-12 rounded-xl px-10 text-[10px] font-black uppercase tracking-widest"
                                     >
-                                        Warp Phone Number
+                                        Update Phone Number
                                     </Button>
                                 </div>
 
                                 <div className="space-y-8">
-                                    <h4 className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Cipher Rotation</h4>
+                                    <h4 className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Change Password</h4>
                                     <Input
                                         label="Current Cipher"
                                         type="password"
@@ -371,7 +371,7 @@ export default function SettingsPage() {
                                     />
                                     <div className="grid sm:grid-cols-2 gap-8">
                                         <Input
-                                            label="New Cipher"
+                                            label="New Password"
                                             type="password"
                                             name="newPassword"
                                             value={passwordData.newPassword}
@@ -379,7 +379,7 @@ export default function SettingsPage() {
                                             placeholder="••••••••"
                                         />
                                         <Input
-                                            label="Confirm Cipher"
+                                            label="Confirm New Password"
                                             type="password"
                                             name="confirmNewPassword"
                                             value={passwordData.confirmNewPassword}
@@ -394,7 +394,7 @@ export default function SettingsPage() {
                                         loading={updatingPassword}
                                         disabled={updatingPassword}
                                     >
-                                        Recalibrate Credentials
+                                        Update Password
                                     </Button>
                                 </div>
                             </Card>
@@ -412,7 +412,7 @@ export default function SettingsPage() {
                                                 <p className="text-sm font-black text-white group-hover:text-cyan-400 transition-colors uppercase tracking-tight">{log.device}</p>
                                                 <p className="text-[10px] text-zinc-600 font-bold mt-1 uppercase tracking-widest">{log.ip} • {log.date}</p>
                                             </div>
-                                            <span className={`text-[10px] font-black uppercase tracking-widest ${log.status === 'Injected' ? 'text-cyan-400 glow-text' : 'text-rose-500'}`}>{log.status}</span>
+                                            <span className={`text-[10px] font-black uppercase tracking-widest ${log.status === 'Injected' ? 'text-cyan-400 glow-text' : 'text-rose-500'}`}>{log.status === 'Injected' ? 'SUCCESS' : 'FAILED'}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -421,10 +421,10 @@ export default function SettingsPage() {
                     )}
 
                     {/* Notifications Section */}
-                    {activeTab === 'Notification Matrix' && (
+                    {activeTab === 'Notifications' && (
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
                             <Card variant="default" className="p-12 border-white/5 rounded-[2.5rem] bg-white/[0.01]">
-                                <h3 className="text-[10px] font-black text-amber-400 uppercase tracking-[0.2em] mb-10">Alert Configuration</h3>
+                                <h3 className="text-[10px] font-black text-amber-400 uppercase tracking-[0.2em] mb-10">Notifications</h3>
                                 <div className="space-y-6">
                                     {[
                                         { label: 'System Emails', desc: 'Receive daily summary reports via email', state: notifications.emailAlerts, key: 'emailAlerts' },
@@ -450,10 +450,10 @@ export default function SettingsPage() {
                     )}
 
                     {/* System Prefs Section */}
-                    {activeTab === 'System Prefs' && (
+                    {activeTab === 'System' && (
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
                             <Card variant="default" className="p-12 border-white/5 rounded-[2.5rem] bg-white/[0.01]">
-                                <h3 className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em] mb-10">Data Retention</h3>
+                                <h3 className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em] mb-10">System Information</h3>
                                 <div className="p-8 rounded-[2rem] bg-indigo-500/5 border border-indigo-500/10 flex items-start gap-6 border-l-4 border-l-indigo-400">
                                     <div className="p-4 bg-indigo-500/10 rounded-2xl text-indigo-400"><Settings size={24} /></div>
                                     <div>
@@ -478,8 +478,8 @@ export default function SettingsPage() {
 
                             <Card variant="default" className="p-12 flex items-center justify-between border-rose-500/20 bg-rose-500/5 rounded-[2.5rem]">
                                 <div className="space-y-2">
-                                    <h4 className="text-rose-500 font-black uppercase text-sm tracking-tighter">Nuclear Protocol</h4>
-                                    <p className="text-[10px] text-zinc-600 font-bold uppercase tracking-widest">Permanently wipe all gym records and system data.</p>
+                                    <h4 className="text-rose-500 font-black uppercase text-sm tracking-tighter">Danger Zone</h4>
+                                    <p className="text-[10px] text-zinc-600 font-bold uppercase tracking-widest">Permanently delete all gym records and system data.</p>
                                 </div>
                                 <Button variant="secondary" className="h-12 px-8 rounded-xl bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white border-none text-[10px] font-black uppercase tracking-widest">
                                     Factory Reset

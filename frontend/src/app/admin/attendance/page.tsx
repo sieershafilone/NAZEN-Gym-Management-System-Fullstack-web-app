@@ -15,37 +15,37 @@ export default function AttendancePage() {
                         Activity <span className="text-cyan-400 glow-text">Logs</span>
                     </h1>
                     <p className="text-zinc-500 mt-3 font-medium tracking-widest uppercase text-[10px]">
-                        Monitor <span className="text-white">Athlete Presence</span> & Real-time gym flux.
+                        Monitor <span className="text-white">Member Attendance</span> & Real-time gym traffic.
                     </p>
                 </div>
                 <div className="flex items-center gap-4">
-                    <Button variant="secondary" className="group h-14 rounded-2xl px-6 border-white/5">
+                    <Button variant="secondary" className="group h-14 rounded-2xl px-6 border-white/5 bg-white/[0.03] backdrop-blur-3xl border-white/10">
                         <Filter size={20} className="mr-3 group-hover:text-cyan-400 transition-colors" />
-                        Sort Matrix
+                        Filter Logs
                     </Button>
                     <Button className="h-14 px-8 rounded-2xl group">
-                        Manual Induction
+                        Manual Check-in
                     </Button>
                 </div>
             </div>
 
             {/* Metrics */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <StatCard title="Morning Flux" value="42" icon={<Users size={20} />} color="indigo" />
-                <StatCard title="Midday Flux" value="28" icon={<Users size={20} />} color="mint" />
-                <StatCard title="Peak Flux" value="65" icon={<Users size={20} />} color="amber" />
-                <StatCard title="Max Intensity" value="6PM" icon={<Calendar size={20} />} color="indigo" />
+                <StatCard title="Morning Session" value="42" icon={<Users size={20} />} color="indigo" />
+                <StatCard title="Afternoon Session" value="28" icon={<Users size={20} />} color="mint" />
+                <StatCard title="Peak Hours" value="65" icon={<Users size={20} />} color="amber" />
+                <StatCard title="Peak Time" value="6PM" icon={<Calendar size={20} />} color="indigo" />
             </div>
 
             {/* Content Area */}
-            <Card variant="default" className="min-h-[600px] flex flex-col justify-center items-center border-white/5 rounded-[2.5rem] bg-white/[0.01]">
+            <Card variant="default" className="min-h-[600px] flex flex-col justify-center items-center bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[2.5rem] shadow-xl">
                 <EmptyState
                     icon={<Calendar size={64} className="text-zinc-800" />}
-                    title="Logs Dormant"
-                    description="Our biometric scanners are ready. Once athletes start checking in, logs will appear here in real-time."
+                    title="No Attendance Logs"
+                    description="Once members start checking in, their attendance logs will appear here."
                     action={
                         <Button variant="secondary" className="mt-6 rounded-xl">
-                            Verify Hardware Sync
+                            Refresh Logs
                         </Button>
                     }
                 />

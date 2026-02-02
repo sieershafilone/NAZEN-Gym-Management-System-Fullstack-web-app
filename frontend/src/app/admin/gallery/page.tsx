@@ -12,7 +12,7 @@ export default function GalleryPage() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div className="space-y-4">
                     <h1 className="text-5xl font-black text-white tracking-tighter sm:text-6xl">
-                        Visual <span className="text-cyan-400 glow-text">Archive</span>
+                        Gym <span className="text-cyan-400 glow-text">Gallery</span>
                     </h1>
                     <p className="text-zinc-500 mt-3 font-medium tracking-widest uppercase text-[10px]">
                         Curate your gym's <span className="text-white">Atmosphere</span> and transformation stories.
@@ -29,20 +29,20 @@ export default function GalleryPage() {
                     </div>
                     <Button className="h-14 px-8 rounded-2xl group">
                         <Camera size={20} className="mr-3 group-hover:scale-110 transition-transform" />
-                        Infect Media
+                        Upload Media
                     </Button>
                 </div>
             </div>
 
             {/* Content Area */}
-            <Card variant="default" className="min-h-[600px] border-white/5 rounded-[2.5rem] bg-white/[0.01] flex flex-col justify-center items-center">
+            <Card variant="default" className="min-h-[600px] bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[2.5rem] shadow-xl flex flex-col justify-center items-center">
                 <EmptyState
                     icon={<ImageIcon size={64} className="text-zinc-800" />}
-                    title="Vault Dormant"
+                    title="Gallery Empty"
                     description="Your high-resolution gym photos and transformation stories will be safely stored here."
                     action={
                         <Button variant="secondary" className="mt-6 px-10 rounded-xl">
-                            Select Payload
+                            Choose Files
                         </Button>
                     }
                 />

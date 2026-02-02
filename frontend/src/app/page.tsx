@@ -101,7 +101,7 @@ export default function HomePage() {
             </div>
             <Link href="/login">
               <Button size="sm" className="h-10 px-8 rounded-xl font-black text-[10px] uppercase tracking-widest">
-                Access System
+                Member Login
               </Button>
             </Link>
           </div>
@@ -127,31 +127,31 @@ export default function HomePage() {
             <div className="inline-flex items-center gap-3 bg-white/[0.03] border border-white/5 rounded-2xl px-6 py-2 mb-10 transition-all hover:bg-white/[0.05] group">
               <Zap className="w-4 h-4 text-cyan-400 animate-pulse group-hover:scale-125 transition-transform" />
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400">
-                Kupwara&apos;s <span className="text-white">Elite Performance</span> Matrix
+                Kupwara&apos;s <span className="text-white">Premium Fitness</span> Center
               </span>
             </div>
 
             <h1 className="text-6xl md:text-[6.5rem] font-black mb-10 leading-[0.9] tracking-tighter">
               EVOLVE YOUR <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-500">PHYSICAL</span>
-              <span className="text-cyan-400 glow-text"> LOGIC</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-500">FITNESS</span>
+              <span className="text-cyan-400 glow-text"> JOURNEY</span>
             </h1>
 
             <p className="text-lg text-zinc-500 max-w-2xl mx-auto mb-12 font-bold uppercase tracking-widest leading-relaxed">
-              Join <span className="text-white">NAIZEN</span> – The high-intensity training protocol in Drugmulla,
-              designed for the <span className="text-white">Elite 1%</span>.
+              Join <span className="text-white">ULIFTS</span> – THE PREMIER GYM IN DRUGMULLA,
+              DESIGNED FOR THE <span className="text-white">DEDICATED</span>.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <Link href="/login">
-                <Button size="lg" className="h-16 px-12 rounded-2xl font-black text-[12px] uppercase tracking-[0.2em] group shadow-[0_20px_40px_rgba(255,255,255,0.05)]">
-                  Enter The Matrix
+                <Button size="lg" className="h-16 px-12 rounded-2xl font-black text-[12px] uppercase tracking-[0.2em] group shadow-xl">
+                  Get Started
                   <ArrowRight className="ml-4 w-5 h-5 group-hover:translate-x-2 transition-transform" />
                 </Button>
               </Link>
               <a href="#plans">
                 <Button size="lg" variant="secondary" className="h-16 px-12 rounded-2xl font-black text-[12px] uppercase tracking-[0.2em] border-white/5 hover:bg-white/5 transition-all">
-                  View Protocols
+                  View Plans
                 </Button>
               </a>
             </div>
@@ -160,12 +160,12 @@ export default function HomePage() {
             <div className="flex items-center justify-center gap-12 mt-24">
               <div className="text-center group">
                 <p className="text-5xl font-black text-white tracking-tighter group-hover:text-cyan-400 transition-colors">500+</p>
-                <p className="text-zinc-600 text-[10px] uppercase tracking-widest font-black mt-2">Active Subjects</p>
+                <p className="text-zinc-600 text-[10px] uppercase tracking-widest font-black mt-2">Active Members</p>
               </div>
               <div className="w-px h-16 bg-white/5" />
               <div className="text-center group">
                 <p className="text-5xl font-black text-white tracking-tighter group-hover:text-cyan-400 transition-colors">75+</p>
-                <p className="text-zinc-600 text-[10px] uppercase tracking-widest font-black mt-2">Force Units</p>
+                <p className="text-zinc-600 text-[10px] uppercase tracking-widest font-black mt-2">Gym Equipment</p>
               </div>
             </div>
           </motion.div>
@@ -184,11 +184,11 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
           <div className="text-center mb-24">
             <h2 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter uppercase">
-              VISUAL <span className="text-cyan-400 glow-text">ARCHIVE</span>
+              GYM <span className="text-cyan-400 glow-text">GALLERY</span>
             </h2>
             <div className="w-24 h-1 bg-cyan-400 mx-auto mb-10" />
             <p className="text-zinc-500 max-w-2xl mx-auto font-black uppercase text-[10px] tracking-[0.3em]">
-              state-of-the-art intensity captured in real-time.
+              Checkout our members and facilities.
             </p>
           </div>
 
@@ -218,11 +218,11 @@ export default function HomePage() {
                   src={`/images/${imgName}`}
                   alt={`Gym Photo ${index + 1}`}
                   fill
-                  className="object-cover transition-transform duration-[1.5s] group-hover:scale-110 group-hover:rotate-1 grayscale group-hover:grayscale-0"
+                  className="object-cover transition-transform duration-[1.5s] group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
                   <div className="w-10 h-1 bg-cyan-400 mb-4 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500 delay-100" />
-                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500 delay-200">SECTOR {index + 1}</span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500 delay-200">PHOTO {index + 1}</span>
                 </div>
               </motion.div>
             ))}
@@ -235,10 +235,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
           <div className="text-center mb-24">
             <h2 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter uppercase leading-tight">
-              CORE <span className="text-cyan-400 glow-text">LOGISTICS</span>
+              OUR <span className="text-cyan-400 glow-text">FEATURES</span>
             </h2>
             <p className="text-zinc-600 max-w-2xl mx-auto font-black uppercase text-[10px] tracking-[0.3em]">
-              Enterprise-grade tools for peak athletic performance.
+              Everything you need to reach your goals.
             </p>
           </div>
 
@@ -251,7 +251,7 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card variant="default" className="h-full group p-10 rounded-[3rem] border-white/5 bg-white/[0.01] hover:bg-white/[0.03] transition-all duration-500 border hover:border-cyan-400/20">
+                <Card variant="default" className="h-full group p-10 rounded-[3rem] border-white/10 bg-white/[0.03] backdrop-blur-3xl transition-all duration-500 shadow-xl hover:border-cyan-400/20">
                   <div className="w-20 h-20 bg-[#0D0D0D] border border-white/5 rounded-3xl flex items-center justify-center mb-8 group-hover:border-cyan-400/30 transition-all group-hover:scale-110 group-hover:rotate-3">
                     <feature.icon className="w-10 h-10 text-white group-hover:text-cyan-400 transition-colors" />
                   </div>
@@ -269,10 +269,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
           <div className="text-center mb-24">
             <h2 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter uppercase leading-tight">
-              MEMBERSHIP <span className="text-cyan-400 glow-text">PROTOCOLS</span>
+              MEMBERSHIP <span className="text-cyan-400 glow-text">PLANS</span>
             </h2>
             <p className="text-zinc-600 max-w-2xl mx-auto font-black uppercase text-[10px] tracking-[0.3em]">
-              select your tier of engagement. all prices gst-synced.
+              Select the best plan for your needs.
             </p>
           </div>
 
@@ -282,7 +282,7 @@ export default function HomePage() {
             </div>
           ) : plans.length === 0 ? (
             <div className="text-center py-20 bg-[#0D0D0D] rounded-[3rem] border border-white/5 border-dashed">
-              <p className="text-zinc-600 font-black uppercase tracking-widest">No active protocols detected.</p>
+              <p className="text-zinc-600 font-black uppercase tracking-widest">No active plans found.</p>
             </div>
           ) : (
             <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
@@ -296,7 +296,7 @@ export default function HomePage() {
                 >
                   <Card
                     variant="default"
-                    className="relative flex flex-col p-12 rounded-[3.5rem] bg-[#0A0A0A] border-white/5 hover:border-cyan-400/30 transition-all duration-700 min-h-[500px]"
+                    className="relative flex flex-col p-12 rounded-[3.5rem] bg-white/[0.03] backdrop-blur-3xl border-white/10 shadow-xl transition-all duration-700 min-h-[500px]"
                   >
                     <div className="text-center mb-10">
                       <h3 className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.4em] mb-6">{plan.name}</h3>
@@ -306,7 +306,7 @@ export default function HomePage() {
                         </span>
                       </div>
                       <p className="text-zinc-600 text-[8px] font-black uppercase tracking-[0.2em] mt-6">
-                        {plan.durationDays} DAYS PROTOCOL
+                        {plan.durationDays} DAYS PLAN
                       </p>
                     </div>
 
@@ -321,7 +321,7 @@ export default function HomePage() {
 
                     <Link href="/login" className="mt-auto">
                       <Button className="w-full h-16 rounded-2xl font-black text-[10px] uppercase tracking-widest group bg-white text-black hover:bg-cyan-400 transition-colors">
-                        INITIAITE SYNC
+                        JOIN NOW
                         <ArrowRight className="ml-3 w-4 h-4 group-hover:translate-x-2 transition-transform" />
                       </Button>
                     </Link>
@@ -340,20 +340,20 @@ export default function HomePage() {
             <div className="space-y-12">
               <div>
                 <h2 className="text-5xl md:text-7xl font-black mb-8 tracking-tighter uppercase leading-[0.9]">
-                  LOCATE <br />
-                  <span className="text-cyan-400 glow-text">STATION</span>
+                  FIND <br />
+                  <span className="text-cyan-400 glow-text">US</span>
                 </h2>
                 <p className="text-zinc-600 font-black uppercase text-[10px] tracking-[0.3em] leading-loose max-w-lg">
-                  Deployed in the core of <span className="text-white">Drugmulla</span>.
-                  Equipped with high-frequency kinetics units.
+                  Visit our gym in <span className="text-white">Drugmulla</span>.
+                  Equipped with high-quality fitness equipment.
                 </p>
               </div>
 
               <div className="space-y-8">
                 {[
-                  { icon: MapPin, label: 'COORDINATES', value: 'NH 701, FOREST BLOCK, DRUGMULLA, KUPWARA' },
-                  { icon: Phone, label: 'UPLINK', value: '+91 6005314228' },
-                  { icon: Clock, label: 'OPERATIONAL WINDOW', value: 'MON-SAT: 0600 - 2200 | SUN: 0800 - 1400' },
+                  { icon: MapPin, label: 'ADDRESS', value: 'NH 701, FOREST BLOCK, DRUGMULLA, KUPWARA' },
+                  { icon: Phone, label: 'PHONE', value: '+91 6005314228' },
+                  { icon: Clock, label: 'OPENING HOURS', value: 'MON-SAT: 0600 - 2200 | SUN: 0800 - 1400' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-8 group">
                     <div className="w-16 h-16 bg-[#0D0D0D] border border-white/5 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:border-cyan-400/30 transition-all">
@@ -377,7 +377,7 @@ export default function HomePage() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="filter grayscale contrast-125 invert opacity-40 group-hover:opacity-80 transition-all duration-[2s] scale-110 group-hover:scale-100"
+                className="opacity-70 border-white/10 group-hover:opacity-100 transition-all duration-[2s] scale-110 group-hover:scale-100"
               />
               <div className="absolute inset-0 pointer-events-none border-[20px] border-[#0D0D0D]" />
             </div>
@@ -392,20 +392,20 @@ export default function HomePage() {
             <Link href="/">
               <BrandLogo
                 variant="default"
-                className="grayscale opacity-30 hover:grayscale-0 hover:opacity-100 transition-all duration-1000 scale-125"
-                withGlow={false}
+                className="hover:scale-125 transition-all duration-1000"
+                withGlow={true}
               />
             </Link>
 
             <div className="text-center md:text-right space-y-4">
               <p className="text-zinc-700 font-bold uppercase text-[10px] tracking-[0.4em]">
-                © 2026 NAIZEN SYSTEMS. ALL ARCHIVES SECURED.
+                © 2026 ULIFTS GYM. ALL RIGHTS RESERVED.
               </p>
               <div className="h-px w-12 bg-white/5 ml-auto hidden md:block" />
               <p className="text-[10px] text-zinc-500 font-black uppercase tracking-widest leading-loose">
-                DEVELOPED BY <span className="text-white">SIEER LONE</span> <br />
-                KINETIC UPLINK: +91 6005314228 <br />
-                DIRECTIVE: SIEERSHAFILONE@GMAIL.COM
+                MADE BY <span className="text-white">SIEER LONE</span> <br />
+                PHONE: +91 6005314228 <br />
+                EMAIL: SIEERSHAFILONE@GMAIL.COM
               </p>
             </div>
           </div>

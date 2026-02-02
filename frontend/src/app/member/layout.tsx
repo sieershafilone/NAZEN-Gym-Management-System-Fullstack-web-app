@@ -91,24 +91,24 @@ export default function MemberLayout({
 
             {/* Sidebar */}
             <aside
-                className={`fixed left-0 top-0 h-full w-72 bg-[#080808] border-r border-white/5 z-50 transform transition-transform duration-500 ease-[0.16, 1, 0.3, 1] lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+                className={`fixed left-0 top-0 h-full w-72 bg-[#080808]/60 backdrop-blur-2xl border-r border-white/5 z-50 transform transition-transform duration-500 ease-[0.16, 1, 0.3, 1] lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
                     }`}
             >
                 {/* Logo Section */}
                 <div className="h-24 flex items-center justify-between px-8 border-b border-white/5">
                     <Link href="/member" className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-[#0D0D0D] border border-cyan-400/20 rounded-2xl flex items-center justify-center overflow-hidden shadow-[0_0_20px_rgba(34,211,238,0.1)]">
+                        <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center overflow-hidden shadow-[0_0_20px_rgba(255,255,255,0.05)]">
                             <Image
                                 src="/logo.png"
-                                alt="NAIZEN Logo"
+                                alt="ULIFTS Logo"
                                 width={36}
                                 height={36}
-                                className="object-contain grayscale brightness-200"
+                                className="object-contain"
                             />
                         </div>
                         <div>
-                            <span className="font-black text-white tracking-tighter text-xl">NAIZEN</span>
-                            <span className="text-zinc-600 text-[8px] font-black uppercase tracking-[0.3em] block mt-1">Subject Hub</span>
+                            <span className="font-black text-white tracking-tighter text-xl">ULIFTS</span>
+                            <span className="text-zinc-600 text-[8px] font-black uppercase tracking-[0.3em] block mt-1">Member Area</span>
                         </div>
                     </Link>
                     <button
@@ -119,7 +119,7 @@ export default function MemberLayout({
                     </button>
                 </div>
 
-                {/* Membership Pulse */}
+                {/* Membership Status */}
                 {membership && (
                     <div className="p-8 border-b border-white/5 bg-white/[0.01]">
                         <div className="bg-[#0D0D0D] border border-white/5 rounded-3xl p-5 group hover:border-cyan-400/20 transition-all duration-500">
@@ -158,22 +158,22 @@ export default function MemberLayout({
                     })}
                 </nav>
 
-                {/* Exit Command */}
-                <div className="absolute bottom-0 left-0 right-0 p-8 border-t border-white/5 bg-[#030303]">
+                {/* Logout */}
+                <div className="absolute bottom-0 left-0 right-0 p-8 border-t border-white/5 bg-black/20 backdrop-blur-xl">
                     <button
                         onClick={handleLogout}
                         className="flex items-center gap-4 w-full px-6 py-4 rounded-2xl text-zinc-600 hover:text-rose-400 hover:bg-rose-400/5 transition-all duration-300 group"
                     >
                         <LogOut size={20} className="group-hover:translate-x-1 transition-transform" />
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em]">Terminate Phase</span>
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em]">Logout</span>
                     </button>
                     <div className="mt-6 text-center">
-                        <p className="text-[8px] font-black text-zinc-800 uppercase tracking-[0.4em]">© 2026 NAIZEN SYSTEMS</p>
+                        <p className="text-[8px] font-black text-zinc-800 uppercase tracking-[0.4em]">© 2026 ULIFTS GYM</p>
                     </div>
                 </div>
             </aside>
 
-            {/* Main Operational Area */}
+            {/* Main Content Area */}
             <div className="lg:pl-72">
                 {/* Unified Top Header */}
                 <header className="sticky top-0 z-30 h-24 bg-[#050505]/80 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-8 lg:px-12">
@@ -188,12 +188,12 @@ export default function MemberLayout({
                             <h1 className="text-xl font-black text-white uppercase tracking-tighter hidden sm:block">
                                 WELCOME, <span className="text-cyan-400">{user?.fullName?.split(' ')[0]}</span>
                             </h1>
-                            <p className="text-[8px] font-black text-zinc-600 uppercase tracking-[0.3em] hidden sm:block">Subject identification successful</p>
+                            <p className="text-[8px] font-black text-zinc-600 uppercase tracking-[0.3em] hidden sm:block">Logged in successfully</p>
                         </div>
                     </div>
 
                     <div className="flex items-center gap-6">
-                        {/* QR Matrix */}
+                        {/* QR Access */}
                         <Link
                             href="/member/qr"
                             className="h-12 w-12 flex items-center justify-center text-zinc-500 hover:text-cyan-400 hover:bg-white/5 border border-white/5 rounded-2xl transition-all duration-300 group"
@@ -201,7 +201,7 @@ export default function MemberLayout({
                             <QrCode size={20} className="group-hover:scale-110 transition-transform" />
                         </Link>
 
-                        {/* Alerts */}
+                        {/* Notifications */}
                         <button className="relative h-12 w-12 flex items-center justify-center text-zinc-500 hover:text-cyan-400 hover:bg-white/5 border border-white/5 rounded-2xl transition-all duration-300 group">
                             <Bell size={20} className="group-hover:rotate-12 transition-transform" />
                             <span className="absolute top-3 right-3 w-2 h-2 bg-rose-500 rounded-full border-2 border-[#050505]" />
@@ -209,7 +209,7 @@ export default function MemberLayout({
 
                         <div className="w-px h-8 bg-white/5 mx-2" />
 
-                        {/* User Matrix */}
+                        {/* User Profile */}
                         <div className="relative">
                             <button
                                 onClick={() => setShowUserMenu(!showUserMenu)}
@@ -241,14 +241,14 @@ export default function MemberLayout({
                                             href="/member/profile"
                                             className="flex items-center gap-4 px-6 py-4 rounded-2xl text-[10px] font-black text-zinc-500 hover:text-white hover:bg-white/5 transition-all uppercase tracking-widest"
                                         >
-                                            Profile Matrix
+                                            My Profile
                                         </Link>
                                         <div className="h-px bg-white/5 mx-4 my-1" />
                                         <button
                                             onClick={handleLogout}
                                             className="flex items-center gap-4 w-full px-6 py-4 rounded-2xl text-[10px] font-black text-rose-500 hover:bg-rose-500/5 transition-all uppercase tracking-widest"
                                         >
-                                            Exit Session
+                                            Logout
                                         </button>
                                     </motion.div>
                                 )}
@@ -257,7 +257,7 @@ export default function MemberLayout({
                     </div>
                 </header>
 
-                {/* Page Content Operational Center */}
+                {/* Page Content */}
                 <main className="p-8 lg:p-12 max-w-[1600px] mx-auto min-h-[calc(100vh-6rem)]">
                     {children}
                 </main>

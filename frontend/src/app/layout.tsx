@@ -9,13 +9,13 @@ const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono" });
 
 export const metadata: Metadata = {
-  title: "NAIZEN – Elite Hybrid Training | Performance Matrix",
-  description: "High-intensity gym management and performance monitoring for NAIZEN, Drugmulla, Kupwara. Engineered for the elite 1%.",
-  keywords: ["gym", "fitness", "Kupwara", "NAIZEN", "workout", "performance matrix"],
-  authors: [{ name: "NAIZEN" }],
+  title: "ULIFTS Gym | Kupwara",
+  description: "ULIFTS Gym - Drugmulla, Kupwara. Premium Fitness and Training Center.",
+  keywords: ["gym", "fitness", "Kupwara", "ULIFTS", "workout"],
+  authors: [{ name: "ULIFTS" }],
   openGraph: {
-    title: "NAIZEN | Elite Performance Matrix",
-    description: "Recalibrate Your Physical Logic",
+    title: "ULIFTS | Premium Fitness Center",
+    description: "Premium Fitness and Training Center",
     type: "website",
   },
 };

@@ -29,7 +29,7 @@
 
 html,
 body {
-  background: #0B0D10;
+  background: #050505;
   color: #f8fafc;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -68,15 +68,15 @@ h6 {
 
 /* Cyber Glassmorphism */
 .glass {
-  background: rgba(13, 13, 13, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .glass-card {
   background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
 }

@@ -41,10 +41,10 @@ export default function WorkoutsPage() {
                         <Dumbbell size={40} className="text-zinc-800" />
                     </div>
                     <div className="space-y-4">
-                        <h2 className="text-4xl font-black text-white tracking-tighter uppercase">Protocol <span className="text-cyan-400">Offline</span></h2>
+                        <h2 className="text-4xl font-black text-white tracking-tighter uppercase">No Workout <span className="text-cyan-400">Assigned</span></h2>
                         <p className="text-zinc-600 font-bold uppercase text-[9px] tracking-[0.2em] leading-relaxed">
-                            Your performance matrix hasn't been calibrated yet. <br />
-                            Contact the <span className="text-white">Floor Operations</span> for system deployment.
+                            You don't have a workout plan assigned yet. <br />
+                            Please ask the <span className="text-white">Gym Staff</span> to assign you a plan.
                         </p>
                     </div>
                 </div>
@@ -56,15 +56,15 @@ export default function WorkoutsPage() {
         <div className="space-y-16 animate-fade-in pb-20">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/5 pb-12">
                 <div className="space-y-4">
-                    <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.5em]">Active Deployment</p>
+                    <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.5em]">Workout Plan</p>
                     <h1 className="text-6xl font-black text-white tracking-tighter uppercase leading-none">
-                        MY <span className="text-cyan-400">PROGRAM</span>
+                        MY <span className="text-cyan-400">WORKOUT</span>
                     </h1>
                     <div className="flex items-center gap-4 mt-6">
                         <Badge variant="info" className="bg-cyan-400/10 text-cyan-400 border-cyan-400/20 text-[9px] font-black tracking-widest px-4 py-2 rounded-xl">
                             {plan.name}
                         </Badge>
-                        <span className="text-[10px] text-zinc-500 font-black uppercase tracking-widest">{plan.daysPerWeek} DAYS / CYCLE</span>
+                        <span className="text-[10px] text-zinc-500 font-black uppercase tracking-widest">{plan.daysPerWeek} DAYS / WEEK</span>
                     </div>
                 </div>
 
@@ -73,19 +73,19 @@ export default function WorkoutsPage() {
                         <Activity size={20} />
                     </div>
                     <div>
-                        <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest">Protocol Status</p>
-                        <p className="text-[11px] font-black text-white uppercase tracking-widest mt-0.5">NOMINAL</p>
+                        <p className="text-[8px] font-black text-zinc-600 uppercase tracking-widest">Workout Status</p>
+                        <p className="text-[11px] font-black text-white uppercase tracking-widest mt-0.5">ACTIVE</p>
                     </div>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 {plan.exercises?.map((day: any, i: number) => (
-                    <Card key={i} variant="default" className="flex flex-col h-full rounded-[2.5rem] p-10 bg-white/[0.01] border-white/5 group hover:bg-white/[0.03] hover:border-cyan-400/20 transition-all duration-700">
+                    <Card key={i} variant="default" className="flex flex-col h-full rounded-[2.5rem] p-10 bg-white/[0.03] backdrop-blur-3xl border-white/10 group hover:border-cyan-400/20 transition-all duration-700 shadow-xl">
                         <div className="flex justify-between items-start mb-10">
                             <div className="space-y-1">
                                 <h3 className="text-2xl font-black text-white uppercase tracking-tighter">{day.day}</h3>
-                                <p className="text-[8px] font-black text-zinc-600 uppercase tracking-[0.3em]">Execution Sequence</p>
+                                <p className="text-[8px] font-black text-zinc-600 uppercase tracking-[0.3em]">Exercises</p>
                             </div>
                             <div className="p-4 bg-[#0D0D0D] border border-white/5 rounded-2xl text-zinc-700 group-hover:text-cyan-400 transition-colors">
                                 <Dumbbell size={20} />
@@ -115,7 +115,7 @@ export default function WorkoutsPage() {
 
                         <div className="mt-10 pt-8 border-t border-white/5">
                             <button className="w-full h-14 bg-white text-black hover:bg-cyan-400 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all duration-500 flex items-center justify-center gap-3">
-                                <Play size={14} className="fill-current" /> Engage Session
+                                <Play size={14} className="fill-current" /> Start Workout
                             </button>
                         </div>
                     </Card>

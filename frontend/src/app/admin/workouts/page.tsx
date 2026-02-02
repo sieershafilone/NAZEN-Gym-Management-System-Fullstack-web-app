@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Dumbbell, Plus, Terminal, Target, Zap } from 'lucide-react';
+import { Dumbbell, Plus, Terminal, Target, Zap, ArrowUpRight } from 'lucide-react';
 import { Card, Button, Badge, StatCard } from '@/components/ui';
 
 export default function WorkoutsPage() {
@@ -12,24 +12,24 @@ export default function WorkoutsPage() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div className="space-y-4">
                     <h1 className="text-5xl font-black text-white tracking-tighter sm:text-6xl">
-                        Training <span className="text-cyan-400 glow-text">Matrix</span>
+                        Training <span className="text-cyan-400 glow-text">Plans</span>
                     </h1>
                     <p className="text-zinc-500 mt-3 font-medium tracking-widest uppercase text-[10px]">
-                        Engineer and assign <span className="text-white">High-Performance</span> workout protocols.
+                        Create and assign <span className="text-white">Workout Plans</span> to your members.
                     </p>
                 </div>
                 <Button className="h-14 px-8 rounded-2xl group">
                     <Plus size={20} className="mr-3 group-hover:rotate-90 transition-transform duration-500" />
-                    New Protocol
+                    Create Plan
                 </Button>
             </div>
 
             {/* Stats */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <StatCard title="Total Protocols" value="24" icon={<Dumbbell size={20} />} color="indigo" />
-                <StatCard title="Active Assigns" value="184" icon={<Target size={20} />} color="mint" />
+                <StatCard title="Total Plans" value="24" icon={<Dumbbell size={20} />} color="indigo" />
+                <StatCard title="Active Assignments" value="184" icon={<Target size={20} />} color="mint" />
                 <StatCard title="New This Week" value="5" icon={<Plus size={20} />} color="amber" />
-                <StatCard title="Avg Intensity" value="8.5" icon={<Zap size={20} />} color="indigo" />
+                <StatCard title="Avg Difficulty" value="8.5" icon={<Zap size={20} />} color="indigo" />
             </div>
 
             {/* Protocols Grid */}
@@ -45,7 +45,7 @@ export default function WorkoutsPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.1, duration: 0.5 }}
                     >
-                        <Card variant="default" className="group p-8 rounded-[2.5rem] border-white/5 bg-white/[0.01] hover:bg-white/[0.03] transition-all duration-500">
+                        <Card variant="default" className="group p-8 bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[2.5rem] hover:bg-white/[0.05] transition-all duration-500 shadow-xl">
                             <div className="flex items-start justify-between mb-8">
                                 <div className="h-16 w-16 flex items-center justify-center rounded-2xl bg-[#0D0D0D] border border-white/5 text-white group-hover:text-cyan-400 group-hover:border-cyan-400/30 transition-all duration-500">
                                     <Dumbbell size={28} />
@@ -55,7 +55,7 @@ export default function WorkoutsPage() {
                                 </Badge>
                             </div>
                             <h3 className="text-2xl font-black text-white mb-3 tracking-tight group-hover:text-cyan-400 transition-colors uppercase">{plan.name}</h3>
-                            <p className="text-[10px] text-zinc-600 mb-8 font-bold uppercase tracking-widest leading-relaxed">Systematic approach to {plan.name.toLowerCase()} goals.</p>
+                            <p className="text-[10px] text-zinc-600 mb-8 font-bold uppercase tracking-widest leading-relaxed">Workout plan focused on {plan.name.toLowerCase()}.</p>
 
                             <div className="flex items-center gap-8 py-6 border-y border-white/5 mb-8">
                                 <div className="flex flex-col">
@@ -70,8 +70,8 @@ export default function WorkoutsPage() {
                             </div>
 
                             <Button variant="secondary" className="w-full h-14 rounded-2xl group/btn bg-white/5 border-white/5 hover:bg-white hover:text-black transition-all duration-500">
-                                <span className="text-[10px] font-black uppercase tracking-widest">Load Script</span>
-                                <Terminal size={18} className="ml-3 opacity-50 group-hover/btn:opacity-100 transition-opacity" />
+                                <span className="text-[10px] font-black uppercase tracking-widest">View Plan</span>
+                                <ArrowUpRight size={18} className="ml-3 opacity-50 group-hover/btn:opacity-100 transition-opacity" />
                             </Button>
                         </Card>
                     </motion.div>

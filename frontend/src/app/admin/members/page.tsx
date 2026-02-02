@@ -130,10 +130,10 @@ export default function MembersPage() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div className="space-y-4">
                     <h1 className="text-5xl font-black text-white tracking-tighter sm:text-6xl">
-                        Elite <span className="text-cyan-400 glow-text">Registry</span>
+                        Gym <span className="text-cyan-400 glow-text">Members</span>
                     </h1>
                     <p className="text-zinc-500 font-medium tracking-widest uppercase text-[10px] max-w-xl">
-                        Command center for <span className="text-white">Athlete Operations</span> & Access control.
+                        Manage your gym <span className="text-white">Members</span> & their membership status.
                     </p>
                 </div>
                 <Button
@@ -141,25 +141,25 @@ export default function MembersPage() {
                     className="h-14 px-10 rounded-2xl group"
                 >
                     <Plus size={20} className="mr-3 group-hover:rotate-90 transition-transform duration-500" />
-                    Induct Athlete
+                    Add Member
                 </Button>
             </div>
 
             {/* --- Stats Row --- */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <StatCard title="Total Athletes" value={members.length} icon={<Users size={20} />} color="indigo" />
-                <StatCard title="Active Flux" value="12" icon={<Activity size={20} />} color="mint" />
-                <StatCard title="Power Index" value="3" icon={<Dumbbell size={20} />} color="indigo" />
-                <StatCard title="Security Level" value="5" icon={<Shield size={20} />} color="amber" />
+                <StatCard title="Total Members" value={members.length} icon={<Users size={20} />} color="indigo" />
+                <StatCard title="Active Now" value="12" icon={<Activity size={20} />} color="mint" />
+                <StatCard title="Workouts Today" value="3" icon={<Dumbbell size={20} />} color="indigo" />
+                <StatCard title="Attendance" value="5" icon={<Shield size={20} />} color="amber" />
             </div>
 
             {/* --- Controls & Filter Bar --- */}
-            <div className="glass p-6 rounded-[2.5rem] flex flex-col md:flex-row gap-6 items-center">
+            <div className="bg-white/[0.03] backdrop-blur-3xl border border-white/10 p-6 rounded-[2.5rem] flex flex-col md:flex-row gap-6 items-center shadow-xl">
                 <div className="relative flex-1 w-full group">
                     <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-600 group-focus-within:text-cyan-400 transition-colors" size={20} />
                     <input
                         type="text"
-                        placeholder="Search athlete registry..."
+                        placeholder="Search members..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         className="w-full bg-[#0D0D0D] border border-white/5 rounded-2xl py-4 pl-14 pr-6 text-white focus:outline-none focus:border-cyan-400/50 focus:ring-4 focus:ring-cyan-400/5 transition-all duration-300 placeholder:text-zinc-700 font-medium"
@@ -194,9 +194,9 @@ export default function MembersPage() {
                     <div className="col-span-full flex items-center justify-center">
                         <EmptyState
                             icon={<Users size={64} className="text-zinc-800" />}
-                            title="Registry Empty"
-                            description="No athletes match the current security clearance filters."
-                            action={<Button variant="secondary" onClick={() => { setSearch(''); setStatusFilter('ALL') }} className="mt-4 rounded-xl">Reset Access</Button>}
+                            title="No Members Found"
+                            description="No members match the current filters."
+                            action={<Button variant="secondary" onClick={() => { setSearch(''); setStatusFilter('ALL') }} className="mt-4 rounded-xl">Reset Filters</Button>}
                         />
                     </div>
                 ) : (
@@ -245,7 +245,7 @@ function MemberCard({ member, onView, onDelete, index }: { member: Member, onVie
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative bg-[#0D0D0D] border border-white/5 rounded-[2.5rem] p-10 hover:border-cyan-400/30 transition-all duration-500 flex flex-col justify-between h-full overflow-hidden"
+            className="group relative bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-10 hover:border-cyan-400/30 transition-all duration-500 flex flex-col justify-between h-full overflow-hidden shadow-xl"
         >
             <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-400/5 blur-[60px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
@@ -286,11 +286,11 @@ function MemberCard({ member, onView, onDelete, index }: { member: Member, onVie
             {/* Stats Grid */}
             <div className="grid grid-cols-2 gap-4 mb-10 relative z-10">
                 <div className="bg-white/[0.02] rounded-[1.5rem] p-5 border border-white/5">
-                    <p className="text-[9px] text-zinc-600 uppercase font-black tracking-widest mb-1.5">Sector</p>
+                    <p className="text-[9px] text-zinc-600 uppercase font-black tracking-widest mb-1.5">Plan</p>
                     <p className="text-sm font-bold text-white truncate">{activePlan?.plan?.name || '--'}</p>
                 </div>
                 <div className="bg-white/[0.02] rounded-[1.5rem] p-5 border border-white/5">
-                    <p className="text-[9px] text-zinc-600 uppercase font-black tracking-widest mb-1.5">Clearance</p>
+                    <p className="text-[9px] text-zinc-600 uppercase font-black tracking-widest mb-1.5">Expires In</p>
                     <p className="text-sm font-black text-cyan-400 tabular-nums">
                         {activePlan ? `${getDaysRemaining(activePlan.endDate)}d` : '--'}
                     </p>
@@ -300,14 +300,14 @@ function MemberCard({ member, onView, onDelete, index }: { member: Member, onVie
             {/* Footer */}
             <div className="pt-8 border-t border-white/5 flex justify-between items-center relative z-10">
                 <span className="text-[10px] font-black text-zinc-700 uppercase tracking-widest">
-                    {member.fitnessGoal || 'NEUTRAL OBJECTIVE'}
+                    {member.fitnessGoal || 'FITNESS GOAL'}
                 </span>
                 <motion.button
                     whileHover={{ x: 3 }}
                     onClick={onView}
                     className="text-xs font-black text-white hover:text-cyan-400 flex items-center transition-colors uppercase tracking-widest"
                 >
-                    DATA <ArrowUpRight size={14} className="ml-2" />
+                    DETAILS <ArrowUpRight size={14} className="ml-2" />
                 </motion.button>
             </div>
         </motion.div>
@@ -349,8 +349,8 @@ function AddMemberModal({ isOpen, onClose, plans, onSuccess }: { isOpen: boolean
             >
                 <div className="p-10 border-b border-white/5 flex justify-between items-center bg-white/[0.01]">
                     <div>
-                        <h2 className="text-2xl font-black text-white tracking-tight">ATHLETE INDUCTION</h2>
-                        <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mt-1">INITIAL PROTOCOL SEQUENCE</p>
+                        <h2 className="text-2xl font-black text-white tracking-tight">ADD MEMBER</h2>
+                        <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mt-1">BASIC INFORMATION</p>
                     </div>
                     <button onClick={onClose} className="p-4 bg-white/5 rounded-2xl text-zinc-500 hover:text-white transition-colors"><X size={24} /></button>
                 </div>
@@ -360,13 +360,13 @@ function AddMemberModal({ isOpen, onClose, plans, onSuccess }: { isOpen: boolean
                         <section>
                             <h3 className="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-8 flex items-center gap-3">
                                 <div className="w-8 h-[1px] bg-cyan-400/30" />
-                                Biological Identity
+                                Member Identity
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <Input label="Biological Name" placeholder="ex. JOHN DOE" {...register('fullName')} error={errors.fullName?.message} />
-                                <Input type="date" label="Origin Date (DOB)" {...register('dateOfBirth')} error={errors.dateOfBirth?.message} />
+                                <Input label="Full Name" placeholder="ex. JOHN DOE" {...register('fullName')} error={errors.fullName?.message} />
+                                <Input type="date" label="Date of Birth" {...register('dateOfBirth')} error={errors.dateOfBirth?.message} />
                                 <div className="space-y-2">
-                                    <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Gender Class</label>
+                                    <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Gender</label>
                                     <select {...register('gender')} className="w-full px-5 py-3 bg-[#0D0D0D] border border-white/5 rounded-2xl text-white appearance-none focus:outline-none focus:border-cyan-400/50 transition-all duration-300">
                                         <option value="MALE">MALE</option>
                                         <option value="FEMALE">FEMALE</option>
@@ -379,18 +379,18 @@ function AddMemberModal({ isOpen, onClose, plans, onSuccess }: { isOpen: boolean
                         <section>
                             <h3 className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-8 flex items-center gap-3">
                                 <div className="w-8 h-[1px] bg-indigo-400/30" />
-                                Comms Encryption
+                                Contact Details
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <Input label="Uplink Number" placeholder="10-DIGIT MOBILE" {...register('mobile')} error={errors.mobile?.message} />
-                                <Input label="Mail Protocol" placeholder="ATHLETE@DOMAIN.COM" {...register('email')} error={errors.email?.message} />
+                                <Input label="Mobile Number" placeholder="10-DIGIT MOBILE" {...register('mobile')} error={errors.mobile?.message} />
+                                <Input label="Email Address" placeholder="MEMBER@DOMAIN.COM" {...register('email')} error={errors.email?.message} />
                             </div>
                         </section>
 
                         <section>
                             <h3 className="text-[10px] font-black text-amber-400 uppercase tracking-widest mb-8 flex items-center gap-3">
                                 <div className="w-8 h-[1px] bg-amber-400/30" />
-                                Clearance Level
+                                Membership Plan
                             </h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 {plans.map(plan => (
@@ -401,7 +401,7 @@ function AddMemberModal({ isOpen, onClose, plans, onSuccess }: { isOpen: boolean
                                                 <span className="font-black text-white text-sm tracking-tight">{plan.name}</span>
                                                 <span className="text-[10px] text-cyan-400 font-bold uppercase">{formatCurrency(plan.finalPrice)}</span>
                                             </div>
-                                            <div className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">{plan.durationDays} DAYS CLEARANCE</div>
+                                            <div className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">{plan.durationDays} DAYS</div>
                                         </div>
                                         <div className="absolute top-4 right-4 opacity-0 peer-checked:opacity-100 transition-opacity">
                                             <div className="bg-cyan-400 rounded-lg p-1 shadow-[0_0_10px_rgba(45,212,191,0.5)]"><Check size={12} className="text-black font-black" /></div>
@@ -417,7 +417,7 @@ function AddMemberModal({ isOpen, onClose, plans, onSuccess }: { isOpen: boolean
                 <div className="p-10 border-t border-white/5 bg-white/[0.01] flex justify-end gap-6">
                     <Button variant="ghost" onClick={onClose} className="px-8 h-14 rounded-2xl">Abort</Button>
                     <Button form="add-member-form" disabled={isSubmitting} className="px-10 h-14 rounded-2xl">
-                        {isSubmitting ? <Spinner size="sm" /> : <>COMMIT INDUCTION</>}
+                        {isSubmitting ? <Spinner size="sm" /> : <>ADD MEMBER</>}
                     </Button>
                 </div>
             </motion.div>
@@ -444,7 +444,7 @@ function ViewMemberModal({ isOpen, onClose, member }: { isOpen: boolean, onClose
                             <h1 className="text-5xl font-black text-white tracking-tighter">{member.user?.fullName}</h1>
                             <div className="flex items-center gap-4 mt-4">
                                 <Badge variant="default" className="bg-white/5 border-none font-black tracking-widest">{member.memberId}</Badge>
-                                <Badge variant="success" className="px-4 py-1">SECURED</Badge>
+                                <Badge variant="success" className="px-4 py-1">ACTIVE</Badge>
                             </div>
                         </div>
                     </div>
@@ -454,10 +454,10 @@ function ViewMemberModal({ isOpen, onClose, member }: { isOpen: boolean, onClose
                 <div className="px-12 pb-12 overflow-y-auto custom-scrollbar scroll-hide space-y-12">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                         {[
-                            { label: 'Mass', value: member.weight ? `${member.weight} KG` : '--', icon: Dumbbell, color: 'indigo' },
-                            { label: 'Dimension', value: member.height ? `${member.height} CM` : '--', icon: Activity, color: 'mint' },
-                            { label: 'Directive', value: member.fitnessGoal || 'NEUTRAL', icon: TrendingUp, color: 'amber' },
-                            { label: 'Activated', value: formatDate(member.joinDate).toUpperCase(), icon: Calendar, color: 'indigo' },
+                            { label: 'Weight', value: member.weight ? `${member.weight} KG` : '--', icon: Dumbbell, color: 'indigo' },
+                            { label: 'Height', value: member.height ? `${member.height} CM` : '--', icon: Activity, color: 'mint' },
+                            { label: 'Goal', value: member.fitnessGoal || 'GENERAL', icon: TrendingUp, color: 'amber' },
+                            { label: 'Joined', value: formatDate(member.joinDate).toUpperCase(), icon: Calendar, color: 'indigo' },
                         ].map((stat, i) => (
                             <div key={i} className="bg-white/[0.02] rounded-3xl p-6 border border-white/5 group hover:bg-white/[0.04] transition-all">
                                 <div className={cn(
@@ -474,34 +474,34 @@ function ViewMemberModal({ isOpen, onClose, member }: { isOpen: boolean, onClose
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-12">
-                        <div className="glass p-10 rounded-[2.5rem]">
-                            <h3 className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-8">Metadata Protocols</h3>
+                        <div className="bg-white/[0.03] backdrop-blur-3xl border border-white/10 p-10 rounded-[2.5rem] shadow-xl">
+                            <h3 className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-8">Contact Details</h3>
                             <div className="space-y-6">
-                                <InfoRow label="Access Channel" value={member.user?.mobile} />
-                                <InfoRow label="Mail Encryption" value={member.user?.email} />
-                                <InfoRow label="Generation Date" value={formatDate(member.dateOfBirth)} />
-                                <InfoRow label="Emergency Uplink" value={member.emergencyContact} />
+                                <InfoRow label="Mobile" value={member.user?.mobile} />
+                                <InfoRow label="Email" value={member.user?.email} />
+                                <InfoRow label="Date of Birth" value={formatDate(member.dateOfBirth)} />
+                                <InfoRow label="Emergency Contact" value={member.emergencyContact} />
                             </div>
                         </div>
-                        <div className="glass p-10 rounded-[2.5rem]">
-                            <h3 className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-8">Access Logic</h3>
+                        <div className="bg-white/[0.03] backdrop-blur-3xl border border-white/10 p-10 rounded-[2.5rem] shadow-xl">
+                            <h3 className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-8">Membership</h3>
                             {member.memberships?.[0] ? (
                                 <div className="space-y-8">
                                     <div className="flex justify-between items-end">
                                         <div>
-                                            <p className="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-2">Protocol Current</p>
+                                            <p className="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-2">Current Plan</p>
                                             <h4 className="text-3xl font-black text-white tracking-tighter">{member.memberships[0].plan?.name}</h4>
                                         </div>
                                         <Badge variant="success" className="mb-1 px-4">VALID</Badge>
                                     </div>
                                     <div className="p-6 bg-white/[0.02] rounded-2xl border border-white/5">
-                                        <p className="text-[10px] font-black text-zinc-600 uppercase tracking-widest mb-2 text-center">Protocol Life Termination</p>
+                                        <p className="text-[10px] font-black text-zinc-600 uppercase tracking-widest mb-2 text-center">Membership Expires On</p>
                                         <div className="text-xl font-black text-white text-center tracking-tight">{formatDate(member.memberships[0].endDate)}</div>
                                     </div>
                                 </div>
                             ) : (
                                 <div className="h-full flex items-center justify-center border-2 border-dashed border-white/5 rounded-[2rem]">
-                                    <p className="text-zinc-700 text-xs font-black uppercase tracking-widest">Protocol Null</p>
+                                    <p className="text-zinc-700 text-xs font-black uppercase tracking-widest">No Active Plan</p>
                                 </div>
                             )}
                         </div>
@@ -509,7 +509,7 @@ function ViewMemberModal({ isOpen, onClose, member }: { isOpen: boolean, onClose
                 </div>
 
                 <div className="p-10 border-t border-white/5 bg-white/[0.01] flex justify-end mt-auto">
-                    <Button variant="secondary" onClick={onClose} className="px-10 h-14 rounded-2xl">Terminate Dossier</Button>
+                    <Button variant="secondary" onClick={onClose} className="px-10 h-14 rounded-2xl">Close</Button>
                 </div>
             </motion.div>
         </div>

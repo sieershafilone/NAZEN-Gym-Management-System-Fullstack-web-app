@@ -60,10 +60,10 @@ export default function AdminDashboardPage() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div>
                     <h1 className="text-5xl font-black text-white tracking-tighter sm:text-6xl">
-                        Command <span className="text-cyan-400 glow-text">Portal</span>
+                        Admin <span className="text-cyan-400 glow-text">Dashboard</span>
                     </h1>
                     <p className="text-zinc-500 mt-3 font-medium tracking-widest uppercase text-[10px]">
-                        NAIZEN <span className="text-white">Live Intelligence</span>
+                        ULIFTS <span className="text-white">Management System</span>
                     </p>
                 </div>
                 <div className="flex items-center gap-4">
@@ -77,13 +77,13 @@ export default function AdminDashboardPage() {
             {/* Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <StatCard
-                    title="Total Base"
+                    title="Total Members"
                     value={data.members.total}
                     icon={<Users size={24} />}
                     color="amber"
                 />
                 <StatCard
-                    title="Active Squad"
+                    title="Active Members"
                     value={data.members.active}
                     icon={<UserCheck size={24} />}
                     color="indigo"
@@ -116,11 +116,11 @@ export default function AdminDashboardPage() {
                     <div className="glass rounded-[3rem] overflow-hidden">
                         <div className="p-10 border-b border-white/5 flex items-center justify-between bg-white/[0.01]">
                             <div>
-                                <h2 className="text-2xl font-bold text-white tracking-tight">Financial Flow</h2>
-                                <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-1">Real-time ledger audit</p>
+                                <h2 className="text-2xl font-bold text-white tracking-tight">Recent Payments</h2>
+                                <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-1">View latest transactions</p>
                             </div>
                             <Link href="/admin/payments">
-                                <Button variant="secondary" size="sm" className="rounded-2xl">Audit History</Button>
+                                <Button variant="secondary" size="sm" className="rounded-2xl">View All</Button>
                             </Link>
                         </div>
 
@@ -138,7 +138,7 @@ export default function AdminDashboardPage() {
                                 <tbody>
                                     {data.recentPayments.length === 0 ? (
                                         <tr>
-                                            <td colSpan={5} className="text-center py-16 text-zinc-600 font-bold tracking-widest uppercase text-xs">No activity pulse detected.</td>
+                                            <td colSpan={5} className="text-center py-16 text-zinc-600 font-bold tracking-widest uppercase text-xs">No recent payments found.</td>
                                         </tr>
                                     ) : (
                                         data.recentPayments.map((payment) => (
@@ -195,9 +195,9 @@ export default function AdminDashboardPage() {
                                     <div className="p-2 bg-rose-500/10 rounded-xl text-rose-500">
                                         <AlertCircle size={20} />
                                     </div>
-                                    Alerts
+                                    Expiring Soon
                                 </h2>
-                                <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-1">Expiry Watchlist</p>
+                                <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-1">Renewal Watchlist</p>
                             </div>
                             <div className="w-10 h-10 flex items-center justify-center rounded-2xl bg-rose-500 font-black text-black">
                                 {data.expiringMemberships.length}
@@ -254,7 +254,7 @@ export default function AdminDashboardPage() {
                             <Link
                                 key={action.label}
                                 href={action.href}
-                                className="glass border border-white/5 p-6 rounded-3xl flex flex-col items-center gap-4 hover:bg-white/[0.02] transition-all group overflow-hidden"
+                                className="bg-white/[0.03] backdrop-blur-3xl border border-white/10 p-6 rounded-3xl flex flex-col items-center gap-4 hover:bg-white/[0.05] transition-all group overflow-hidden shadow-xl"
                             >
                                 <div className={cn(
                                     "w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-6",

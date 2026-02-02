@@ -46,7 +46,7 @@ export const BrandLogo = ({ className, variant = 'default', withGlow = true }: B
             <div className="relative w-full h-full filter drop-shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-all duration-300">
                 <Image
                     src="/logo-white.png"
-                    alt="NAIZEN"
+                    alt="ULIFTS Gym"
                     fill
                     className={cn(
                         // Clean projection
