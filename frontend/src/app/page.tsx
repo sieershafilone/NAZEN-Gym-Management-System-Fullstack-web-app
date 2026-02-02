@@ -345,9 +345,9 @@ export default function HomePage() {
 
               <div className="space-y-8">
                 {[
-                  { icon: MapPin, label: 'ADDRESS', value: 'NH 701, FOREST BLOCK, DRUGMULLA, KUPWARA' },
-                  { icon: Phone, label: 'PHONE', value: '+91 6005314228' },
-                  { icon: Clock, label: 'OPENING HOURS', value: 'MON-SAT: 0600 - 2200 | SUN: 0800 - 1400' },
+                  { icon: MapPin, label: 'ADDRESS', value: 'BED COLLEGE DRUGMULLA KUPWARA' },
+                  { icon: Phone, label: 'PHONE', value: '+91 6006403075' },
+                  { icon: Clock, label: 'OPENING HOURS', value: 'MON-SAT: Morning 6:00 AM TO 8:30 AM - Males | 9:00 AM TO 12:00 PM - Females| 2:00 PM TO 10:00 PM - Males' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-8 group">
                     <div className="w-16 h-16 bg-[#0D0D0D] border border-white/5 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:border-cyan-400/30 transition-all">
